@@ -101,7 +101,7 @@
     <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
       <div class="card pt-4">
         <div class="card-body">
-          <h4 class="card-title">Artist Vote Tally</h4>
+          <h4 class="card-title">Artist Vote Tally - My IP: {{ \Request::ip() }}</h4>
           <canvas id="myChart" style="height:230px"></canvas>
         </div>
       </div>

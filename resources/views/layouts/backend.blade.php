@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>{{env('APP_NAME')}}</title>
     <!-- plugins:css -->
     @include('partials.head')
   </head>
