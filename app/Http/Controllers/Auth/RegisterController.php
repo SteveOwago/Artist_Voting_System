@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -53,6 +54,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'integer', 'min:12'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'profile' => ['required','file','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+            'video' => ['required','max:20000'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,11 +68,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if(request()->hasFile('profile')&& request()->hasFile('video')){
+
+            //Upload Profile Picture
+            $profile = time().'.'.request()->file('profile')->getClientOriginalName();  
+            request()->file('profile')->move(public_path('profile_pictures'), $profile);
+
+            //Upload video
+            $video = time().'.'.request()->file('video')->getClientOriginalName();  
+            request()->file('video')->move(public_path('video_uploads'), $video);
+
+
+            $user->update(['profile'=>$profile, 'video'=>$video]);
+
+        }
+        return $user;
+
     }
 }

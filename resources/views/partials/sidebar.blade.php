@@ -8,14 +8,14 @@
         <div class="profile-desc">
           <div class="profile-pic">
             <div class="count-indicator">
-              <img class="img-xs rounded-circle " src="{{ asset('backend/assets/images/faces/face15.jpg')}}" alt="">
+              <img class="img-xs rounded-circle " src="/profile_pictures/{{Auth::user()->profile}}" alt="">
               <span class="count bg-success"></span>
             </div>
             <div class="profile-name">
               <h5 class="mb-0 font-weight-normal">{{Auth::user()->name}}</h5>
             </div>
           </div>
-          <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+          {{-- <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
           <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
             <a href="#" class="dropdown-item preview-item">
               <div class="preview-thumbnail">
@@ -49,21 +49,21 @@
                 <p class="preview-subject ellipsis mb-1 text-small">To-do list</p>
               </div>
             </a>
-          </div>
+          </div> --}}
         </div>
       </li>
       <li class="nav-item nav-category">
         <span class="nav-link">Navigation</span>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('home')}}">
           <span class="menu-icon">
             <i class="mdi mdi-speedometer"></i>
           </span>
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
+      {{-- <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-icon">
             <i class="mdi mdi-laptop"></i>
@@ -78,13 +78,13 @@
             <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
           </ul>
         </div>
-      </li>
+      </li> --}}
       <li class="nav-item menu-items">
         <a class="nav-link" href="pages/forms/basic_elements.html">
           <span class="menu-icon">
             <i class="mdi mdi-playlist-play"></i>
           </span>
-          <span class="menu-title">Form Elements</span>
+          <span class="menu-title">Artists</span>
         </a>
       </li>
       <li class="nav-item menu-items">
@@ -92,7 +92,7 @@
           <span class="menu-icon">
             <i class="mdi mdi-table-large"></i>
           </span>
-          <span class="menu-title">Tables</span>
+          <span class="menu-title">Judges</span>
         </a>
       </li>
       <li class="nav-item menu-items">
@@ -100,16 +100,19 @@
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>
-          <span class="menu-title">Charts</span>
+          <span class="menu-title">Gamers</span>
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-file-document-box"></i>
-          </span>
-          <span class="menu-title">Documentation</span>
-        </a>
+        <a class="nav-link" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
       </li>
     </ul>
   </nav>

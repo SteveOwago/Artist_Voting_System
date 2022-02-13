@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{env('APP_NAME')}}</title>
     <!-- plugins:css -->
+    @yield('css')
     @include('partials.head')
   </head>
   <body>
@@ -32,6 +33,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     @include('partials.scripts')
     @yield('scripts')
   </body>
