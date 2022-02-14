@@ -9,12 +9,23 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">{{ $user->name }}</h4>
-        <div class="col-lg-10 offset-1">
+        <div class="col-lg-12">
           <div class="card">
               <div class="card-body">
                   <div class="row">
                     <div class="col-lg-3">
-                        <img src="/profile_pictures/{{$user->profile}}" width="200" height="200" style="border-radius:50%;" alt="Profile Image Avatar">
+                        <div class="row">
+                            <img src="/profile_pictures/{{$user->profile}}" width="200" height="200" style="border-radius:50%;" alt="Profile Image Avatar">
+                        </div>
+                        @if($user->video != null &&(Auth::id() == $user->id|| $user->role_id == 1))
+                            <div class="row mt-5">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                    <video class="embed-responsive-item" controls controlsList="nodownload">
+                                        <source src="/video_uploads/{{$user->video}}">
+                                    </video>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-lg-9">
                             {{-- <table class="table-bordered table-striped">
@@ -59,7 +70,6 @@
                                     </div>              
                                 </tr>
                             </table> --}}
-
                             <div class="card">
                                 <div class="card-header">
                                     {{strtoupper($user->name)}}
@@ -71,7 +81,7 @@
                                         <li class="list-group-item"><b>Registered:</b> {{$user->created_at->diffForHumans()}} </li>
                                         <li class="list-group-item"><b>Type:</b> {{$user->role_id == 1 ? "Judge":($user->role_id == 2?"Artist":"Gamer")}} </li>
                                         @if($user->role_id != 1 )
-                                            <li class="list-group-item"><b>Status:</b> <a class="btn btn-sm {{$user->is_approved == '1'?"text-success":"text-danger"}}">{{ $user->is_approved == '1'?"Aproved":"Not Approved"}}</a></li>
+                                            <li class="list-group-item"><b>Status:</b> <a class="btn btn-sm {{$user->is_approved == '1'?"text-success":"text-danger"}}">{{ $user->is_approved == '1'?"Approved":"Not Approved"}}</a></li>
                                         @endif
                                     </ul>
                                     @if (Auth::id()== $user->id)
@@ -80,8 +90,36 @@
                                         </div>
                                     @endif
                                 </div>
-                              </div>
+                            </div>
                     </div>
+                    @if ($user->is_approved == 0 && $user->role_id != 1)
+                        <div class="row text-center ml-5 mt-5">
+                            <a class="btn btn-lg btn-success" href="{{ route('approve',[$user->id])}}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('approve').submit();">
+                                            Approve
+                                        </a>
+
+                                        <form id="approve" action="{{ route('approve',[$user->id]) }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                        </div>   
+                    @endif
+
+                    @if ($user->is_approved == 1 && $user->role_id != 1)
+                        <div class="row text-center ml-5 mt-5">
+                            <a class="btn btn-lg btn-danger" href="{{ route('disapprove',[$user->id])}}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('disapprove').submit();">
+                                            Disapprove
+                                        </a>
+
+                                        <form id="disapprove" action="{{ route('disapprove',[$user->id]) }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                        </div>   
+                    @endif
+                    
                   </div>
               </div>
           </div>

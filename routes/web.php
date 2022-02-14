@@ -29,3 +29,6 @@ Route::post('judges/create', 'HomeController@add_judge')->name('add_judge');
 Route::get('profile/{id}', 'HomeController@profile')->name('profile');
 Route::get('edit_profile/{id}', 'HomeController@edit_profile')->name('edit_profile');
 Route::put('edit_profile/{id}', 'HomeController@update_profile')->name('update_profile');
+
+Route::post('approve/{id}','HomeController@approve')->name('approve');
+Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove');

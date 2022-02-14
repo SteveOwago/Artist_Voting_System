@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Vote;
 
 class HomeController extends Controller
 {
@@ -27,12 +28,26 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $video_size = 0;
+
+        foreach( File::allFiles(public_path('video_uploads')) as $file)
+        {
+            $video_size += $file->getSize();
+        }
+        $video_size = number_format($video_size / 1048576,2);
+
+
+
         $authuser = User::where('id', \Auth::id())->get();
         $artists = User::where('role_id',2)->get();
-        return view('home',compact('artists','authuser'));
+        $approvedArtists = User::where('role_id','!=',2)->where('is_approved',1)->get();
+        $votes = Vote::all();
+
+        return view('home',compact('artists','authuser', 'video_size', 'approvedArtists','votes'));
     }
     public function artists(){
         $artists = User::where('role_id',2)->get();
+
         return view('artists',compact('artists'));
     }
     public function judges(){
@@ -146,6 +161,36 @@ class HomeController extends Controller
         ]);
 
         return redirect()->route('profile',[$user->id]);
+
+    }
+
+    // Approve Artist/Gamer
+    public function approve($id){
+
+        $user = User::findOrFail($id);
+
+        $is_approved = 1;
+
+        $user->update([
+            'is_approved' => $is_approved,
+        ]);
+
+        return back();
+
+    }
+
+    // DisApprove Artist/Gamer
+    public function disapprove($id){
+
+        $user = User::findOrFail($id);
+
+        $is_approved = 0;
+
+        $user->update([
+            'is_approved' => $is_approved,
+        ]);
+
+        return back();
 
     }
 

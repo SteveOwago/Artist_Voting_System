@@ -29,7 +29,30 @@
                         <td class="text-center">{{ $artist->phone}}</td>
                         <td class="text-center">{{ $artist->is_approved == '1'?"Aproved":"Not Approved"}}</td>
                         <td class="text-center">{{ $artist->created_at}}</td>
-                        <td class="text-center"><a href="" class="btn btn-sm btn-primary"> View </a> &nbsp; <a href="" class="btn btn-sm btn-success"> Approve </a> &nbsp; <a href="" class="btn btn-sm btn-danger"> Delete </a></td>
+                        <td class="text-center"><a href="{{route('profile',[$artist->id])}}" class="btn btn-sm btn-primary"> View </a> &nbsp;  
+                          @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
+                              <a class="btn btn-sm btn-danger" href="{{ route('disapprove',[$artist->id])}}"
+                                          onclick="event.preventDefault();
+                                                          document.getElementById('disapprove').submit();">
+                                              Disapprove
+                                          </a>
+      
+                                          <form id="disapprove" action="{{ route('disapprove',[$artist->id]) }}" method="POST" class="d-none">
+                                              @csrf
+                                          </form>   
+                          @endif
+                          @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
+                            <a class="btn btn-sm btn-success" href="{{ route('approve',[$artist->id])}}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('approve').submit();">
+                                            Approve
+                                        </a>
+
+                                        <form id="approve" action="{{ route('approve',[$artist->id]) }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>   
+                          @endif
+                      &nbsp; <a href="" class="btn btn-sm btn-danger"> Delete </a></td>
                     </tr>
                 @empty
                     <tr>
