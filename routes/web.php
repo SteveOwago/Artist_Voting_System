@@ -20,3 +20,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('artists', 'HomeController@artists')->name('artists');
+Route::get('judges', 'HomeController@judges')->name('judges');
+Route::get('judges/create', 'HomeController@create_judge')->name('create_judge');
+Route::post('judges/create', 'HomeController@add_judge')->name('add_judge');
+
+Route::get('profile/{id}', 'HomeController@profile')->name('profile');
+Route::get('edit_profile/{id}', 'HomeController@edit_profile')->name('edit_profile');
+Route::put('edit_profile/{id}', 'HomeController@update_profile')->name('update_profile');

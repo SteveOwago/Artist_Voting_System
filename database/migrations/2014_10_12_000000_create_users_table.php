@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('role_id')->default('2');
             $table->string('is_approved')->default('0');
-            $table->string('profile')->default('profile_pictures/default.png');
+            $table->string('profile')->default('default.png');
             $table->string('video')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

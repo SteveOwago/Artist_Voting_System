@@ -141,9 +141,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const data = {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      labels: ['Simple Boy', 'Nyashinski', 'Khaligraph', 'Nikita', 'Avril', 'Otile Brown', 'King Kaka'],
       datasets: [{
-        label: 'Weekly Sales',
+        label: 'Artist Votes',
         data: [18, 12, 6, 9, 12, 3, 9],
         backgroundColor: [
           'rgba(255, 26, 104, 0.2)',
@@ -225,26 +225,26 @@
         //     dp[i]+= Math.floor(Math.random() * 11);
         // }
 
-        if(dp[lab.indexOf('Mon')]<100){
-            dp[lab.indexOf('Mon')] +=3
+        if(dp[lab.indexOf('Simple Boy')]<100){
+            dp[lab.indexOf('Simple Boy')] +=3
         }
-        if(dp[lab.indexOf('Tue')]<90){
-            dp[lab.indexOf('Tue')] +=2
+        if(dp[lab.indexOf('Nyashinski')]<90){
+            dp[lab.indexOf('Nyashinski')] +=2
         }
-        if(dp[lab.indexOf('Wed')]<120){
-            dp[lab.indexOf('Wed')] +=7
+        if(dp[lab.indexOf('Khaligraph')]<120){
+            dp[lab.indexOf('Khaligraph')] +=7
         }
-        if(dp[lab.indexOf('Thu')]<85){
-            dp[lab.indexOf('Thu')] +=4
+        if(dp[lab.indexOf('Nikita')]<85){
+            dp[lab.indexOf('Nikita')] +=4
         }
-        if(dp[lab.indexOf('Fri')]<235){
-            dp[lab.indexOf('Fri')] +=1
+        if(dp[lab.indexOf('King Kaka')]<235){
+            dp[lab.indexOf('King Kaka')] +=1
         }
-        if(dp[lab.indexOf('Sat')]<65){
-            dp[lab.indexOf('Sat')] +=2
+        if(dp[lab.indexOf('Otile Brown')]<65){
+            dp[lab.indexOf('Otile Brown')] +=2
         }
-        if(dp[lab.indexOf('Sun')]<50){
-            dp[lab.indexOf('Sun')] += 0.5
+        if(dp[lab.indexOf('Avril')]<50){
+            dp[lab.indexOf('Avril')] += 0.5
         }
 
         myChart.update();
