@@ -32,3 +32,5 @@ Route::put('edit_profile/{id}', 'HomeController@update_profile')->name('update_p
 
 Route::post('approve/{id}','HomeController@approve')->name('approve');
 Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove');
+
+Route::get('vote', 'IndexController@index')->name('vote');
