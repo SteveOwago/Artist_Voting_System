@@ -16,22 +16,39 @@
         input::placeholder {
             color: rgb(252, 244, 244);
         }
-
     </style>
 </head>
 
 <body>
-    <div class="container-scroller">
+    <div class="container-scroller" style="background-color: rgb(236, 169, 25);">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="row w-100 m-0">
+            <div class="row w-100">
                 <div class="content-wrapper d-flex align-items-center" style="background-color: rgb(236, 169, 25);">
-                    <div class="col-lg-4 mx-auto">
+                    
+                    <div class="col-sm-12 col-lg-4 mx-auto">
                         {{-- <div class="text-center">
                     <a href="{{route('vote')}}" style="background-color: rgb(51, 196, 196);" class="btn btn-lg btn-success"><h4>Vote Now</h4></a>
                 </div> --}}
                         <div class="card-body text-center justify-content-center px-5 py-5"
-                            style="background-color: rgb(175, 130, 88); border-radius:20px;">
-                            <form action="" method="POST">
+                            style="background-color: rgb(211, 166, 44); border-radius:20px;">
+                                @if(session('message'))
+                                    <div class="row mb-2">
+                                        <div class="col-lg-12">
+                                            <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if($errors->count() > 0)
+                                    <div class="alert alert-danger">
+                                        <ul class="list-unstyled">
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            <form action="{{route('submit_vote')}}" method="POST">
+                                @csrf
                                 <div class="form-group">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
                                         name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
@@ -39,7 +56,7 @@
 
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>{{ $error }}</strong>
                                         </span>
                                     @enderror
                                 </div>
@@ -51,43 +68,42 @@
 
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>{{ $error }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <input id="id_number" type="text"
-                                        class="form-control @error('id_number') is-invalid @enderror" name="name"
+                                        class="form-control @error('id_number') is-invalid @enderror" name="id_number"
                                         value="{{ old('id_number') }}" required autocomplete="id_number" autofocus
                                         placeholder="ID Number" style="text-align:center">
 
                                     @error('id_number')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>{{ $error }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <select class="form-control {{ $errors->has('region') ? 'is-invalid' : '' }}"
-                                        name="region" id="region" required style="text-align:center">
+                                    <select class="form-control"
+                                        name="region_id" id="region_id" required style="text-align:center">
                                         <option selected disabled>--- Select Region ---</option>
                                         @foreach ($regions as $region)
                                             <option value="{{ $region->id }}">{{ $region->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('region')
+                                    @error('region_id')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong>{{ $error }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <div class="row col-lg-10 offset-1 mt-3 text-center align-items-center"
-                                        style="background-color: rgb(173, 153, 38); border-radius:20px;">
+                                <div class="form-group col-sm-12 mt-3 text-center"
+                                style="background-color: rgb(173, 153, 38); border-radius:20px;">
                                         <div class="text-center mt-2">
                                             <h4>Who is Your Favourite Artist?</h4>
                                         </div>
-                                        <select class="form-control mt-3 mb-5" name="artist_id" id="artist" required>
+                                        <select class="form-control mt-3 mb-5" name="artist_id" id="artist_id" required>
                                             <option selected disabled>--- Select Artist ---</option>
                                             @foreach ($artists as $artist)
                                                 <option value="{{ $artist->id }}">{{ $artist->name }}</option>
@@ -95,16 +111,13 @@
                                         </select>
                                         @error('artist')
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+                                                <strong>{{ $error }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="{{ route('vote') }}" style="background-color: rgb(51, 196, 196);"
-                                        class="btn btn-lg btn-success">
-                                        Submit
-                                    </a>
+                                    <input type="submit" value="Submit" style="background-color: rgb(51, 196, 196);"
+                                    class="btn btn-lg btn-success form-control">
                                 </div>
                             </form>
                         </div>

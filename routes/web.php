@@ -34,3 +34,4 @@ Route::post('approve/{id}','HomeController@approve')->name('approve');
 Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove');
 
 Route::get('vote', 'IndexController@index')->name('vote');
+Route::post('submit_vote', 'IndexController@vote')->name('submit_vote');

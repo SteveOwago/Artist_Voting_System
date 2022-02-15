@@ -10,8 +10,12 @@ class Vote extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
+        'phone',
+        'id_number',
         'artist_id',
         'ip_address',
+        'region_id',
         'created_at',
         'updated_at',
     ];
