@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Vote;
@@ -65,7 +66,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|integer|min:12',
+            'phone' => 'required|integer|min:12|unique:users',
             'profile' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -78,17 +79,18 @@ class HomeController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        if($request->hasFile('profile')&& $request->hasFile('video')){
+        if($request->hasFile('profile')){
 
             //Upload Profile Picture
             $profile = time().'.'.$request->file('profile')->getClientOriginalName();  
             $request->file('profile')->move(public_path('profile_pictures'), $profile);
+           //Storage::disk('sftp')->put($profile, fopen($request->file('profile'), 'r+'));
 
 
 
             $user->update(['profile'=>$profile]);
         }
-        return view('judges');
+        return back()->with('message', 'Judge Added Sucessfully');
     }
 
     public function profile($id){
@@ -160,7 +162,7 @@ class HomeController extends Controller
             'phone' => $request->phone,
         ]);
 
-        return redirect()->route('profile',[$user->id]);
+        return redirect()->route('profile',[$user->id])->with('message','Profile Updated Successfully');
 
     }
 
@@ -175,7 +177,7 @@ class HomeController extends Controller
             'is_approved' => $is_approved,
         ]);
 
-        return back();
+        return back()->with('message','Artist Approved Successfully');
 
     }
 
@@ -190,7 +192,7 @@ class HomeController extends Controller
             'is_approved' => $is_approved,
         ]);
 
-        return back();
+        return back()->with('message','Operation Successful');
 
     }
 

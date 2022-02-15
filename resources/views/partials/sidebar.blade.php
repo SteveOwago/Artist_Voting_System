@@ -79,6 +79,7 @@
           </ul>
         </div>
       </li> --}}
+      @if(Auth::user()->role_id ==  1)
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('artists')}}">
           <span class="menu-icon">
@@ -87,6 +88,7 @@
           <span class="menu-title">Artists</span>
         </a>
       </li>
+      
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('judges')}}">
           <span class="menu-icon">
@@ -95,14 +97,23 @@
           <span class="menu-title">Judges</span>
         </a>
       </li>
+      @endif
       <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('profile',Auth::id())}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-account"></i>
+          </span>
+          <span class="menu-title">My Profile</span>
+        </a>
+      </li>
+      {{-- <li class="nav-item menu-items">
         <a class="nav-link" href="pages/charts/chartjs.html">
           <span class="menu-icon">
             <i class="mdi mdi-chart-bar"></i>
           </span>
           <span class="menu-title">Gamers</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

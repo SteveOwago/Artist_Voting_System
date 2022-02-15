@@ -21133,7 +21133,7 @@ div.tagsinput {
   flex-grow: 1;
 
 }
-@media (min-height: 500px) and (min-width: 580px)
+@media (max-height: 500px) and (max-width: 580px)
         {
            .content-wrapper{
             height:100%;

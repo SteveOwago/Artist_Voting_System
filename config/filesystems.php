@@ -60,11 +60,11 @@ return [
             'root' => env('FTP_PATH'), // for example: /public_html/images
          
             // Settings for SSH key based authentication...
-            // 'privateKey' => '/path/to/privateKey',
-            // 'password' => 'encryption-password',
+            // 'privateKey' => asset('backend/ssh/SteveOwago.ppk'),
+            // 'password' => env('SSH_PASSPHRASE'),
          
             // Optional SFTP Settings...
-             'port' => 1624,
+            //'port' => 1624,
             // 'timeout' => 30,
         ],
 
