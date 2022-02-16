@@ -143,8 +143,9 @@
                                                 class="btn btn-sm btn-primary"> View </a> &nbsp;
                                             @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
                                                 <a class="btn btn-sm btn-danger"
-                                                    href="{{ route('disapprove', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                document.getElementById('disapprove').submit();">
+                                                    href="{{ route('disapprove', [$artist->id]) }}"
+                                                    onclick="event.preventDefault();
+                                                                            document.getElementById('disapprove').submit();">
                                                     Disapprove
                                                 </a>
 
@@ -156,7 +157,7 @@
                                             @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
                                                 <a class="btn btn-sm btn-success"
                                                     href="{{ route('approve', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                document.getElementById('approve').submit();">
+                                                                            document.getElementById('approve').submit();">
                                                     Approve
                                                 </a>
 
@@ -297,36 +298,34 @@
     </script> --}}
     <script>
         const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
-
-        setInterval(async function getData()
-        {
+        const setBg = () => {
+            const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            return randomColor
+        }
+        setInterval(async function getData() {
             let response = await fetch(url);
             const res = await response.json();
-            
-             //console.log(data.data[0].name);
-            
-            const labels=[];
+
+            //console.log(data.data[0].name);
+
+            const labels = [];
             const count = [];
             const backgroundColor = [];
-            for(let i=0;i<10;i++){
+            for (let i = 0; i < 10; i++) {
                 labels.push(res.data[i].name);
                 count.push(res.data[i].count);
-                const setBg = () => {
-                    const randomColor ="#" + Math.floor(Math.random() * 16777215).toString(16);
-                    return randomColor
-                }
                 backgroundColor.push(setBg());
 
             }
-            console.log(count);
+           // console.log(count);
 
             const data = {
                 labels: labels,
                 datasets: [{
                     label: 'Artist Votes',
                     data: count,
-                    backgroundColor:backgroundColor,
-                    borderColor:backgroundColor,
+                    backgroundColor: backgroundColor,
+                    borderColor: backgroundColor,
                     borderWidth: 1
                 }]
             };
@@ -352,8 +351,8 @@
                 document.getElementById('myChart'),
                 config
             );
-        
-        },2000);
+
+
 
             setInterval(function update() {
                 let merged = myChart.config.data.labels.map((label, i) => {
@@ -387,12 +386,16 @@
                 myChart.config.data.datasets[0].backgroundColor = bgc;
                 myChart.config.data.datasets[0].borderColor = bc;
 
-
+                function addData(chart, label, data) {
+                    chart.data.labels.push(label);
+                    chart.data.datasets.forEach((dataset) => {
+                        dataset.data.push(data);
+                    });
+                    chart.update();
+                }
                 myChart.update();
             }, 1000);
-
-
-       
+        }, 2000);
     </script>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
