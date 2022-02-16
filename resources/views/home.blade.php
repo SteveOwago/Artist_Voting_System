@@ -100,7 +100,7 @@
     </div> --}}
         <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
             <div class="card pt-4">
-                <div class="card-body">
+                <div class="card-body mb-5">
                     <h4 class="card-title">Artist Vote Tally</h4>
                     <canvas id="myChart" style="height:230px"></canvas>
                 </div>
@@ -179,7 +179,119 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script>
+        const data = {
+            labels: ['Simple Boy', 'Nyashinski', 'Khaligraph', 'Nikita', 'Avril', 'Otile Brown', 'King Kaka'],
+            datasets: [{
+                label: 'Artist Votes',
+                data: [18, 12, 6, 9, 12, 3, 9],
+                backgroundColor: [
+                    'rgba(255, 26, 104, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(0, 0, 0, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 26, 104, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(0, 0, 0, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // config 
+        const config = {
+            type: 'bar',
+            data,
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        };
+
+        // render init block
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        setInterval(function update() {
+            let merged = myChart.config.data.labels.map((label, i) => {
+                return {
+                    'labels': myChart.config.data.labels[i],
+                    'dataPoints': myChart.config.data.datasets[0].data[i],
+                    'backgroundColor': myChart.config.data.datasets[0].backgroundColor[i],
+                    'borderColor': myChart.config.data.datasets[0].borderColor[i]
+                }
+            })
+            // console.log(merged)
+            const lab = [];
+            const dp = [];
+            const bgc = [];
+            const bc = [];
+
+            const dataSort = merged.sort((b, a) => {
+                return a.dataPoints - b.dataPoints
+            });
+
+            for (i = 0; i < dataSort.length; i++) {
+                lab.push(dataSort[i].labels);
+                dp.push(dataSort[i].dataPoints);
+                bgc.push(dataSort[i].backgroundColor);
+                bc.push(dataSort[i].borderColor);
+            }
+
+            // console.log(lab);
+            myChart.config.data.labels = lab;
+            myChart.config.data.datasets[0].data = dp;
+            myChart.config.data.datasets[0].backgroundColor = bgc;
+            myChart.config.data.datasets[0].borderColor = bc;
+
+            // for(x = 0; x<dp.length; x++){
+            //     dp[i]+= Math.floor(Math.random() * 11);
+            // }
+
+            if (dp[lab.indexOf('Simple Boy')] < 100) {
+                dp[lab.indexOf('Simple Boy')] += 3
+            }
+            if (dp[lab.indexOf('Nyashinski')] < 90) {
+                dp[lab.indexOf('Nyashinski')] += 2
+            }
+            if (dp[lab.indexOf('Khaligraph')] < 120) {
+                dp[lab.indexOf('Khaligraph')] += 7
+            }
+            if (dp[lab.indexOf('Nikita')] < 85) {
+                dp[lab.indexOf('Nikita')] += 4
+            }
+            if (dp[lab.indexOf('King Kaka')] < 235) {
+                dp[lab.indexOf('King Kaka')] += 1
+            }
+            if (dp[lab.indexOf('Otile Brown')] < 65) {
+                dp[lab.indexOf('Otile Brown')] += 2
+            }
+            if (dp[lab.indexOf('Avril')] < 50) {
+                dp[lab.indexOf('Avril')] += 0.5
+            }
+
+            myChart.update();
+        }, 1000);
+    </script> --}}
     <script>
+        <script>
         const data = {
             labels: ['Simple Boy', 'Nyashinski', 'Khaligraph', 'Nikita', 'Avril', 'Otile Brown', 'King Kaka'],
             datasets: [{
