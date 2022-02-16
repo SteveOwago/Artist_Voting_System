@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Vote;
+use DB;
 
 class HomeController extends Controller
 {
@@ -29,6 +30,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
+        //Data for homepage dashboard statistics
+        $authuser = User::where('id', \Auth::id())->get();
+        $artists = User::where('role_id',2)->get();
+        $approvedArtists = User::where('role_id','!=',1)->where('is_approved',1)->get();
+        $votes = Vote::all();
+        
         $video_size = 0;
 
         foreach( File::allFiles(public_path('video_uploads')) as $file)
@@ -37,13 +45,7 @@ class HomeController extends Controller
         }
         $video_size = number_format($video_size / 1048576,2);
 
-
-
-        $authuser = User::where('id', \Auth::id())->get();
-        $artists = User::where('role_id',2)->get();
-        $approvedArtists = User::where('role_id','!=',1)->where('is_approved',1)->get();
-        $votes = Vote::all();
-
+       
 
         return view('home',compact('artists','authuser', 'video_size', 'approvedArtists','votes'));
     }

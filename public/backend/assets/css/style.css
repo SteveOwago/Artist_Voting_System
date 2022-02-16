@@ -8601,11 +8601,11 @@ pre {
   border: 0; }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #2C2A23; }
+  background-color: #B8A973; }
 
 .table-hover tbody tr:hover {
   color: #212529;
-  background-color: #2C2A23; }
+  background-color:#B8A973; }
 
 .table-primary,
 .table-primary > th,
@@ -11399,7 +11399,7 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #2C2A23;
+  background-color: #B8A973;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem; }

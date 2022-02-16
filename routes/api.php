@@ -18,4 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/api/v1/artists','ApiController@getArtists')->name('api.artists.index');
+Route::get('/v1/artists','ApiController@getArtists')->name('api.artists.index');
+Route::get('/v1/getVoteCountPerArtist','ApiController@getVoteCountPerArtist')->name('api.votes.getVoteCountPerArtist');
