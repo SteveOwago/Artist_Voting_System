@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         $authuser = User::where('id', \Auth::id())->get();
         $artists = User::where('role_id',2)->get();
-        $approvedArtists = User::where('role_id','!=',2)->where('is_approved',1)->get();
+        $approvedArtists = User::where('role_id','!=',1)->where('is_approved',1)->get();
         $votes = Vote::all();
 
 
