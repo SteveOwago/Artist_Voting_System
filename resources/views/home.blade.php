@@ -4,87 +4,89 @@
 @endsection
 @section('content')
     {{-- Dashboard Statistics Section --}}
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ count($artists) }} Artists</h3>
-                                {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
+    @if(Auth::user()->role_id == 1)
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">{{ count($artists) }} Artists</h3>
+                                    {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-success ">
+                                    <span class="mdi mdi-music icon-item"></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success ">
-                                <span class="mdi mdi-music icon-item"></span>
-                            </div>
-                        </div>
+                        <h6 class="text-muted font-weight-normal">Registered Artists</h6>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Registered Artists</h6>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">{{ $video_size }} MBS</h3>
+                                    {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p> --}}
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-success">
+                                    <span class="mdi mdi-video icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Videos Uploaded</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">{{ count($approvedArtists) }} Artists</h3>
+                                    {{-- <p class="text-muted ml-2 mb-0 font-weight-medium">-2.4%</p> --}}
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-success">
+                                    <span class="mdi mdi-library-music icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Approved Artists</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="d-flex align-items-center align-self-start">
+                                    <h3 class="mb-0">{{ count($votes) }}</h3>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="icon icon-box-success ">
+                                    <span class="mdi mdi-briefcase-check icon-item"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Total Votes</h6>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ $video_size }} MBS</h3>
-                                {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p> --}}
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success">
-                                <span class="mdi mdi-video icon-item"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">Videos Uploaded</h6>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ count($approvedArtists) }} Artists</h3>
-                                {{-- <p class="text-muted ml-2 mb-0 font-weight-medium">-2.4%</p> --}}
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success">
-                                <span class="mdi mdi-library-music icon-item"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">Approved Artists</h6>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="d-flex align-items-center align-self-start">
-                                <h3 class="mb-0">{{ count($votes) }}</h3>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="icon icon-box-success ">
-                                <span class="mdi mdi-briefcase-check icon-item"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">Total Votes</h6>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endif
     {{-- End Dashboard Statistics Section --}}
 
 
@@ -110,71 +112,73 @@
     {{-- End Chart Votes Tally Summary Area Chart --}}
 
     {{-- Registered Artists --}}
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">All Registered Artists</h4>
-                <div class="col-lg-10 offset-1 table-responsive">
-                    <table class="table table-striped table-hover" id="ArtistTable">
-                        <thead>
-                          <tr>
-                            <th> Name </th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th> Status </th>
-                            <th>Date Registered</th>
-                            <th class="text-center">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($artists as $artist)
-                                <tr>
-                                    <td>{{ $artist->name }}</td>
-                                    <td class="text-center">{{ $artist->email }}</td>
-                                    <td class="text-center">{{ $artist->phone }}</td>
-                                    <td class="text-center">{{ $artist->is_approved == '1' ? 'Aproved' : 'Not Approved' }}
-                                    </td>
-                                    <td class="text-center">{{ $artist->created_at }}</td>
-                                    <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
-                                            class="btn btn-sm btn-primary"> View </a> &nbsp;
-                                        @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-danger"
-                                                href="{{ route('disapprove', [$artist->id]) }}" onclick="event.preventDefault();
-                                                          document.getElementById('disapprove').submit();">
-                                                Disapprove
-                                            </a>
+    @if(Auth::user()->role_id == 1)
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">All Registered Artists</h4>
+                    <div class="col-lg-10 offset-1 table-responsive">
+                        <table class="table table-striped table-hover" id="ArtistTable">
+                            <thead>
+                            <tr>
+                                <th> Name </th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th> Status </th>
+                                <th>Date Registered</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($artists as $artist)
+                                    <tr>
+                                        <td>{{ $artist->name }}</td>
+                                        <td class="text-center">{{ $artist->email }}</td>
+                                        <td class="text-center">{{ $artist->phone }}</td>
+                                        <td class="text-center">{{ $artist->is_approved == '1' ? 'Aproved' : 'Not Approved' }}
+                                        </td>
+                                        <td class="text-center">{{ $artist->created_at }}</td>
+                                        <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
+                                                class="btn btn-sm btn-primary"> View </a> &nbsp;
+                                            @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
+                                                <a class="btn btn-sm btn-danger"
+                                                    href="{{ route('disapprove', [$artist->id]) }}" onclick="event.preventDefault();
+                                                            document.getElementById('disapprove').submit();">
+                                                    Disapprove
+                                                </a>
 
-                                            <form id="disapprove" action="{{ route('disapprove', [$artist->id]) }}"
-                                                method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        @endif
-                                        @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-success" href="{{ route('approve', [$artist->id]) }}"
-                                                onclick="event.preventDefault();
-                                                        document.getElementById('approve').submit();">
-                                                Approve
-                                            </a>
+                                                <form id="disapprove" action="{{ route('disapprove', [$artist->id]) }}"
+                                                    method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            @endif
+                                            @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
+                                                <a class="btn btn-sm btn-success" href="{{ route('approve', [$artist->id]) }}"
+                                                    onclick="event.preventDefault();
+                                                            document.getElementById('approve').submit();">
+                                                    Approve
+                                                </a>
 
-                                            <form id="approve" action="{{ route('approve', [$artist->id]) }}"
-                                                method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        @endif
-                                        &nbsp; <a href="" class="btn btn-sm btn-danger"> Delete </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="text-center" colspan="6">No Registered Artists</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                                                <form id="approve" action="{{ route('approve', [$artist->id]) }}"
+                                                    method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            @endif
+                                            &nbsp; <a href="" class="btn btn-sm btn-danger"> Delete </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="6">No Registered Artists</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     {{-- End of registered Users --}}
 @endsection
 @section('scripts')

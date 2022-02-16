@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                     </div>
-                    @if ($user->is_approved == 0 && $user->role_id != 1)
+                    @if ($user->is_approved == 0 && Auth::user()->role_id == 1)
                         <div class="row text-center ml-5 mt-5">
                             <a class="btn btn-lg btn-success" href="{{ route('approve',[$user->id])}}"
                                         onclick="event.preventDefault();
@@ -106,7 +106,7 @@
                         </div>   
                     @endif
 
-                    @if ($user->is_approved == 1 && $user->role_id != 1)
+                    @if ($user->is_approved == 1 && Auth::user()->role_id == 1)
                         <div class="row text-center ml-5 mt-5">
                             <a class="btn btn-lg btn-danger" href="{{ route('disapprove',[$user->id])}}"
                                         onclick="event.preventDefault();

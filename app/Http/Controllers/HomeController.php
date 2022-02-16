@@ -44,6 +44,7 @@ class HomeController extends Controller
         $approvedArtists = User::where('role_id','!=',2)->where('is_approved',1)->get();
         $votes = Vote::all();
 
+
         return view('home',compact('artists','authuser', 'video_size', 'approvedArtists','votes'));
     }
     public function artists(){
