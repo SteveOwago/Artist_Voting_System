@@ -198,5 +198,23 @@ class HomeController extends Controller
         return back()->with('message','Operation Successful');
 
     }
+    public function delete_artist($id){
+
+        $user = User::findOrFail($id);
+        $video = public_path('video_uploads/').$user->video;
+                    if($video){
+                        File::delete($video);
+                    }
+        $profile = public_path('profile_pictures/').$user->profile;
+                if($profile && $user->profile !== "default.png"){
+                    File::delete($profile);
+                }
+
+        $user->delete();
+
+
+        return back()->with('message','Operation Successful');
+
+    }
 
 }

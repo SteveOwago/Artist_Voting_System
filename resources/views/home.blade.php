@@ -166,7 +166,19 @@
                                                     @csrf
                                                 </form>
                                             @endif
-                                            &nbsp; <a href="" class="btn btn-sm btn-danger"> Delete </a>
+                                            &nbsp; @if (Auth::user()->role_id == 1)
+                                            <a class="btn btn-sm btn-danger" href="{{ route('delete', [$artist->id]) }}"
+                                                onclick="event.preventDefault();
+                                                      document.getElementById('delete').submit();">
+                                                Delete
+                                            </a>
+
+                                            <form id="delete" action="{{ route('delete', [$artist->id]) }}"
+                                                method="POST" class="d-none">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
+                                        @endif
                                         </td>
                                     </tr>
                                 @empty
