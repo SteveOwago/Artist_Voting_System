@@ -17,7 +17,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="icon icon-box-success ">
+                                <div class="icon icon-box-warning">
                                     <span class="mdi mdi-music icon-item"></span>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="icon icon-box-success">
+                                <div class="icon icon-box-warning">
                                     <span class="mdi mdi-library-music icon-item"></span>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="col-3">
-                                <div class="icon icon-box-success ">
+                                <div class="icon icon-box-warning ">
                                     <span class="mdi mdi-briefcase-check icon-item"></span>
                                 </div>
                             </div>
@@ -93,6 +93,7 @@
 
     {{-- Registered Artists --}}
     @if (Auth::user()->role_id == 1)
+    <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -172,6 +173,7 @@
                 </div>
             </div>
         </div>
+    </div>
     @endif
     {{-- End of registered Users --}}
 @endsection
