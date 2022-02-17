@@ -17,15 +17,6 @@
                         <div class="row">
                             <img src="/profile_pictures/{{$user->profile}}" width="200" height="200" style="border-radius:50%;" class="mx-auto" alt="Profile Image Avatar">
                         </div>
-                        @if($user->video != null &&(Auth::id() == $user->id|| $user->role_id == 1))
-                            <div class="row mt-5">
-                                <div class="embed-responsive embed-responsive-4by3">
-                                    <video class="embed-responsive-item" controls controlsList="nodownload">
-                                        <source src="/video_uploads/{{$user->video}}">
-                                    </video>
-                                </div>
-                            </div>
-                        @endif
                     </div>
                     <div class="col-lg-9">
                             {{-- <table class="table-bordered table-striped">

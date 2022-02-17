@@ -25,7 +25,6 @@ class User extends Authenticatable
         'is_approved',
         'role_id',
         'profile',
-        'video',
         'password',
     ];
 

@@ -37,17 +37,11 @@ class HomeController extends Controller
         $approvedArtists = User::where('role_id','!=',1)->where('is_approved',1)->get();
         $votes = Vote::all();
         
-        $video_size = 0;
-
-        foreach( File::allFiles(public_path('video_uploads')) as $file)
-        {
-            $video_size += $file->getSize();
-        }
-        $video_size = number_format($video_size / 1048576,2);
+        
 
        
 
-        return view('home',compact('artists','authuser', 'video_size', 'approvedArtists','votes'));
+        return view('home',compact('artists','authuser', 'approvedArtists','votes'));
     }
     public function artists(){
         $artists = User::where('role_id',2)->get();
@@ -70,7 +64,6 @@ class HomeController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|integer|min:12|unique:users',
-            'profile' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -81,18 +74,7 @@ class HomeController extends Controller
             'role_id' => 1,
             'password' => Hash::make($request->password),
         ]);
-
-        if($request->hasFile('profile')){
-
-            //Upload Profile Picture
-            $profile = time().'.'.$request->file('profile')->getClientOriginalName();  
-            $request->file('profile')->move(public_path('profile_pictures'), $profile);
-           //Storage::disk('sftp')->put($profile, fopen($request->file('profile'), 'r+'));
-
-
-
-            $user->update(['profile'=>$profile]);
-        }
+        
         return back()->with('message', 'Judge Added Sucessfully');
     }
 
@@ -114,13 +96,6 @@ class HomeController extends Controller
     public function update_profile(Request $request, $id){
         
 
-        if($request->hasFile('video')|| $request->hasFile('profile')){
-            $validated = $request->validate([
-                'video' => 'file|max:20000',
-                'profile' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-        }
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
@@ -128,35 +103,8 @@ class HomeController extends Controller
         ]);
         
         $user = User::findOrFail($id);
+
         
-        if($request->hasFile('profile') || $request->hasFile('video')){
-            if($request->hasFile('profile')){
-                $profile = public_path('profile_pictures/').$user->profile;
-                if($profile && $user->profile !== "default.png"){
-                    File::delete($profile);
-                }
-
-                $profile = time().'.'.$request->file('profile')->getClientOriginalName();  
-                $request->file('profile')->move(public_path('profile_pictures'), $profile);
-
-                $user->update(['profile'=>$profile,]);
-            }
-            
-            if($request->hasFile('video')){
-                $video = public_path('video_uploads/').$user->video;
-                    if($video){
-                        File::delete($video);
-                    }
-                
-
-                $video = time().'.'.$request->file('video')->getClientOriginalName();  
-                $request->file('video')->move(public_path('video_uploads'), $video);
-
-                $user->update(['video'=>$video,]);
-            }
-
-
-        }
           
 
         $user->update([
@@ -205,14 +153,6 @@ class HomeController extends Controller
         if($user->votes()->count()>0){
             return back()->with('errors','Artist with cannot be deleted. Artist has Votes');
         }
-        $video = public_path('video_uploads/').$user->video;
-                    if($video){
-                        File::delete($video);
-                    }
-        $profile = public_path('profile_pictures/').$user->profile;
-                if($profile && $user->profile !== "default.png"){
-                    File::delete($profile);
-                }
 
         $user->delete();
 
