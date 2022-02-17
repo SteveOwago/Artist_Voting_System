@@ -16,7 +16,7 @@ class CreateVotesTable extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('artist_id');
-            $table->foreign('artist_id', 'artist_fk_5609809')->references('id')->on('users');
+            $table->foreign('artist_id', 'artist_fk_5609809')->references('id')->on('users')->onDelete('cascade');
             $table->string('ip_address')->unique();
             $table->timestamps();
         });

@@ -15,7 +15,7 @@
                   <div class="row">
                     <div class="col-lg-3">
                         <div class="row">
-                            <img src="/profile_pictures/{{$user->profile}}" width="200" height="200" style="border-radius:50%;" alt="Profile Image Avatar">
+                            <img src="/profile_pictures/{{$user->profile}}" width="200" height="200" style="border-radius:50%;" class="mx-auto" alt="Profile Image Avatar">
                         </div>
                         @if($user->video != null &&(Auth::id() == $user->id|| $user->role_id == 1))
                             <div class="row mt-5">

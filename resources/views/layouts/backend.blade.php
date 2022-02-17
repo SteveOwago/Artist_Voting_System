@@ -29,6 +29,13 @@
                             </div>
                         </div>
                     @endif
+                    @if (session('errors'))
+                        <div class="row mb-2">
+                            <div class="col-lg-12">
+                                <div class="alert alert-danger" role="alert">{{ session('errors') }}</div>
+                            </div>
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
                 <!-- content-wrapper ends -->

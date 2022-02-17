@@ -314,7 +314,7 @@
             const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
             return randomColor
         }
-        setInterval(async function getData() {
+        async function getData() {
             let response = await fetch(url);
             const res = await response.json();
 
@@ -407,7 +407,9 @@
                 }
                 myChart.update();
             }, 1000);
-        }, 2000);
+        }
+
+        getData();
     </script>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"

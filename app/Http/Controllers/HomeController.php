@@ -201,6 +201,10 @@ class HomeController extends Controller
     public function delete_artist($id){
 
         $user = User::findOrFail($id);
+        //Check if artists has votes
+        if($user->votes()->count()>0){
+            return back()->with('errors','Artist with cannot be deleted. Artist has Votes');
+        }
         $video = public_path('video_uploads/').$user->video;
                     if($video){
                         File::delete($video);
