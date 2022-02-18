@@ -100,19 +100,21 @@ class ApiController extends Controller
                         ->get();
 
         $artistsRegistered = [];
-        $days = ["Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"];
+        $days = [ 
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+        ];
 
         $data = [];
         foreach($days as $day)
         {
             foreach ($artistsweekly as $aw) {
-                if($aw->dayname == $day){
+                if($aw->dayname === $day){
                     $data = [
                         'day'=>$aw->dayname,
                         'count'=>$aw->count,
@@ -121,8 +123,9 @@ class ApiController extends Controller
                 }
             }
         }
+        
         foreach ($days as $day) {
-            if(!(array_search($day, array_column($artistsRegistered, 'day')))){
+            if(!(array_search($day, array_column($artistsRegistered, "day")))){
                 $data = [
                     'day'=>$day,
                     'count'=>0,
@@ -130,49 +133,8 @@ class ApiController extends Controller
                     array_push($artistsRegistered,$data);
                }
         }
-        
-        //    if(!in_array('Tuesday', $artistsRegistered)){
-        //     $data = [
-        //         'day'=>'Tuesday',
-        //         'count'=>0,
-        //     ];
-        //         array_push($artistsRegistered,$data);
-        //    }
-        //    if(!in_array('Wednesday', $artistsRegistered)){
-        //     $data = [
-        //         'day'=>'Wednesday',
-        //         'count'=>0,
-        //     ];
-        //         array_push($artistsRegistered,$data);
-        //    }
-        //    if(!in_array('Thursday', $artistsRegistered)){
-        //     $data = [
-        //         'day'=>'Thursday',
-        //         'count'=>0,
-        //     ];
-        //         array_push($artistsRegistered,$data);
-        //    }
-        //    if(!in_array('Friday', $artistsRegistered)){
-        //     $data = [
-        //         'day'=>'Friday',
-        //         'count'=>0,
-        //     ];
-        //         array_push($artistsRegistered,$data);
-        //    }
-        //    if(!in_array('Saturday', $artistsRegistered)){
-        //     $data = [
-        //         'day'=>'Saturday',
-        //         'count'=>0,
-        //     ];
-        //         array_push($artistsRegistered,$data);
-        //    }
-        //    if(!in_array('Sunday', $artistsRegistered)){
-        //     $data = [
-        //         'day'=>'Sunday',
-        //         'count'=>0,
-        //     ];
-        //         array_push($artistsRegistered,$data);
-        //    }
+
+
 
        return new ApiResource($artistsRegistered);
     }

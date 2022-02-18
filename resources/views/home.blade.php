@@ -88,17 +88,17 @@
                     <div class="card-body mb-5">
                         <div class="row">
                             <div class="col-md-6">
-                                    <h4 class="card-title">Registered Artist This Week</h4>
-                                    <div class="card-body">
-                                        <canvas id="myChart-bar" style="height:230px"></canvas>
-                                    </div>
+                                <h4 class="card-title">Registered Artist This Week</h4>
+                                <div class="card-body">
+                                    <canvas id="myChart-bar" style="height:230px"></canvas>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                    <h4 class="card-title">Artist Vote Tally</h4>
-                                    <div class="card-body" style="position: relative; height:50%; width:50%">
-                                        <canvas id="myChart-pie" height="300"></canvas>
-                                    </div>
-                                
+                                <h4 class="card-title">Artist Vote Tally</h4>
+                                <div class="card-body" style="position: relative; height:50%; width:50%">
+                                    <canvas id="myChart-pie" height="300"></canvas>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                                                     <a class="btn btn-sm btn-danger"
                                                         href="{{ route('disapprove', [$artist->id]) }}"
                                                         onclick="event.preventDefault();
-                                                                                            document.getElementById('disapprove').submit();">
+                                                                                                document.getElementById('disapprove').submit();">
                                                         Disapprove
                                                     </a>
 
@@ -166,7 +166,7 @@
                                                     <a class="btn btn-sm btn-warning"
                                                         href="{{ route('approve', [$artist->id]) }}"
                                                         onclick="event.preventDefault();
-                                                                                            document.getElementById('approve').submit();">
+                                                                                                document.getElementById('approve').submit();">
                                                         Approve
                                                     </a>
 
@@ -178,7 +178,7 @@
                                                 &nbsp; @if (Auth::user()->role_id == 1)
                                                     <a class="btn btn-sm btn-danger"
                                                         href="{{ route('delete', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                      document.getElementById('delete').submit();">
+                                                                          document.getElementById('delete').submit();">
                                                         Delete
                                                     </a>
 
@@ -317,20 +317,24 @@
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
-                    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-                    return randomColor
-                }
+                const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                return randomColor
+            }
             async function fetchData() {
                 let response_bar = await fetch(url_bar);
                 const res_bar = await response_bar.json();
 
                 const labels_bar = [];
-                const backgroundColor_bar=[];
+                const backgroundColor_bar = [];
                 const data_bar1 = [];
-                for (let i = 0; i < 7; i++) {
+                let opacity = 0.0;
+                for (let i = 0; i < 8; i++) {
+                    let color = 'rgb(245, 162, 10,'
+                    color = color + ((opacity += 0.15).toString()) + ')'
+                    console.log(color)
                     labels_bar.push(res_bar.data[i].day);
                     data_bar1.push(res_bar.data[i].count);
-                    backgroundColor_bar.push(setBg());
+                    backgroundColor_bar.push(color);
                 }
 
 
@@ -339,7 +343,7 @@
                     labels: labels_bar,
                     datasets: [{
                         label: 'Registered Artists This Week',
-                        backgroundColor:  backgroundColor_bar,
+                        backgroundColor: backgroundColor_bar,
                         // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],
                         data: data_bar1,
                     }]
