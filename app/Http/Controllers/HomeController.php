@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Vote;
 use DB;
 
+
 class HomeController extends Controller
 {
     /**
@@ -36,8 +37,10 @@ class HomeController extends Controller
         $artists = User::where('role_id',2)->get();
         $approvedArtists = User::where('role_id','!=',1)->where('is_approved',1)->get();
         $votes = Vote::all();
-        
-        
+        $start = 02;
+        $end = 03;
+        $weeks = \Carbon\Carbon::now()->weekOfYear;
+
 
        
 

@@ -83,319 +83,294 @@
       </div>
     </div> --}}
         <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
-            <div class="card pt-4">
-                <div class="card-body mb-5">
-                    <h4 class="card-title">Artist Vote Tally</h4>
-                    <canvas id="myChart" style="height:230px"></canvas>
+            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+                <div class="card pt-4">
+                    <div class="card-body mb-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <h4 class="card-title">Registered Artist This Week</h4>
+                                    <div class="card-body">
+                                        <canvas id="myChart-bar" style="height:230px"></canvas>
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                    <h4 class="card-title">Artist Vote Tally</h4>
+                                    <div class="card-body" style="position: relative; height:50%; width:50%">
+                                        <canvas id="myChart-pie" height="300"></canvas>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endif
+            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+                <div class="card pt-4">
+                    <div class="card-body mb-5">
+                        <h4 class="card-title">Artist Vote Tally</h4>
+                        <canvas id="myChart" style="height:230px"></canvas>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     {{-- End Chart Votes Tally Summary Area Chart --}}
 
     {{-- Registered Artists --}}
     @if (Auth::user()->role_id == 1)
-    <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">All Registered Artists</h4>
-                    <div class="col-lg-10 offset-1 table-responsive">
-                        <table class="table table-striped table-hover" id="ArtistTable">
-                            <thead>
-                                <tr>
-                                    <th> Name </th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th> Status </th>
-                                    <th>Date Registered</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($artists as $artist)
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">All Registered Artists</h4>
+                        <div class="col-lg-10 offset-1 table-responsive">
+                            <table class="table table-striped table-hover" id="ArtistTable">
+                                <thead>
                                     <tr>
-                                        <td>{{ $artist->name }}</td>
-                                        <td class="text-center">{{ $artist->email }}</td>
-                                        <td class="text-center">{{ $artist->phone }}</td>
-                                        <td class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
-                                            {{ $artist->is_approved == 1 ? 'Approved' : 'Not Approved' }}
-                                        </td>
-                                        <td class="text-center">{{ $artist->created_at }}</td>
-                                        <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
-                                                class="btn btn-sm btn-dark"> View </a> &nbsp;
-                                            @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
-                                                <a class="btn btn-sm btn-danger"
-                                                    href="{{ route('disapprove', [$artist->id]) }}"
-                                                    onclick="event.preventDefault();
-                                                                            document.getElementById('disapprove').submit();">
-                                                    Disapprove
-                                                </a>
-
-                                                <form id="disapprove" action="{{ route('disapprove', [$artist->id]) }}"
-                                                    method="POST" class="d-none">
-                                                    @csrf
-                                                </form>
-                                            @endif
-                                            @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
-                                                <a class="btn btn-sm btn-warning"
-                                                    href="{{ route('approve', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                            document.getElementById('approve').submit();">
-                                                    Approve
-                                                </a>
-
-                                                <form id="approve" action="{{ route('approve', [$artist->id]) }}"
-                                                    method="POST" class="d-none">
-                                                    @csrf
-                                                </form>
-                                            @endif
-                                            &nbsp; @if (Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-danger" href="{{ route('delete', [$artist->id]) }}"
-                                                onclick="event.preventDefault();
-                                                      document.getElementById('delete').submit();">
-                                                Delete
-                                            </a>
-
-                                            <form id="delete" action="{{ route('delete', [$artist->id]) }}"
-                                                method="POST" class="d-none">
-                                                @csrf
-                                                @method('delete')
-                                            </form>
-                                        @endif
-                                        </td>
+                                        <th> Name </th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th> Status </th>
+                                        <th>Date Registered</th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td class="text-center" colspan="6">No Registered Artists</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @forelse ($artists as $artist)
+                                        <tr>
+                                            <td>{{ $artist->name }}</td>
+                                            <td class="text-center">{{ $artist->email }}</td>
+                                            <td class="text-center">{{ $artist->phone }}</td>
+                                            <td
+                                                class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
+                                                {{ $artist->is_approved == 1 ? 'Approved' : 'Not Approved' }}
+                                            </td>
+                                            <td class="text-center">{{ $artist->created_at }}</td>
+                                            <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
+                                                    class="btn btn-sm btn-dark"> View </a> &nbsp;
+                                                @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
+                                                    <a class="btn btn-sm btn-danger"
+                                                        href="{{ route('disapprove', [$artist->id]) }}"
+                                                        onclick="event.preventDefault();
+                                                                                            document.getElementById('disapprove').submit();">
+                                                        Disapprove
+                                                    </a>
+
+                                                    <form id="disapprove"
+                                                        action="{{ route('disapprove', [$artist->id]) }}" method="POST"
+                                                        class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                @endif
+                                                @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
+                                                    <a class="btn btn-sm btn-warning"
+                                                        href="{{ route('approve', [$artist->id]) }}"
+                                                        onclick="event.preventDefault();
+                                                                                            document.getElementById('approve').submit();">
+                                                        Approve
+                                                    </a>
+
+                                                    <form id="approve" action="{{ route('approve', [$artist->id]) }}"
+                                                        method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+                                                @endif
+                                                &nbsp; @if (Auth::user()->role_id == 1)
+                                                    <a class="btn btn-sm btn-danger"
+                                                        href="{{ route('delete', [$artist->id]) }}" onclick="event.preventDefault();
+                                                                      document.getElementById('delete').submit();">
+                                                        Delete
+                                                    </a>
+
+                                                    <form id="delete" action="{{ route('delete', [$artist->id]) }}"
+                                                        method="POST" class="d-none">
+                                                        @csrf
+                                                        @method('delete')
+                                                    </form>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td class="text-center" colspan="6">No Registered Artists</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
     {{-- End of registered Users --}}
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    {{-- <script>
-        const data = {
-            labels: ['Simple Boy', 'Nyashinski', 'Khaligraph', 'Nikita', 'Avril', 'Otile Brown', 'King Kaka'],
-            datasets: [{
-                label: 'Artist Votes',
-                data: [18, 12, 6, 9, 12, 3, 9],
-                backgroundColor: [
-                    'rgba(255, 26, 104, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(0, 0, 0, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 26, 104, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(0, 0, 0, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
-
-        // config 
-        const config = {
-            type: 'bar',
-            data,
-            options: {
-                indexAxis: 'y',
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: false,
+    {{-- Section Racing Bar vote tally --}}
+    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+        <script>
+            const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
+            const setBg = () => {
+                const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                return randomColor
             }
-        };
+            async function getData() {
+                let response = await fetch(url);
+                const res = await response.json();
 
-        // render init block
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
+                //console.log(data.data[0].name);
 
-        setInterval(function update() {
-            let merged = myChart.config.data.labels.map((label, i) => {
-                return {
-                    'labels': myChart.config.data.labels[i],
-                    'dataPoints': myChart.config.data.datasets[0].data[i],
-                    'backgroundColor': myChart.config.data.datasets[0].backgroundColor[i],
-                    'borderColor': myChart.config.data.datasets[0].borderColor[i]
+                const labels = [];
+                const count = [];
+                const backgroundColor = [];
+                for (let i = 0; i < 10; i++) {
+                    labels.push(res.data[i].name);
+                    count.push(res.data[i].count);
+                    backgroundColor.push(setBg());
+
                 }
-            })
-            // console.log(merged)
-            const lab = [];
-            const dp = [];
-            const bgc = [];
-            const bc = [];
+                // console.log(count);
 
-            const dataSort = merged.sort((b, a) => {
-                return a.dataPoints - b.dataPoints
-            });
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Artist Votes',
+                        data: count,
+                        backgroundColor: backgroundColor,
+                        borderColor: backgroundColor,
+                        borderWidth: 1
+                    }]
+                };
 
-            for (i = 0; i < dataSort.length; i++) {
-                lab.push(dataSort[i].labels);
-                dp.push(dataSort[i].dataPoints);
-                bgc.push(dataSort[i].backgroundColor);
-                bc.push(dataSort[i].borderColor);
-            }
+                // config 
+                const config = {
+                    type: 'bar',
+                    data,
+                    options: {
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                };
 
-            // console.log(lab);
-            myChart.config.data.labels = lab;
-            myChart.config.data.datasets[0].data = dp;
-            myChart.config.data.datasets[0].backgroundColor = bgc;
-            myChart.config.data.datasets[0].borderColor = bc;
+                // render init block
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
 
-            // for(x = 0; x<dp.length; x++){
-            //     dp[i]+= Math.floor(Math.random() * 11);
-            // }
 
-            if (dp[lab.indexOf('Simple Boy')] < 100) {
-                dp[lab.indexOf('Simple Boy')] += 3
-            }
-            if (dp[lab.indexOf('Nyashinski')] < 90) {
-                dp[lab.indexOf('Nyashinski')] += 2
-            }
-            if (dp[lab.indexOf('Khaligraph')] < 120) {
-                dp[lab.indexOf('Khaligraph')] += 7
-            }
-            if (dp[lab.indexOf('Nikita')] < 85) {
-                dp[lab.indexOf('Nikita')] += 4
-            }
-            if (dp[lab.indexOf('King Kaka')] < 235) {
-                dp[lab.indexOf('King Kaka')] += 1
-            }
-            if (dp[lab.indexOf('Otile Brown')] < 65) {
-                dp[lab.indexOf('Otile Brown')] += 2
-            }
-            if (dp[lab.indexOf('Avril')] < 50) {
-                dp[lab.indexOf('Avril')] += 0.5
-            }
 
-            myChart.update();
-        }, 1000);
-    </script> --}}
-    <script>
-        const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
-        const setBg = () => {
-            const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-            return randomColor
-        }
-        async function getData() {
-            let response = await fetch(url);
-            const res = await response.json();
-
-            //console.log(data.data[0].name);
-
-            const labels = [];
-            const count = [];
-            const backgroundColor = [];
-            for (let i = 0; i < 10; i++) {
-                labels.push(res.data[i].name);
-                count.push(res.data[i].count);
-                backgroundColor.push(setBg());
-
-            }
-           // console.log(count);
-
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: 'Artist Votes',
-                    data: count,
-                    backgroundColor: backgroundColor,
-                    borderColor: backgroundColor,
-                    borderWidth: 1
-                }]
-            };
-
-            // config 
-            const config = {
-                type: 'bar',
-                data,
-                options: {
-                    indexAxis: 'y',
-                    scales: {
-                        x: {
-                            beginAtZero: true
+                setInterval(function update() {
+                    let merged = myChart.config.data.labels.map((label, i) => {
+                        return {
+                            'labels': myChart.config.data.labels[i],
+                            'dataPoints': myChart.config.data.datasets[0].data[i],
+                            'backgroundColor': myChart.config.data.datasets[0].backgroundColor[i],
+                            'borderColor': myChart.config.data.datasets[0].borderColor[i]
                         }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                }
-            };
+                    })
+                    // console.log(merged)
+                    const lab = [];
+                    const dp = [];
+                    const bgc = [];
+                    const bc = [];
 
-            // render init block
-            const myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
-
-
-
-            setInterval(function update() {
-                let merged = myChart.config.data.labels.map((label, i) => {
-                    return {
-                        'labels': myChart.config.data.labels[i],
-                        'dataPoints': myChart.config.data.datasets[0].data[i],
-                        'backgroundColor': myChart.config.data.datasets[0].backgroundColor[i],
-                        'borderColor': myChart.config.data.datasets[0].borderColor[i]
-                    }
-                })
-                // console.log(merged)
-                const lab = [];
-                const dp = [];
-                const bgc = [];
-                const bc = [];
-
-                const dataSort = merged.sort((b, a) => {
-                    return a.dataPoints - b.dataPoints
-                });
-
-                for (i = 0; i < dataSort.length; i++) {
-                    lab.push(dataSort[i].labels);
-                    dp.push(dataSort[i].dataPoints);
-                    bgc.push(dataSort[i].backgroundColor);
-                    bc.push(dataSort[i].borderColor);
-                }
-
-                // console.log(lab);
-                myChart.config.data.labels = lab;
-                myChart.config.data.datasets[0].data = dp;
-                myChart.config.data.datasets[0].backgroundColor = bgc;
-                myChart.config.data.datasets[0].borderColor = bc;
-
-                function addData(chart, label, data) {
-                    chart.data.labels.push(label);
-                    chart.data.datasets.forEach((dataset) => {
-                        dataset.data.push(data);
+                    const dataSort = merged.sort((b, a) => {
+                        return a.dataPoints - b.dataPoints
                     });
-                    chart.update();
-                }
-                myChart.update();
-            }, 1000);
-        }
 
-        getData();
-    </script>
-    </script>
+                    for (i = 0; i < dataSort.length; i++) {
+                        lab.push(dataSort[i].labels);
+                        dp.push(dataSort[i].dataPoints);
+                        bgc.push(dataSort[i].backgroundColor);
+                        bc.push(dataSort[i].borderColor);
+                    }
+
+                    // console.log(lab);
+                    myChart.config.data.labels = lab;
+                    myChart.config.data.datasets[0].data = dp;
+                    myChart.config.data.datasets[0].backgroundColor = bgc;
+                    myChart.config.data.datasets[0].borderColor = bc;
+
+                    function addData(chart, label, data) {
+                        chart.data.labels.push(label);
+                        chart.data.datasets.forEach((dataset) => {
+                            dataset.data.push(data);
+                        });
+                        chart.update();
+                    }
+                    myChart.update();
+                }, 1000);
+            }
+
+            getData();
+        </script>
+    @endif
+    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+        <script>
+            const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
+            const setBg = () => {
+                    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                    return randomColor
+                }
+            async function fetchData() {
+                let response_bar = await fetch(url_bar);
+                const res_bar = await response_bar.json();
+
+                const labels_bar = [];
+                const backgroundColor_bar=[];
+                const data_bar1 = [];
+                for (let i = 0; i < 7; i++) {
+                    labels_bar.push(res_bar.data[i].day);
+                    data_bar1.push(res_bar.data[i].count);
+                    backgroundColor_bar.push(setBg());
+                }
+
+
+
+                const data_bar = {
+                    labels: labels_bar,
+                    datasets: [{
+                        label: 'Registered Artists This Week',
+                        backgroundColor:  backgroundColor_bar,
+                        // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],
+                        data: data_bar1,
+                    }]
+                };
+
+                const config_bar = {
+                    type: 'bar',
+                    data: data_bar,
+                    options: {}
+                };
+                const config_pie = {
+                    type: 'pie',
+                    data: data_bar,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                    }
+                };
+
+                const myChart_bar = new Chart(
+                    document.getElementById('myChart-bar'),
+                    config_bar
+                );
+                const myChart_pie = new Chart(
+                    document.getElementById('myChart-pie'),
+                    config_pie
+                );
+            }
+            fetchData();
+        </script>
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -426,8 +401,8 @@
                         title: 'Judges_list',
                         exportOptions: {
                             exportOptions: {
-                            columns: [0, 1, 2, 3, 4, ':visible' ]
-                        }
+                                columns: [0, 1, 2, 3, 4, ':visible']
+                            }
                         }
                     },
                     {
