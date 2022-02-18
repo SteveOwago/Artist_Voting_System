@@ -85,7 +85,7 @@
                     </div>
                     @if ($user->is_approved == 0 && Auth::user()->role_id == 1)
                         <div class="row text-center ml-5 mt-5">
-                            <a class="btn btn-lg btn-success" href="{{ route('approve',[$user->id])}}"
+                            <a class="btn btn-lg btn-warning" href="{{ route('approve',[$user->id])}}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('approve').submit();">
                                             Approve

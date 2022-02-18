@@ -1,6 +1,8 @@
 @extends('layouts.backend')
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
 @endsection
 @section('content')
     {{-- Dashboard Statistics Section --}}
@@ -116,12 +118,12 @@
                                         <td>{{ $artist->name }}</td>
                                         <td class="text-center">{{ $artist->email }}</td>
                                         <td class="text-center">{{ $artist->phone }}</td>
-                                        <td class="text-center">
-                                            {{ $artist->is_approved == '1' ? 'Aproved' : 'Not Approved' }}
+                                        <td class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
+                                            {{ $artist->is_approved == 1 ? 'Approved' : 'Not Approved' }}
                                         </td>
                                         <td class="text-center">{{ $artist->created_at }}</td>
                                         <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
-                                                class="btn btn-sm btn-primary"> View </a> &nbsp;
+                                                class="btn btn-sm btn-dark"> View </a> &nbsp;
                                             @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
                                                 <a class="btn btn-sm btn-danger"
                                                     href="{{ route('disapprove', [$artist->id]) }}"
@@ -136,7 +138,7 @@
                                                 </form>
                                             @endif
                                             @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
-                                                <a class="btn btn-sm btn-success"
+                                                <a class="btn btn-sm btn-warning"
                                                     href="{{ route('approve', [$artist->id]) }}" onclick="event.preventDefault();
                                                                             document.getElementById('approve').submit();">
                                                     Approve
@@ -415,7 +417,29 @@
     </script> --}}
     <script>
         $(document).ready(function() {
-            $('#ArtistTable').DataTable();
+            $('#ArtistTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Judges_list',
+                        exportOptions: {
+                            exportOptions: {
+                            columns: [0, 1, 2, 3, 4, ':visible' ]
+                        }
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Judges_list',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    'colvis'
+                ]
+            });
         });
     </script>
 @endsection
