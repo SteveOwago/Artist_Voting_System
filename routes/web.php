@@ -19,7 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('otp');
+
+Route::get('otp', [App\Http\Controllers\OTPController::class, 'index'])->name('otp.index');
+Route::post('otp', [App\Http\Controllers\OTPController::class, 'store'])->name('otp.post');
+Route::get('otp/reset', [App\Http\Controllers\OTPController::class, 'resend'])->name('otp.resend');
 
 Route::get('artists', 'HomeController@artists')->name('artists');
 Route::get('judges', 'HomeController@judges')->name('judges');
