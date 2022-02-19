@@ -133,8 +133,9 @@ class ApiController extends Controller
                     array_push($artistsRegistered,$data);
                }
         }
-
-
+        usort($artistsRegistered, function($a, $b) {
+            return  $b['count']- $a['count'];
+          });
 
        return new ApiResource($artistsRegistered);
     }
