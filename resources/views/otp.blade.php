@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('otp.post') }}">
                         @csrf
 
-                        <p class="text-center">We sent code to your phone : {{ substr(auth()->user()->phone, 0, 5) . '******' . substr(auth()->user()->phone,  -2) }}</p>
+                        <p class="text-center text-success">We sent code to your phone : {{ substr(auth()->user()->phone, 0, 5) . '******' . substr(auth()->user()->phone,  -2) }}</p>
 
                         @if ($message = Session::get('success'))
                             <div class="row">
