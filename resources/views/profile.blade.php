@@ -90,31 +90,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if ($user->is_approved == 0 && Auth::user()->role_id == 1)
-                                    <div class="row text-center ml-5 mt-5">
-                                        <a class="btn btn-lg btn-warning" href="{{ route('approve', [$user->id]) }}"
-                                            onclick="event.preventDefault();
-                                                                document.getElementById('approve').submit();">
-                                            Approve
-                                        </a>
+                                @if ($user->is_approved == 0 && Auth::user()->role_id == 1 && $user->id != Auth::id())
 
-                                        <form id="approve" action="{{ route('approve', [$user->id]) }}" method="POST"
-                                            class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
+                                        <div class="row text-center ml-5 mt-5">
+                                            <a class="btn btn-lg btn-warning" href="{{ route('approve', [$user->id]) }}"
+                                                onclick="event.preventDefault();
+                                                                    document.getElementById('approve').submit();">
+                                                Approve
+                                            </a>
+
+                                            <form id="approve" action="{{ route('approve', [$user->id]) }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
                                 @endif
 
                                 @if ($user->is_approved == 1 && Auth::user()->role_id == 1)
-                                    <a class="btn btn-sm btn-danger" data-toggle="modal"
-                                        data-target="#exampleModal{{ $user->id }}" href="#">
-                                        Disapprove
-                                    </a>
-                                    <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1"
-                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    @if ($user->id != Auth::id())
+                                        <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                            href="#">
+                                            Disapprove
+                                        </a>
+                                    @endif
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
-                                            <div class="card">
-                                                <div class="card-header">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">REJECT ARTIST :
                                                         {{ strtoupper($user->name) }}</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
@@ -124,7 +128,7 @@
                                                 </div>
                                                 <form action="{{ route('disapprove', [$user->id]) }}" method="post">
                                                     @csrf
-                                                    <div class="card-body">
+                                                    <div class="modal-body">
                                                         <div class="form-group">
                                                             <label for="reason">Select Reason</label>
                                                             <select name="reason_id">
@@ -141,7 +145,7 @@
                                                                 rows="10"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer">
+                                                    <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary">Save
