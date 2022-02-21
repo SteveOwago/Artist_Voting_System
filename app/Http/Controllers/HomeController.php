@@ -86,8 +86,9 @@ class HomeController extends Controller
     public function profile($id){
 
         $user = User::findOrFail($id);
+        $reasons = Reason::all();
 
-        return view('profile', compact('user'));
+        return view('profile', compact('user','reasons'));
 
     }
 

@@ -2,6 +2,7 @@
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 @endsection
 @section('content')
     {{-- Registered Artists --}}
@@ -34,16 +35,6 @@
                                     <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
                                             class="btn btn-sm btn-dark"> View </a> &nbsp;
                                         @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
-                                            {{-- <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal"
-                                                href="{{ route('disapprove', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                      document.getElementById('disapprove').submit();">
-                                                Disapprove
-                                            </a> --}}
-
-                                            {{-- <form id="disapprove" action="{{ route('disapprove', [$artist->id]) }}"
-                                                method="POST" class="d-none">
-                                                @csrf
-                                            </form> --}}
                                             <a class="btn btn-sm btn-danger" data-toggle="modal"
                                                 data-target="#exampleModal{{ $artist->id }}" href="#">
                                                 Disapprove
@@ -66,7 +57,7 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="reason">Select Reason</label>
-                                                                    <select name="reason_id" >
+                                                                    <select name="reason_id" class="form-control" style="border:solid 1px;">
                                                                         <option selected disabled>Select Reason</option>
                                                                         @foreach ($reasons as $reason)
                                                                             <option value="{{$reason->id}}">{{strtoupper($reason->reason)}}</option>
