@@ -15,7 +15,8 @@ class CreateDisapprovesTable extends Migration
     {
         Schema::create('disapproves', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('reason_title')->nullable();
+            $table->unsignedBigInteger('reason_id');
+            $table->foreign('reason_id', 'reason_fk_5659809')->references('id')->on('reasons');
             $table->longText('reason')->nullable();
             $table->unsignedBigInteger('artist_id');
             $table->foreign('artist_id', 'artist_fk_5659809')->references('id')->on('users');

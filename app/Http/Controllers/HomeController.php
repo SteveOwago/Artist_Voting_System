@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Reason;
 use App\Models\Vote;
 use DB;
+use App\Models\Disapprove;
 
 
 class HomeController extends Controller
@@ -31,7 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+
         //Data for homepage dashboard statistics
         $authuser = User::where('id', \Auth::id())->get();
         $artists = User::where('role_id',2)->get();
@@ -42,14 +44,14 @@ class HomeController extends Controller
         $weeks = \Carbon\Carbon::now()->weekOfYear;
 
 
-       
+
 
         return view('home',compact('artists','authuser', 'approvedArtists','votes'));
     }
     public function artists(){
         $artists = User::where('role_id',2)->get();
-
-        return view('artists',compact('artists'));
+        $reasons = Reason::all();
+        return view('artists',compact('artists','reasons'));
     }
     public function judges(){
         $judges = User::where('role_id',1)->get();
@@ -77,7 +79,7 @@ class HomeController extends Controller
             'role_id' => 1,
             'password' => Hash::make($request->password),
         ]);
-        
+
         return back()->with('message', 'Judge Added Sucessfully');
     }
 
@@ -90,25 +92,25 @@ class HomeController extends Controller
     }
 
     public function edit_profile($id){
-        
+
         $user = User::findOrFail($id);
 
         return view('edit_profile', compact('user'));
     }
 
     public function update_profile(Request $request, $id){
-        
+
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'phone' => 'required|integer|min:12',
         ]);
-        
+
         $user = User::findOrFail($id);
 
-        
-          
+
+
 
         $user->update([
             'name' => $request->name,
@@ -136,7 +138,7 @@ class HomeController extends Controller
     }
 
     // DisApprove Artist/Gamer
-    public function disapprove($id){
+    public function disapprove(Request $request,$id){
 
         $user = User::findOrFail($id);
 
@@ -144,6 +146,12 @@ class HomeController extends Controller
 
         $user->update([
             'is_approved' => $is_approved,
+        ]);
+
+        Disapprove::create([
+            'reason_id' => $request->reason_id,
+            'reason'=>$request->reason,
+            'artist_id'=> $id,
         ]);
 
         return back()->with('message','Operation Successful');

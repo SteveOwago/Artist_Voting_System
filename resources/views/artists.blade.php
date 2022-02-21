@@ -34,21 +34,65 @@
                                     <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
                                             class="btn btn-sm btn-dark"> View </a> &nbsp;
                                         @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-danger"
+                                            {{-- <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal"
                                                 href="{{ route('disapprove', [$artist->id]) }}" onclick="event.preventDefault();
                                                                       document.getElementById('disapprove').submit();">
                                                 Disapprove
-                                            </a>
+                                            </a> --}}
 
-                                            <form id="disapprove" action="{{ route('disapprove', [$artist->id]) }}"
+                                            {{-- <form id="disapprove" action="{{ route('disapprove', [$artist->id]) }}"
                                                 method="POST" class="d-none">
                                                 @csrf
-                                            </form>
+                                            </form> --}}
+                                            <a class="btn btn-sm btn-danger" data-toggle="modal"
+                                                data-target="#exampleModal{{ $artist->id }}" href="#">
+                                                Disapprove
+                                            </a>
+                                            <div class="modal fade" id="exampleModal{{ $artist->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">REJECT ARTIST :
+                                                                {{ strtoupper($artist->name) }}</h5>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{ route('disapprove', [$artist->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="reason">Select Reason</label>
+                                                                    <select name="reason_id" >
+                                                                        <option selected disabled>Select Reason</option>
+                                                                        @foreach ($reasons as $reason)
+                                                                            <option value="{{$reason->id}}">{{strtoupper($reason->reason)}}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="reason">Reason Description</label>
+                                                                    <textarea class="form-control" name="reason" id="" cols="30" rows="10"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endif
                                         @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-warning" href="{{ route('approve', [$artist->id]) }}"
-                                                onclick="event.preventDefault();
-                                                                    document.getElementById('approve').submit();">
+                                            <a class="btn btn-sm btn-warning"
+                                                href="{{ route('approve', [$artist->id]) }}" onclick="event.preventDefault();
+                                                                        document.getElementById('approve').submit();">
                                                 Approve
                                             </a>
 
@@ -60,7 +104,7 @@
                                         &nbsp; @if (Auth::user()->role_id == 1)
                                             <a class="btn btn-sm btn-danger" href="{{ route('delete', [$artist->id]) }}"
                                                 onclick="event.preventDefault();
-                                                              document.getElementById('delete').submit();">
+                                                                  document.getElementById('delete').submit();">
                                                 Delete
                                             </a>
 
@@ -124,8 +168,8 @@
                         title: 'Judges_list',
                         exportOptions: {
                             exportOptions: {
-                            columns: [0, 1, 2, 3, 4, ':visible' ]
-                        }
+                                columns: [0, 1, 2, 3, 4, ':visible']
+                            }
                         }
                     },
                     {
