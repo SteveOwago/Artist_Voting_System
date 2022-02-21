@@ -39,14 +39,12 @@ class HomeController extends Controller
         $artists = User::where('role_id',2)->get();
         $approvedArtists = User::where('role_id','!=',1)->where('is_approved',1)->get();
         $votes = Vote::all();
-        $start = 02;
-        $end = 03;
-        $weeks = \Carbon\Carbon::now()->weekOfYear;
+        $reasons = Reason::all();
 
 
 
 
-        return view('home',compact('artists','authuser', 'approvedArtists','votes'));
+        return view('home',compact('artists','authuser', 'approvedArtists','votes','reasons'));
     }
     public function artists(){
         $artists = User::where('role_id',2)->get();

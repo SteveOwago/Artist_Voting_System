@@ -132,22 +132,6 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
-    {{-- <script>
-      $(document).ready(function (){
-        $('#ArtistTable').DataTable({
-          "processing":true,
-          "serverSide":true,
-          "ajax": "{{route('api.artists.index')}}",
-          "columns":[
-            { "data": "name"},
-            { "data": "email"},
-            { "data": "phone"},
-            { "data": "is_approved"},
-            { "data": "created_at"},
-          ]
-        });
-      });
-    </script> --}}
     <script>
         $(document).ready(function() {
             $('#ArtistTable').DataTable({

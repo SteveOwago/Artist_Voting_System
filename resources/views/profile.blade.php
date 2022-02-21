@@ -20,48 +20,6 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-9">
-                                    {{-- <table class="table-bordered table-striped">
-                                <tr>
-                                    <div class="col-md-6">
-                                        <th>Name :</th>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <td>{{$user->name}}</td>
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="col-md-6">
-                                        <th>Email:</th>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <td>{{$user->email}}</td>
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="col-md-6">
-                                        <th>Phone:</th>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <td>{{$user->phone}}</td>
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="col-md-6">
-                                        <th>Registered:</th>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <td>{{$user->created_at->diffForHumans()}}</td>
-                                    </div>
-                                </tr>
-                                <tr>
-                                    <div class="col-md-6">
-                                        <th>Status:</th>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <td class="{{ $user->is_approved == '1'?"text-success":"text-danger"}}">{{ $user->is_approved == '1'?"Aproved":"Not Approved"}}</td>
-                                    </div>
-                                </tr>
-                            </table> --}}
                                     <div class="card">
                                         <div class="card-header">
                                             {{ strtoupper($user->name) }}
@@ -91,19 +49,18 @@
                                     </div>
                                 </div>
                                 @if ($user->is_approved == 0 && Auth::user()->role_id == 1 && $user->id != Auth::id())
+                                    <div class="row text-center ml-5 mt-5">
+                                        <a class="btn btn-lg btn-warning" href="{{ route('approve', [$user->id]) }}"
+                                            onclick="event.preventDefault();
+                                                                                document.getElementById('approve').submit();">
+                                            Approve
+                                        </a>
 
-                                        <div class="row text-center ml-5 mt-5">
-                                            <a class="btn btn-lg btn-warning" href="{{ route('approve', [$user->id]) }}"
-                                                onclick="event.preventDefault();
-                                                                    document.getElementById('approve').submit();">
-                                                Approve
-                                            </a>
-
-                                            <form id="approve" action="{{ route('approve', [$user->id]) }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
-                                        </div>
+                                        <form id="approve" action="{{ route('approve', [$user->id]) }}" method="POST"
+                                            class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
                                 @endif
 
                                 @if ($user->is_approved == 1 && Auth::user()->role_id == 1)

@@ -148,19 +148,51 @@
                                             <td class="text-center">{{ $artist->created_at }}</td>
                                             <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
                                                     class="btn btn-sm btn-dark"> View </a> &nbsp;
-                                                @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
-                                                    <a class="btn btn-sm btn-danger"
-                                                        href="{{ route('disapprove', [$artist->id]) }}"
-                                                        onclick="event.preventDefault();
-                                                                                                document.getElementById('disapprove').submit();">
+                                                    @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
+                                                    <a class="btn btn-sm btn-danger" data-toggle="modal"
+                                                        data-target="#exampleModal{{ $artist->id }}" href="#">
                                                         Disapprove
                                                     </a>
-
-                                                    <form id="disapprove"
-                                                        action="{{ route('disapprove', [$artist->id]) }}" method="POST"
-                                                        class="d-none">
-                                                        @csrf
-                                                    </form>
+                                                    <div class="modal fade" id="exampleModal{{ $artist->id }}" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">REJECT ARTIST :
+                                                                        {{ strtoupper($artist->name) }}</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form action="{{ route('disapprove', [$artist->id]) }}"
+                                                                    method="post">
+                                                                    @csrf
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+                                                                            <label for="reason">Select Reason</label>
+                                                                            <select name="reason_id" class="form-control" style="border:solid 1px;">
+                                                                                <option selected disabled>Select Reason</option>
+                                                                                @foreach ($reasons as $reason)
+                                                                                    <option value="{{$reason->id}}">{{strtoupper($reason->reason)}}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="reason">Reason Description</label>
+                                                                            <textarea class="form-control" name="reason" id="" cols="30" rows="10"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-warning">Save
+                                                                            changes</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @endif
                                                 @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
                                                     <a class="btn btn-sm btn-warning"
@@ -243,7 +275,7 @@
                     }]
                 };
 
-                // config 
+                // config
                 const config = {
                     type: 'bar',
                     data,
@@ -316,6 +348,8 @@
     @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
+
+            const url_pie = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
                 const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
                 return randomColor
@@ -327,10 +361,10 @@
                 const labels_bar = [];
                 const backgroundColor_bar = [];
                 const data_bar1 = [];
-                let opacity = 0.0;
+                let opacity = 1.0;
                 for (let i = 0; i < 8; i++) {
                     let color = 'rgb(245, 162, 10,'
-                    color = color + ((opacity += 0.15).toString()) + ')'
+                    color = color + ((opacity -= 0.1).toString()) + ')'
                     console.log(color)
                     labels_bar.push(res_bar.data[i].day);
                     data_bar1.push(res_bar.data[i].count);
@@ -354,6 +388,37 @@
                     data: data_bar,
                     options: {}
                 };
+
+            // Pie Chart
+
+                let response_pie = await fetch(url_pie);
+                const res_pie = await response_pie.json();
+
+                const labels_pie = [];
+                const backgroundColor_pie = [];
+                const data_pie1 = [];
+                let opacity_pie = 1.0;
+                for (let i = 0; i < 7; i++) {
+                    let color_pie = 'rgb(245, 162, 10,'
+                    color_pie = color_pie + ((opacity_pie -= 0.1).toString()) + ')'
+                    console.log(color)
+                    labels_pie.push(res_pie.data[i].region);
+                    data_pie1.push(res_pie.data[i].count);
+                    backgroundColor_pie.push(color);
+                }
+
+
+
+                const data_pie = {
+                    labels: labels_pie,
+                    datasets: [{
+                        label: 'Registered Artists This Week',
+                        backgroundColor: backgroundColor_pie,
+                        // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],
+                        data: data_pie1,
+                    }]
+                };
+
                 const config_pie = {
                     type: 'pie',
                     data: data_bar,

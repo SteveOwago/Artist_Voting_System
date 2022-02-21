@@ -4,7 +4,8 @@
 <head>
     <title>{{ env('APP_NAME') }}</title>
     @include('partials.head')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         input {
             width: 400px;
@@ -16,29 +17,39 @@
         input::placeholder {
             color: rgb(252, 244, 244);
         }
+
     </style>
 </head>
 
 <body>
-    <div class="container-scroller" style="background-color: rgb(236, 169, 25);">
+    <div class="container-scroller" style="background: url({{ asset('frontend/images/landing_page.png') }}) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="row w-100">
-                <div class="content-wrapper d-flex align-items-center" style="background-color: rgb(236, 169, 25);">
-                    
-                    <div class="col-sm-12 col-lg-6 mx-auto">
-                        <div class="card"  style="background-color: rgb(211, 166, 44); border-radius:20px;">
-                            <div class="card-header"><h4>Register</h4></div>
-            
+                <div class="content-wrapper d-flex align-items-center" style="background: url({{ asset('frontend/images/landing_page.png') }}) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;">
+
+                    <div class="col-sm-12 col-lg-4 mx-auto" syle="position: relative;">
+                        {{-- <div class="card text-center justify-content-center"
+                        ></div> --}}
+                        <div class="card" style="background-color: #fafa98;">
+                            <div class="card-header text-center"><h4>Register</h4></div>
                             <div class="card-body text-center justify-content-center px-5 py-5">
                                 <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                     @csrf
-            
                                     <div class="row mb-3">
-                                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-            
+                                        <div class="col-sm-12">
+                                            <input id="name" type="text"
+                                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                                value="{{ old('name') }}" required autocomplete="name"
+                                                placeholder="FirstName LastName" autofocus>
+
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -46,13 +57,14 @@
                                             @enderror
                                         </div>
                                     </div>
-            
+
                                     <div class="row mb-3">
-                                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-            
+                                        <div class="col-sm-12">
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required placeholder="somebody@example.com"
+                                                autocomplete="email">
+
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -60,13 +72,14 @@
                                             @enderror
                                         </div>
                                     </div>
-            
+
                                     <div class="row mb-3">
-                                        <label for="phone" class="col-md-4 col-form-label text-md-end">Phone Number</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
-            
+                                        <div class="col-sm-12">
+                                            <input id="phone" type="text"
+                                                class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                                value="{{ old('phone') }}" required placeholder="2547XXXXXXXX"
+                                                autocomplete="phone">
+
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -74,14 +87,15 @@
                                             @enderror
                                         </div>
                                     </div>
-            
-            
+
+
                                     <div class="row mb-3">
-                                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-            
+                                        <div class="col-sm-12">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password" required placeholder="Password"
+                                                autocomplete="new-password">
+
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -89,32 +103,34 @@
                                             @enderror
                                         </div>
                                     </div>
-            
+
                                     <div class="row mb-3">
-                                        <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                        <div class="col-sm-12">
+                                            <input id="password-confirm" type="password" class="form-control"
+                                                name="password_confirmation" placeholder="Confirm Password" required
+                                                autocomplete="new-password">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row mb-3">
-                                        <div class="col-md-6 offset-md-4">
+                                        <div class="col-sm-12">
                                             <div class="form-check">
-                                                <input class="form-check-input align-left" type="checkbox" name="consent" id="consent">
-                                                <label class="form-check-label  @error('consent') is-invalid @enderror" for="consent">
-                                                    Do you agree Tusker Cenetary To Use Your Details in Future Campaigns
+                                                <input class="form-check-input" type="checkbox" name="consent"
+                                                    id="consent">
+                                                <label class="form-check-label  @error('consent') is-invalid @enderror"
+                                                    for="consent">
+                                                    Do you agree To Tusker Cenetary Terms & Conditions
                                                 </label>
                                                 @error('consent')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-0">
-                                        <div class="col-md-6 offset-md-4">
+                                        <div class="col-sm-12">
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Register') }}
                                             </button>
@@ -125,18 +141,24 @@
                         </div>
                     </div>
                 </div>
-                <!-- content-wrapper ends -->
             </div>
-            <!-- row ends -->
+            <!-- content-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- row ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
     </div>
     @include('partials.scripts')
     <!-- endinject -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
-

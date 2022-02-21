@@ -8,7 +8,11 @@
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="row w-100 m-0">
-          <div class="content-wrapper d-flex align-items-center" style="background: url({{asset('frontend/images/landing_page.jpg')}});background-size: cover;">
+          <div class="content-wrapper d-flex align-items-center" style="background: url({{asset('frontend/images/landing_page.png')}}) no-repeat center center fixed;
+                                                                        -webkit-background-size: cover;
+                                                                        -moz-background-size: cover;
+                                                                        -o-background-size: cover;
+                                                                        background-size: cover;">
             <div class="col-lg-4 mx-auto">
                 @if(\Carbon\Carbon::now()->month == 02||\Carbon\Carbon::now()->month == 03)
                   <div class="text-center">
