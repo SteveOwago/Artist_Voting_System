@@ -125,7 +125,7 @@ class ApiController extends Controller
         }
 
         foreach ($days as $day) {
-            if(!(array_search($day, array_column($artistsRegistered, "day")))&& $day != 'Monday'){
+            if((array_search($day, array_column($artistsRegistered, 'day')))!= $day){
                 $data = [
                     'day'=>$day,
                     'count'=>0,

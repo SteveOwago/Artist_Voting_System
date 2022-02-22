@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @endsection
 @section('content')
@@ -109,7 +108,7 @@
                     </div>
                 </div>
             @endif
-            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
                 <div class="card pt-4">
                     <div class="card-body mb-5">
                         <h4 class="card-title">Artist Vote Tally</h4>
@@ -262,16 +261,18 @@
             async function getData() {
                 let response = await fetch(url);
                 const res = await response.json();
-
                 //console.log(data.data[0].name);
 
                 const labels = [];
                 const count = [];
                 const backgroundColor = [];
-                for (let i = 0; i < 10; i++) {
+                let opacity = 1.0;
+                for (let i = 0; i < res.data.length; i++) {
+                    let color = 'rgb(245, 162, 10,'
+                    color = color + ((opacity -= 0.08).toString()) + ')'
                     labels.push(res.data[i].name);
                     count.push(res.data[i].count);
-                    backgroundColor.push(setBg());
+                    backgroundColor.push(color);
 
                 }
                 // console.log(count);
@@ -372,7 +373,7 @@
                 const backgroundColor_bar = [];
                 const data_bar1 = [];
                 let opacity = 1.0;
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < res_bar.data.length; i++) {
                     let color = 'rgb(245, 162, 10,'
                     color = color + ((opacity -= 0.1).toString()) + ')'
                     //console.log(color)
