@@ -101,7 +101,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-sm-12 mt-3 text-center">
+                            {{-- <div class="form-group col-sm-12 mt-3 text-center">
                                 <select class="form-control mt-3 mb-5 text-center" name="artist_id" id="artist_id"
                                     required>
                                     <option selected disabled>--- Select Artist ---</option>
@@ -115,7 +115,7 @@
                                         <strong>{{ $error }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-lg btn-success form-control">
                             </div>

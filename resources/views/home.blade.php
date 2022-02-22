@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 @endsection
 @section('content')
     {{-- Dashboard Statistics Section --}}
@@ -131,7 +133,7 @@
                                 <thead>
                                     <tr>
                                         <th> Name </th>
-                                        <th>Email</th>
+                                        {{-- <th>Email</th> --}}
                                         <th>Phone</th>
                                         <th> Status </th>
                                         <th>Date Registered</th>
@@ -142,7 +144,7 @@
                                     @forelse ($artists as $artist)
                                         <tr>
                                             <td>{{ $artist->name }}</td>
-                                            <td class="text-center">{{ $artist->email }}</td>
+                                            {{-- <td class="text-center">{{ $artist->email }}</td> --}}
                                             <td class="text-center">{{ $artist->phone }}</td>
                                             <td
                                                 class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
@@ -151,17 +153,19 @@
                                             <td class="text-center">{{ $artist->created_at }}</td>
                                             <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
                                                     class="btn btn-sm btn-dark"> View </a> &nbsp;
-                                                    @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
+                                                @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
                                                     <a class="btn btn-sm btn-danger" data-toggle="modal"
                                                         data-target="#exampleModal{{ $artist->id }}" href="#">
                                                         Disapprove
                                                     </a>
-                                                    <div class="modal fade" id="exampleModal{{ $artist->id }}" tabindex="-1"
-                                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="exampleModal{{ $artist->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">REJECT ARTIST :
+                                                                    <h5 class="modal-title" id="exampleModalLabel">REJECT
+                                                                        ARTIST :
                                                                         {{ strtoupper($artist->name) }}</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
@@ -174,16 +178,21 @@
                                                                     <div class="modal-body">
                                                                         <div class="form-group">
                                                                             <label for="reason">Select Reason</label>
-                                                                            <select name="reason_id" class="form-control" style="border:solid 1px;">
-                                                                                <option selected disabled>Select Reason</option>
+                                                                            <select name="reason_id" class="form-control"
+                                                                                style="border:solid 1px;">
+                                                                                <option selected disabled>Select Reason
+                                                                                </option>
                                                                                 @foreach ($reasons as $reason)
-                                                                                    <option value="{{$reason->id}}">{{strtoupper($reason->reason)}}</option>
+                                                                                    <option value="{{ $reason->id }}">
+                                                                                        {{ strtoupper($reason->reason) }}
+                                                                                    </option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="reason">Reason Description</label>
-                                                                            <textarea class="form-control" name="reason" id="" cols="30" rows="10"></textarea>
+                                                                            <textarea class="form-control" name="reason"
+                                                                                id="" cols="30" rows="10"></textarea>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -201,7 +210,7 @@
                                                     <a class="btn btn-sm btn-warning"
                                                         href="{{ route('approve', [$artist->id]) }}"
                                                         onclick="event.preventDefault();
-                                                                                                document.getElementById('approve').submit();">
+                                                                                                    document.getElementById('approve').submit();">
                                                         Approve
                                                     </a>
 
@@ -213,7 +222,7 @@
                                                 &nbsp; @if (Auth::user()->role_id == 1)
                                                     <a class="btn btn-sm btn-danger"
                                                         href="{{ route('delete', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                          document.getElementById('delete').submit();">
+                                                                              document.getElementById('delete').submit();">
                                                         Delete
                                                     </a>
 
@@ -390,7 +399,7 @@
                     options: {}
                 };
 
-            // Pie Chart
+                // Pie Chart
 
                 let response_pie = await fetch(url_bar);
                 const res_pie = await response_pie.json();

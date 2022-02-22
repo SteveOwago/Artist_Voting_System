@@ -26,10 +26,12 @@
                                         </div>
                                         <div class="card-body  text-dark">
                                             <ul class="list-group">
-                                                <li class="list-group-item"><b>Email:</b> {{ $user->email }}</li>
+                                                {{-- <li class="list-group-item"><b>Email:</b> {{ $user->email }}</li> --}}
                                                 <li class="list-group-item"><b>Phone:</b> {{ $user->phone }}</li>
                                                 <li class="list-group-item"><b>Registered:</b>
                                                     {{ $user->created_at->diffForHumans() }} </li>
+
+                                                <li class="list-group-item"><b>Region:</b> {{ \DB::table('regions')->where('id',$user->region_id)->value('name') }}</li>
                                                 <li class="list-group-item"><b>Type:</b>
                                                     {{ $user->role_id == 1 ? 'Judge' : ($user->role_id == 2 ? 'Artist' : 'Gamer') }}
                                                 </li>

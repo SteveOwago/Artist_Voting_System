@@ -15,7 +15,7 @@
                         <thead>
                             <tr>
                                 <th> Name </th>
-                                <th>Email</th>
+                                {{-- <th>Email</th> --}}
                                 <th>Phone</th>
                                 <th> Status </th>
                                 <th>Date Registered</th>
@@ -26,7 +26,7 @@
                             @forelse ($artists as $artist)
                                 <tr>
                                     <td>{{ $artist->name }}</td>
-                                    <td class="text-center">{{ $artist->email }}</td>
+                                    {{-- <td class="text-center">{{ $artist->email }}</td> --}}
                                     <td class="text-center">{{ $artist->phone }}</td>
                                     <td class="text-center">
                                         {{ $artist->is_approved == '1' ? 'Approved' : 'Not Approved' }}
