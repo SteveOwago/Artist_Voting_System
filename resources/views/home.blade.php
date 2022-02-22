@@ -84,7 +84,7 @@
       </div>
     </div> --}}
         <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
-            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
                 <div class="card pt-4">
                     <div class="card-body mb-5">
                         <div class="row">
@@ -251,7 +251,7 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {{-- Section Racing Bar vote tally --}}
-    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
         <script>
             const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
             const setBg = () => {
@@ -358,7 +358,7 @@
             getData();
         </script>
     @endif
-    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
