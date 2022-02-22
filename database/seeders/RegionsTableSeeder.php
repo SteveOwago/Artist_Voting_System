@@ -17,31 +17,47 @@ class RegionsTableSeeder extends Seeder
         $regions = [
             [
                 'id'                 => 1,
-                'name'         => 'Nyanza',
+                'name'         => 'Nairobi',
             ],
             [
                 'id'                 => 2,
-                'name'         => 'Coast',
+                'name'         => 'Rift',
             ],
             [
                 'id'                 => 3,
-                'name'         => 'Central',
-            ],
-            [
-                'id'                 => 4,
-                'name'         => 'Rift Valley',
-            ],
-            [
-                'id'                 => 5,
                 'name'         => 'Western',
             ],
             [
+                'id'                 => 4,
+                'name'         => 'Coast',
+            ],
+            [
+                'id'                 => 5,
+                'name'         => 'Upper Eastern',
+            ],
+            [
                 'id'                 => 6,
-                'name'         => 'North Eastern',
+                'name'         => 'Lower Eastern',
             ],
             [
                 'id'                 => 7,
-                'name'         => 'Nairobi',
+                'name'         => 'Nyanza',
+            ],
+            [
+                'id'                 => 8,
+                'name'         => 'Meru',
+            ],
+            [
+                'id'                 => 9,
+                'name'         => 'Kiambu',
+            ],
+            [
+                'id'                 => 10,
+                'name'         => 'Thika',
+            ],
+            [
+                'id'                 => 11,
+                'name'         => 'Nyeri',
             ],
         ];
         Region::insert($regions);

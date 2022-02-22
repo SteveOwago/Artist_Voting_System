@@ -34,12 +34,13 @@
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 background-size: cover;">
-
                     <div class="col-sm-12 col-lg-4 mx-auto" syle="position: relative;">
                         {{-- <div class="card text-center justify-content-center"
                         ></div> --}}
                         <div class="card" style="background-color: #fafa98;">
-                            <div class="card-header text-center"><h4>Register</h4></div>
+                            <div class="card-header text-center">
+                                <h4>Register</h4>
+                            </div>
                             <div class="card-body text-center justify-content-center px-5 py-5">
                                 <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                     @csrf
@@ -58,7 +59,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
+                                    {{-- <div class="row mb-3">
                                         <div class="col-sm-12">
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
@@ -71,7 +72,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="row mb-3">
                                         <div class="col-sm-12">
@@ -87,9 +88,20 @@
                                             @enderror
                                         </div>
                                     </div>
-
-
                                     <div class="row mb-3">
+                                        <div class="col-sm-12">
+                                            <select name="region_id" class="form-control">
+                                                <option selected disabled>---Select Your Region---</option>
+                                                @foreach ($regions as $region)
+                                                    <option value="{{ $region->id }}">
+                                                        {{ strtoupper($region->name) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    {{-- <div class="row mb-3">
                                         <div class="col-sm-12">
                                             <input id="password" type="password"
                                                 class="form-control @error('password') is-invalid @enderror"
@@ -102,15 +114,15 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
 
-                                    <div class="row mb-3">
+                                    {{-- <div class="row mb-3">
                                         <div class="col-sm-12">
                                             <input id="password-confirm" type="password" class="form-control"
                                                 name="password_confirmation" placeholder="Confirm Password" required
                                                 autocomplete="new-password">
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="row mb-3">
                                         <div class="col-sm-12">

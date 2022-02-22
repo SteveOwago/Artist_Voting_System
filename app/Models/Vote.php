@@ -11,8 +11,7 @@ class Vote extends Model
 
     protected $fillable = [
         'name',
-        'phone',
-        'id_number',
+        'email',
         'artist_id',
         'ip_address',
         'region_id',

@@ -42,8 +42,6 @@ class HomeController extends Controller
         $reasons = Reason::all();
 
 
-
-
         return view('home',compact('artists','authuser', 'approvedArtists','votes','reasons'));
     }
     public function artists(){

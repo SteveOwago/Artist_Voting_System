@@ -87,14 +87,17 @@
                 <div class="card pt-4">
                     <div class="card-body mb-5">
                         <div class="row">
+                            <div class="col-md-6 offset-3">
+                                <h3>Artist Registered This Week</h3>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Registered Artist This Week</h4>
                                 <div class="card-body">
                                     <canvas id="myChart-bar" style="height:230px"></canvas>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h4 class="card-title">Artist Vote Tally</h4>
                                 <div class="card-body" style="position: relative; height:50%; width:50%">
                                     <canvas id="myChart-pie" height="300"></canvas>
                                 </div>
@@ -348,8 +351,6 @@
     @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
-
-            const url_pie = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
                 const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
                 return randomColor
@@ -362,10 +363,10 @@
                 const backgroundColor_bar = [];
                 const data_bar1 = [];
                 let opacity = 1.0;
-                for (let i = 0; i < 8; i++) {
+                for (let i = 0; i < 7; i++) {
                     let color = 'rgb(245, 162, 10,'
                     color = color + ((opacity -= 0.1).toString()) + ')'
-                    console.log(color)
+                    //console.log(color)
                     labels_bar.push(res_bar.data[i].day);
                     data_bar1.push(res_bar.data[i].count);
                     backgroundColor_bar.push(color);
@@ -391,7 +392,7 @@
 
             // Pie Chart
 
-                let response_pie = await fetch(url_pie);
+                let response_pie = await fetch(url_bar);
                 const res_pie = await response_pie.json();
 
                 const labels_pie = [];
@@ -401,10 +402,10 @@
                 for (let i = 0; i < 7; i++) {
                     let color_pie = 'rgb(245, 162, 10,'
                     color_pie = color_pie + ((opacity_pie -= 0.1).toString()) + ')'
-                    console.log(color)
-                    labels_pie.push(res_pie.data[i].region);
+                    console.log(color_pie)
+                    labels_pie.push(res_pie.data[i].day);
                     data_pie1.push(res_pie.data[i].count);
-                    backgroundColor_pie.push(color);
+                    backgroundColor_pie.push(color_pie);
                 }
 
 

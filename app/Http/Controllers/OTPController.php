@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\UserCode;
+use App\Models\User;
 //use App\Utility\SendSMS;
 
 class OTPController extends Controller

@@ -15,8 +15,7 @@ class AddFieldsToVotesTable extends Migration
     {
         Schema::table('votes', function (Blueprint $table) {
             $table->string('name');
-            $table->string('phone')->unique();
-            $table->string('id_number')->unique();
+            $table->string('email')->unique();
             $table->unsignedBigInteger('region_id');
             $table->foreign('region_id', 'region_fk_5609809')->references('id')->on('regions');
         });

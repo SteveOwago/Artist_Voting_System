@@ -100,7 +100,7 @@ class ApiController extends Controller
                         ->get();
 
         $artistsRegistered = [];
-        $days = [ 
+        $days = [
             "Sunday",
             "Monday",
             "Tuesday",
@@ -123,9 +123,9 @@ class ApiController extends Controller
                 }
             }
         }
-        
+
         foreach ($days as $day) {
-            if(!(array_search($day, array_column($artistsRegistered, "day")))){
+            if(!(array_search($day, array_column($artistsRegistered, "day")))&& $day != 'Monday'){
                 $data = [
                     'day'=>$day,
                     'count'=>0,
@@ -138,5 +138,24 @@ class ApiController extends Controller
           });
 
        return new ApiResource($artistsRegistered);
+    }
+    public function getregisteredArtistPerWeek(){
+        $weeklyregs = User::all()->groupBy(function($date) {
+            return \Carbon\Carbon::parse($date->created_at)->format('W');
+        });
+        $weeklyregs = $weeklyregs->reverse();
+
+        $weeeklydata = [];
+        foreach($weeklyregs as $week){
+            $data = [
+                'week'=>$week,
+                'count'=>0,
+            ];
+            array_push($weeeklydata,$data);
+        }
+
+        dd($weeklyregs);
+
+        return new ApiResource($weeklyregs);
     }
 }
