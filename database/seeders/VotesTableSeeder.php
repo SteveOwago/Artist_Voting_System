@@ -20,7 +20,7 @@ class VotesTableSeeder extends Seeder
                 'ip_address' => mt_rand(0, 255) . "." . mt_rand(0, 255) . "." . mt_rand(0, 255) . "." . mt_rand(0, 255),
                 'artist_id' => mt_rand(1,13),
                 'name'=> 'Voter'.mt_rand(1,200),
-                'email' => 'somebody'.mt_rand(1,200).'@example.com' ,
+                'email' => 'somebody'.mt_rand(1,20000).'@example.com' ,
                 'region_id' => mt_rand(1,7),
             ]);
         }
