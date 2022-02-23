@@ -49,6 +49,11 @@ class HomeController extends Controller
         $reasons = Reason::all();
         return view('artists',compact('artists','reasons'));
     }
+    public function sportstars(){
+        $sportstars = User::where('role_id',3)->get();
+        $reasons = Reason::all();
+        return view('sportstars',compact('sportstars','reasons'));
+    }
     public function judges(){
         $judges = User::where('role_id',1)->get();
         return view('judges',compact('judges'));

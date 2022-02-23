@@ -88,7 +88,14 @@
           <span class="menu-title">Artists</span>
         </a>
       </li>
-      
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('sportstars')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-controller-classic"></i>
+          </span>
+          <span class="menu-title">Sport Stars</span>
+        </a>
+      </li>
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('judges')}}">
           <span class="menu-icon">
@@ -106,14 +113,6 @@
           <span class="menu-title">My Profile</span>
         </a>
       </li>
-      {{-- <li class="nav-item menu-items">
-        <a class="nav-link" href="pages/charts/chartjs.html">
-          <span class="menu-icon">
-            <i class="mdi mdi-chart-bar"></i>
-          </span>
-          <span class="menu-title">Gamers</span>
-        </a>
-      </li> --}}
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

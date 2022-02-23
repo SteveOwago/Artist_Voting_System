@@ -26,6 +26,7 @@ Route::post('otp', [App\Http\Controllers\OTPController::class, 'store'])->name('
 Route::get('otp/reset', [App\Http\Controllers\OTPController::class, 'resend'])->name('otp.resend');
 
 Route::get('artists', 'HomeController@artists')->name('artists');
+Route::get('sportstars', 'HomeController@sportstars')->name('sportstars');
 Route::get('judges', 'HomeController@judges')->name('judges');
 Route::get('judges/create', 'HomeController@create_judge')->name('create_judge');
 Route::post('judges/create', 'HomeController@add_judge')->name('add_judge');
