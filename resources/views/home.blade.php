@@ -126,7 +126,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-dark">All Registered Artists</h4>
+                        <h4 class="card-title text-dark">All Registered Artists & Sport Stars</h4>
                         <div class="col-lg-10 offset-1 table-responsive">
                             <table class="table table-striped table-hover" id="ArtistTable">
                                 <thead>

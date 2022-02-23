@@ -25,6 +25,7 @@ Route::get('otp', [App\Http\Controllers\OTPController::class, 'index'])->name('o
 Route::post('otp', [App\Http\Controllers\OTPController::class, 'store'])->name('otp.post');
 Route::get('otp/reset', [App\Http\Controllers\OTPController::class, 'resend'])->name('otp.resend');
 
+Route::get('approval-disaproval-logs', 'HomeController@approvalDissaprovalLogs')->name('approval.disaproval.logs');
 Route::get('artists', 'HomeController@artists')->name('artists');
 Route::get('sportstars', 'HomeController@sportstars')->name('sportstars');
 Route::get('judges', 'HomeController@judges')->name('judges');
@@ -46,3 +47,4 @@ Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
 
 Route::get('levels','PhasesController@index')->name('levels');
 Route::get('levels/artists/{id}','PhasesController@artistsLevel')->name('levels.artists');
+Route::get('levels/sportstars/{id}','PhasesController@sportstarsLevel')->name('levels.sportstars');

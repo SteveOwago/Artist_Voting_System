@@ -112,6 +112,14 @@
           <span class="menu-title">Approval Levels</span>
         </a>
       </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('approval.disaproval.logs')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-check"></i>
+          </span>
+          <span class="menu-title">Approvals & Rejects</span>
+        </a>
+      </li>
       @endif
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('profile',Auth::id())}}">

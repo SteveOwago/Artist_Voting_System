@@ -36,7 +36,7 @@
                                                     {{ $user->role_id == 1 ? 'Judge' : ($user->role_id == 2 ? 'Artist' : 'Sports Star') }}
                                                 </li>
                                                 @if ($user->role_id != 1)
-                                                <li class="list-group-item"><b>Approval Level:</b> {{ \DB::table('phases')->where('id',$user->phase_id)->value('title') }}</li>
+                                                    <li class="list-group-item"><b>Approval Level:</b> {{ \DB::table('phases')->where('id',$user->phase_id)->value('title') }}</li>
                                                 @endif
                                                 @if ($user->role_id != 1)
                                                     <li class="list-group-item"><b>Status:</b> <a

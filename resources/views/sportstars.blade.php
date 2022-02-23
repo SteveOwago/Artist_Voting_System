@@ -2,7 +2,8 @@
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 @endsection
 @section('content')
     {{-- Registered sportstars --}}
@@ -18,6 +19,7 @@
                                 {{-- <th>Email</th> --}}
                                 <th>Phone</th>
                                 <th> Status </th>
+                                <th>Level</th>
                                 <th>Date Registered</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -31,10 +33,24 @@
                                     <td class="text-center">
                                         {{ $sportstar->is_approved == '1' ? 'Approved' : 'Not Approved' }}
                                     </td>
+                                    <td>{{ strtoupper(\DB::table('phases')->where('id', $sportstar->phase_id)->value('title')) }}
+                                    </td>
                                     <td class="text-center">{{ $sportstar->created_at }}</td>
                                     <td class="text-center"><a href="{{ route('profile', [$sportstar->id]) }}"
                                             class="btn btn-sm btn-dark"> View </a> &nbsp;
-                                        @if ($sportstar->is_approved == 1 && Auth::user()->role_id == 1)
+                                        @if (Auth::user()->role_id == 1 && $sportstar->phase_id != 4)
+                                            <a class="btn btn-sm btn-warning" href="{{ route('approve', [$sportstar->id]) }}"
+                                                onclick="event.preventDefault();
+                                                                                document.getElementById('approve').submit();">
+                                                Approve
+                                            </a>
+
+                                            <form id="approve" action="{{ route('approve', [$sportstar->id]) }}"
+                                                method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        @endif
+                                        @if (Auth::user()->role_id == 1)
                                             <a class="btn btn-sm btn-danger" data-toggle="modal"
                                                 data-target="#exampleModal{{ $sportstar->id }}" href="#">
                                                 Disapprove
@@ -44,7 +60,8 @@
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">REJECT sportstar :
+                                                            <h5 class="modal-title" id="exampleModalLabel">REJECT sportstar
+                                                                :
                                                                 {{ strtoupper($sportstar->name) }}</h5>
                                                             <button type="button" class="close"
                                                                 data-dismiss="modal" aria-label="Close">
@@ -57,16 +74,20 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="reason">Select Reason</label>
-                                                                    <select name="reason_id" class="form-control" style="border:solid 1px;">
+                                                                    <select name="reason_id" class="form-control"
+                                                                        style="border:solid 1px;">
                                                                         <option selected disabled>Select Reason</option>
                                                                         @foreach ($reasons as $reason)
-                                                                            <option value="{{$reason->id}}">{{strtoupper($reason->reason)}}</option>
+                                                                            <option value="{{ $reason->id }}">
+                                                                                {{ strtoupper($reason->reason) }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="reason">Reason Description</label>
-                                                                    <textarea class="form-control" name="reason" id="" cols="30" rows="10"></textarea>
+                                                                    <textarea class="form-control" name="reason" id=""
+                                                                        cols="30" rows="10"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -80,27 +101,15 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        @if ($sportstar->is_approved == 0 && Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-warning"
-                                                href="{{ route('approve', [$sportstar->id]) }}" onclick="event.preventDefault();
-                                                                        document.getElementById('approve').submit();">
-                                                Approve
-                                            </a>
-
-                                            <form id="approve" action="{{ route('approve', [$sportstar->id]) }}"
-                                                method="POST" class="d-none">
-                                                @csrf
-                                            </form>
-                                        @endif
                                         &nbsp; @if (Auth::user()->role_id == 1)
-                                            <a class="btn btn-sm btn-danger" href="{{ route('delete', [$sportstar->id]) }}"
-                                                onclick="event.preventDefault();
-                                                                  document.getElementById('delete').submit();">
+                                            <a class="btn btn-sm btn-danger"
+                                                href="{{ route('delete', [$sportstar->id]) }}" onclick="event.preventDefault();
+                                                                      document.getElementById('delete').submit();">
                                                 Delete
                                             </a>
 
-                                            <form id="delete" action="{{ route('delete', [$sportstar->id]) }}" method="POST"
-                                                class="d-none">
+                                            <form id="delete" action="{{ route('delete', [$sportstar->id]) }}"
+                                                method="POST" class="d-none">
                                                 @csrf
                                                 @method('delete')
                                             </form>

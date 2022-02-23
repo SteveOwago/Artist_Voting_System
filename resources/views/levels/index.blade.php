@@ -63,7 +63,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <a href="" class="btn btn-primary">View List</a>
+                                                    <a href="{{route('levels.sportstars', [$level->id])}}" class="btn btn-primary">View List</a>
                                                 </div>
                                             </div>
                                         </div>

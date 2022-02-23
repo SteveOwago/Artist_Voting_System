@@ -157,7 +157,7 @@
                     },
                     {
                         extend: 'pdfHtml5',
-                        title: 'Judges_list',
+                        title: 'Artists_list',
                         exportOptions: {
                             columns: [0, 1, 2, 3, 4]
                         }

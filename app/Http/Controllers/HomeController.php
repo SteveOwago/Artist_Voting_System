@@ -39,7 +39,7 @@ class HomeController extends Controller
 
         //Data for homepage dashboard statistics
         $authuser = User::where('id', \Auth::id())->get();
-        $artists = User::where('role_id', 2)->get();
+        $artists = User::where('role_id', '!=',1)->get();
         $approvedArtists = User::where('role_id', '!=', 1)->where('is_approved', 1)->get();
         $votes = Vote::all();
         $reasons = Reason::all();
@@ -171,9 +171,11 @@ class HomeController extends Controller
             $is_approved = 1;
         }
 
-        if ($user->phase_id != 0 ) {
+        if ($user->phase_id > 1  ) {
             $level = $user->phase_id;
             $level -= 1;
+        }else{
+            $level = 1;
         }
         $user->update([
             'is_approved' => $is_approved,
@@ -202,5 +204,19 @@ class HomeController extends Controller
 
 
         return back()->with('message', 'Operation Successful');
+    }
+    public function approvalDissaprovalLogs(){
+
+        $approvals = DB::table('approves')->select('artist_id','approved_by','created_at')->orderBy('created_at','desc')->get();
+
+        $disapprovals = DB::table('disapproves')->select('artist_id','action_by','created_at')->orderBy('created_at','desc')->get();
+
+        // $logs = collect([$approvals,$dissaproves]);
+
+        $logs =$disapprovals->merge($approvals)->sortBy('created_at');
+
+        //dd($logs);
+
+        return view('approvals_rejects_log',compact('logs'));
     }
 }

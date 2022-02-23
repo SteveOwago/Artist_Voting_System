@@ -22,4 +22,11 @@ class PhasesController extends Controller
 
         return view('levels.artists',compact('artists','reasons','level'));
     }
+    public function sportstarsLevel($id){
+        $reasons = Reason::all();
+        $level = Phase::findOrFail($id);
+        $sportstars = User::where('role_id',3)->where('is_approved',1)->where('phase_id',$id)->get();
+
+        return view('levels.sportstars',compact('sportstars','reasons','level'));
+    }
 }
