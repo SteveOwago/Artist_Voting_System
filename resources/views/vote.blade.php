@@ -35,94 +35,39 @@
                 -o-background-size: cover;
                 background-size: cover;">
 
-                    <div class="col-sm-12 col-lg-4 mx-auto">
+                    <div class="col-sm-12 col-lg-12 mx-auto">
                         {{-- <div class="text-center">
                     <a href="{{route('vote')}}" style="background-color: rgb(51, 196, 196);" class="btn btn-lg btn-success"><h4>Vote Now</h4></a>
                 </div> --}}
-                <div class="card"style="background-color: #fafa98;">
-                    <div class="card-header text-center">
-                        <h4>Vote Your Favourite Artist</h4>
-                    </div>
-                    <div class="card-body text-center justify-content-center px-5 py-5">
-                        @if (session('message'))
-                            <div class="row mb-2">
-                                <div class="col-lg-12">
-                                    <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-                                </div>
-                            </div>
-                        @endif
-                        @if ($errors->count() > 0)
-                            <div class="alert alert-danger">
-                                <ul class="list-unstyled">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form action="{{ route('submit_vote') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <input id="name" type="text"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name') }}" required autocomplete="name" autofocus
-                                    placeholder="FirstName   LastName" style="text-align:center">
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $error }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <input id="email" type=email"
-                                    class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" required autocomplete="email" autofocus
-                                    placeholder="somebody@example.com" style="text-align:center">
+                        <div class="col-md-3 mt-3 mb-3" style="background: #fafa98">
+                            <ul style="list-style: none;">
+                                @forelse ($artists as $artist)
+                                    <li>
+                                        <div class="row text-center">
+                                            <div class="col-sm-6 mb-1 mt-1"> {{ strtoupper($artist->name) }}</div>
+                                            <div class="col-sm-6 mb-1 mt-1"> <a
+                                                    href="{{ route('voteArtist', [$artist->id]) }}"
+                                                    class="btn btn-sm btn-primary">Vote</a></div>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <li>No Approved Artists yet</li>
+                                @endforelse
+                            </ul>
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-3" style="background: #fafa98">
+                            <ul style="list-style: none;">
+                                @forelse ($artists as $artist)
+                                    <li>{{ strtoupper($artist->name) }}</li>
+                                @empty
+                                    <li>No Approved Artists yet</li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $error }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control" name="region_id" id="region_id" required
-                                    style="text-align:center">
-                                    <option selected disabled>--- Select Region ---</option>
-                                    @foreach ($regions as $region)
-                                        <option value="{{ $region->id }}">{{ strtoupper($region->name) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('region_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $error }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            {{-- <div class="form-group col-sm-12 mt-3 text-center">
-                                <select class="form-control mt-3 mb-5 text-center" name="artist_id" id="artist_id"
-                                    required>
-                                    <option selected disabled>--- Select Artist ---</option>
-                                    @foreach ($artists as $artist)
-                                        <option value="{{ $artist->id }}">{{ strtoupper($artist->name) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('artist')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $error }}</strong>
-                                    </span>
-                                @enderror
-                            </div> --}}
-                            <div class="form-group">
-                                <input type="submit" value="Submit" class="btn btn-lg btn-success form-control">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                    </div>
                 </div>
                 <!-- content-wrapper ends -->
             </div>

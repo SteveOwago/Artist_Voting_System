@@ -39,4 +39,5 @@ Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove');
 Route::delete('delete/{id}','HomeController@delete_artist')->name('delete');
 
 Route::get('vote', 'IndexController@index')->name('vote');
-Route::post('submit_vote', 'IndexController@vote')->name('submit_vote');
+Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist');
+Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
