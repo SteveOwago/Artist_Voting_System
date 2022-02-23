@@ -24,11 +24,12 @@
                         <tbody>
                             @forelse ($logs as $log)
                                 <tr>
-                                    <td>{{ strtoupper(\DB::table('users')->where('id', $log->artist_id)->value('name'))}}</td>
-                                    <td>
-                                        {{ isset($log->action_by)? 'Approved' : 'Disapproved' }}
+                                    <td>{{ strtoupper(\DB::table('users')->where('id', $log->artist_id)->value('name')) }}
                                     </td>
-                                    <td>{{ strtoupper(\DB::table('users')->where('id', (isset($log->action_by)?$log->action_by:$log->approved_by))->value('name')) }}
+                                    <td>
+                                        {{ isset($log->action_by) ? 'Approved' : 'Disapproved' }}
+                                    </td>
+                                    <td>{{ strtoupper(\DB::table('users')->where('id', isset($log->action_by) ? $log->action_by : $log->approved_by)->value('name')) }}
                                     </td>
                                     <td class="text-center">{{ $log->created_at }}</td>
                                 </tr>
@@ -66,7 +67,7 @@
                     'copy',
                     {
                         extend: 'excelHtml5',
-                        title: 'Artist_list',
+                        title: 'Artist_Approval Reject Logs',
                         exportOptions: {
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, ':visible']
@@ -75,9 +76,9 @@
                     },
                     {
                         extend: 'pdfHtml5',
-                        title: 'Artist_list',
+                        title: 'Artist_Approval Reject Logs',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     'colvis'
