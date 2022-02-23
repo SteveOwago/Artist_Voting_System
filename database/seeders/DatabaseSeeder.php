@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             PhasesTableSeeder::class,
             RegionsTableSeeder::class,
             UsersTableSeeder::class,
+            RolesTableSeeder::class,
             VotesTableSeeder::class,
         ]);
     }
