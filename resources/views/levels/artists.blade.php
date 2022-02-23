@@ -10,7 +10,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title text-dark">All Registered Artists</h4>
+                <h4 class="card-title text-dark">All Artists <b>{{ strtoupper($level->title) }}</b></h4>
                 <div class="col-lg-10 offset-1 table-responsive">
                     <table class="table table-striped table-hover display nowrap" id="ArtistTable">
                         <thead>
@@ -19,7 +19,7 @@
                                 {{-- <th>Email</th> --}}
                                 <th>Phone</th>
                                 <th> Status </th>
-                                <th>Level</th>
+                                <th> Level </th>
                                 <th>Date Registered</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -38,7 +38,7 @@
                                     <td class="text-center">{{ $artist->created_at }}</td>
                                     <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
                                             class="btn btn-sm btn-dark"> View </a> &nbsp;
-                                        @if (Auth::user()->role_id == 1)
+                                        @if (Auth::user()->role_id == 1 && $artist->phase_id != 4)
                                             <a class="btn btn-sm btn-warning" href="{{ route('approve', [$artist->id]) }}"
                                                 onclick="event.preventDefault();
                                                                             document.getElementById('approve').submit();">
@@ -148,7 +148,7 @@
                     'copy',
                     {
                         extend: 'excelHtml5',
-                        title: 'Judges_list',
+                        title: 'Artists_list',
                         exportOptions: {
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, ':visible']

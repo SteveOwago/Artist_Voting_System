@@ -90,11 +90,22 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-12">
-                                            <select name="region_id" class="form-control">
+                                            <select name="region_id" class="form-control" required>
                                                 <option selected disabled>---Select Your Region---</option>
                                                 @foreach ($regions as $region)
                                                     <option value="{{ $region->id }}">
                                                         {{ strtoupper($region->name) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-12">
+                                            <select name="role_id" class="form-control" required>
+                                                <option selected disabled>---Select Type---</option>
+                                                @foreach ($roles as $role)
+                                                    <option value="{{ $role->id }}">
+                                                        {{ strtoupper($role->title) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

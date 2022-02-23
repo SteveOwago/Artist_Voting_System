@@ -42,3 +42,7 @@ Route::delete('delete/{id}','HomeController@delete_artist')->name('delete');
 Route::get('vote', 'IndexController@index')->name('vote');
 Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist');
 Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
+
+
+Route::get('levels','PhasesController@index')->name('levels');
+Route::get('levels/artists/{id}','PhasesController@artistsLevel')->name('levels.artists');

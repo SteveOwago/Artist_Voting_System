@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'integer', 'min:12','unique:users'],
             'region_id' => ['required', 'integer'],
+            'role_id' => ['required', 'integer'],
             'consent' => ['required','accepted'],
         ],
         [
@@ -74,6 +75,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'phone' => $data['phone'],
             'region_id' => $data['region_id'],
+            'role_id' => $data['role_id'],
         ]);
 
         return $user;

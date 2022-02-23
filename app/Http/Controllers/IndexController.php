@@ -13,8 +13,8 @@ class IndexController extends Controller
 {
     public function index(){
 
-        $artists = User::where('role_id',2)->where('is_approved',1)->take(10)->get();
-
+        $artists = User::where('role_id',2)->where('is_approved',1)->where('phase_id',4)->take(10)->get();
+        $sportstars = User::where('role_id',3)->where('is_approved',1)->where('phase_id',4)->take(10)->get();
         // $regions = DB::table('regions')->select('name','id')->get();
 
         return view('vote',compact('artists'));

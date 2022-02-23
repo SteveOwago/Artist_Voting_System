@@ -83,7 +83,7 @@
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('artists')}}">
           <span class="menu-icon">
-            <i class="mdi mdi-playlist-play"></i>
+            <i class="mdi mdi-nature-people"></i>
           </span>
           <span class="menu-title">Artists</span>
         </a>
@@ -102,6 +102,14 @@
             <i class="mdi mdi-table-large"></i>
           </span>
           <span class="menu-title">Judges</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('levels')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-playlist-check"></i>
+          </span>
+          <span class="menu-title">Approval Levels</span>
         </a>
       </li>
       @endif

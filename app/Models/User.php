@@ -27,6 +27,7 @@ class User extends Authenticatable
         'is_approved',
         'role_id',
         'profile',
+        'phase_id',
         'region_id',
         'password',
     ];
