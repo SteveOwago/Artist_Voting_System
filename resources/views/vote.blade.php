@@ -39,32 +39,40 @@
                         {{-- <div class="text-center">
                     <a href="{{route('vote')}}" style="background-color: rgb(51, 196, 196);" class="btn btn-lg btn-success"><h4>Vote Now</h4></a>
                 </div> --}}
-
-                        <div class="col-md-3 mt-3 mb-3" style="background: #fafa98">
-                            <ul style="list-style: none;">
-                                @forelse ($artists as $artist)
-                                    <li>
-                                        <div class="row text-center">
-                                            <div class="col-sm-6 mb-1 mt-1"> {{ strtoupper($artist->name) }}</div>
-                                            <div class="col-sm-6 mb-1 mt-1"> <a
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-4 mt-3 mb-3" style="background: transparent;">
+                                <ul style="list-style: none;">
+                                    @forelse ($artists as $artist)
+                                        <li>
+                                            <div class="row text-center">
+                                                <div class="col-sm-6 mb-1 mt-1"> {{ strtoupper($artist->name) }}</div>
+                                                <div class="col-sm-6 mb-1 mt-1"> <a
+                                                        href="{{ route('voteArtist', [$artist->id]) }}"
+                                                        class="btn btn-sm btn-primary">Vote</a></div>
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <li>No Approved Artists yet</li>
+                                    @endforelse
+                                </ul>
+                            </div>
+                            <div class="col-lg-4"></div>
+                            <div class="col-sm-6 col-lg-4" style="background: transparent;">
+                                <ul style="list-style: none;">
+                                    @forelse ($artists as $artist)
+                                        <li>
+                                            <div class="row text-center">
+                                                <div class="col-sm-6 mb-1 mt-1"> <a
                                                     href="{{ route('voteArtist', [$artist->id]) }}"
                                                     class="btn btn-sm btn-primary">Vote</a></div>
-                                        </div>
-                                    </li>
-                                @empty
-                                    <li>No Approved Artists yet</li>
-                                @endforelse
-                            </ul>
-                        </div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-3" style="background: #fafa98">
-                            <ul style="list-style: none;">
-                                @forelse ($artists as $artist)
-                                    <li>{{ strtoupper($artist->name) }}</li>
-                                @empty
-                                    <li>No Approved Artists yet</li>
-                                @endforelse
-                            </ul>
+                                                <div class="col-sm-6 mb-1 mt-1"> {{ strtoupper($artist->name) }}</div>
+                                            </div>
+                                        </li>
+                                    @empty
+                                        <li>No Approved Artists yet</li>
+                                    @endforelse
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
