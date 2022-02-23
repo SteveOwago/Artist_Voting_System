@@ -12,6 +12,7 @@ use App\Models\Reason;
 use App\Models\Vote;
 use DB;
 use App\Models\Disapprove;
+use Illuminate\Validation\Rules\Password;
 
 
 class HomeController extends Controller
@@ -67,10 +68,10 @@ class HomeController extends Controller
     public function add_judge(Request $request){
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|integer|min:12|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'name' => ['required','string','max:255'],
+            'email' => ['required','string','email','max:255','unique:users'],
+            'phone' => ['required','integer','min:12','unique:users'],
+            'password' => ['required','string', Password::min(8)->mixedCase()->symbols()->uncompromised(),'confirmed'],
         ]);
 
         $user = User::create([
