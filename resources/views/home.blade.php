@@ -140,7 +140,7 @@
                                         <th>Phone</th>
                                         <th> Status </th>
                                         <th>Date Registered</th>
-                                        <th class="text-center">Actions</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
