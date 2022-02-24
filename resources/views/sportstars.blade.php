@@ -144,7 +144,7 @@
     <script>
         $(document).ready(function() {
             $('#sportstarTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'lBfrtip',
                 buttons: [
                     'copy',
                     {

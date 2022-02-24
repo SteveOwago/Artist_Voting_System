@@ -76,7 +76,7 @@
     <script>
         $(document).ready(function() {
             $('#JudgesTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'lBfrtip',
                 buttons: [
                     'copy',
                     {

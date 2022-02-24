@@ -143,7 +143,7 @@
     <script>
         $(document).ready(function() {
             $('#ArtistTable').DataTable({
-                dom: 'Bfrtip',
+                dom: 'lBfrtip',
                 buttons: [
                     'copy',
                     {

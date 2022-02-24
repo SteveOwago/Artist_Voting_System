@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 @endsection
 @section('content')
     {{-- Dashboard Statistics Section --}}
@@ -144,8 +147,8 @@
                                     {{-- @forelse ($artists as $artist)
                                         <tr>
                                             <td>{{ $artist->name }}</td> --}}
-                                            {{-- <td class="text-center">{{ $artist->email }}</td> --}}
-                                            {{-- <td class="text-center">{{ $artist->phone }}</td>
+                                    {{-- <td class="text-center">{{ $artist->email }}</td> --}}
+                                    {{-- <td class="text-center">{{ $artist->phone }}</td>
                                             <td
                                                 class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
                                                 {{ $artist->is_approved == 1 ? 'Approved' : 'Not Approved' }}
@@ -269,8 +272,8 @@
                 const backgroundColor = [];
                 let opacity = 1.0;
                 for (let i = 0; i < res.data.length; i++) {
-                    let color = 'rgb(245, 162, 10,'
-                    color = color + ((opacity -= 0.08).toString()) + ')'
+                    let color = 'rgb(252, 186, 3,'
+                    color = color + ((opacity -= 0.05).toString()) + ')'
                     labels.push(res.data[i].name);
                     count.push(res.data[i].count);
                     backgroundColor.push(color);
@@ -455,26 +458,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
     <script>
-      $(document).ready(function (){
-        $('#ArtistTable').DataTable({
-          "processing":true,
-          "serverSide":true,
-          "ajax": "{{route('api.artists.index')}}",
-          "columns":[
-            { "data": "name"},
-            // { "data": "email"},
-            { "data": "phone"},
-            { "data": "is_approved"},
-            { "data": "created_at"},
-            { "data": "action",orderable:false,searchable:false},
-          ],
-          dom: 'Bfrtip',
+        $(document).ready(function() {
+            $('#ArtistTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ route('api.artists.index') }}",
+                "columns": [{
+                        "data": "name"
+                    },
+                    // { "data": "email"},
+                    {
+                        "data": "phone"
+                    },
+                    {
+                        "data": "is_approved"
+                    },
+                    {
+                        "data": "created_at"
+                    },
+                    {
+                        "data": "action",
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                dom: 'lBfrtip',
                 buttons: [
                     'copy',
                     {
                         extend: 'excelHtml5',
-                        title: 'Judges_list',
+                        title: 'Artist_and_Sport_Stars_list',
                         exportOptions: {
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, ':visible']
@@ -483,15 +506,15 @@
                     },
                     {
                         extend: 'pdfHtml5',
-                        title: 'Judges_list',
+                        title: 'Artist_and_Sport_Stars_list',
                         exportOptions: {
                             columns: [0, 1, 2, 3, 4]
                         }
                     },
                     'colvis'
                 ],
+            });
         });
-      });
     </script>
     {{-- <script>
         $(document).ready(function() {
