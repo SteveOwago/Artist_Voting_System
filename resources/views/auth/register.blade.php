@@ -140,10 +140,9 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" name="consent"
                                                     id="consent">
-                                                <label class="form-check-label  @error('consent') is-invalid @enderror"
-                                                    for="consent">
+                                                <a class="form-check-label  @error('consent') is-invalid @enderror">
                                                     Do you agree To Tusker Cenetary Terms & Conditions
-                                                </label>
+                                                </a>
                                                 @error('consent')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
