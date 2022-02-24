@@ -41,12 +41,12 @@ class HomeController extends Controller
         //Data for homepage dashboard statistics
         $authuser = User::where('id', \Auth::id())->get();
         $artists = User::where('role_id', '!=',1)->get();
-        $approvedArtists = User::where('role_id', '!=', 1)->where('is_approved', 1)->get();
+        $finalistsArtists = User::where('role_id', '!=', 1)->where('is_approved', 1)->where('phase_id', 4)->get();
         $votes = Vote::all();
         $reasons = Reason::all();
 
 
-        return view('home', compact('artists', 'authuser', 'approvedArtists', 'votes', 'reasons'));
+        return view('home', compact('artists', 'authuser', 'finalistsArtists', 'votes', 'reasons'));
     }
     public function artists()
     {

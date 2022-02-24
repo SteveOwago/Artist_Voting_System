@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-9">
                                 <div class="d-flex align-items-center align-self-start">
-                                    <h3 class="mb-0">{{ count($approvedArtists) }} Artists</h3>
+                                    <h3 class="mb-0">{{ count($finalistsArtists) }} Artists and SportStars</h3>
                                     {{-- <p class="text-muted ml-2 mb-0 font-weight-medium">-2.4%</p> --}}
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Approved Artists</h6>
+                        <h6 class="text-muted font-weight-normal">Finalists</h6>
                     </div>
                 </div>
             </div>
@@ -253,7 +253,8 @@
     {{-- End of registered Users --}}
 @endsection
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     {{-- Section Racing Bar vote tally --}}
     @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
         <script>
@@ -294,6 +295,7 @@
 
                 // config
                 const config = {
+                    plugins: [ChartDataLabels],
                     type: 'bar',
                     data,
                     options: {
@@ -303,6 +305,14 @@
                                 beginAtZero: true
                             }
                         },
+                        datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                formatter: Math.round,
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
                         responsive: true,
                         maintainAspectRatio: false,
                     }
@@ -399,9 +409,21 @@
                 };
 
                 const config_bar = {
+                    plugins: [ChartDataLabels],
                     type: 'bar',
                     data: data_bar,
-                    options: {}
+                    options: {
+                        plugins: {
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                formatter: Math.round,
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
                 };
 
                 // Pie Chart

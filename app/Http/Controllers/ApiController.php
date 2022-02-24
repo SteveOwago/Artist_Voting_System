@@ -135,13 +135,13 @@ class ApiController extends Controller
                     array_push($artistsRegistered,$data);
                 }
             }
-            if((array_search($day, array_column($artistsRegistered, 'day')))!= $day){
-                $data = [
-                    'day'=>$day,
-                    'count'=>0,
-                ];
-                    array_push($artistsRegistered,$data);
-               }
+            // if((array_search($day, array_column($artistsRegistered, 'day')))!= $day){
+            //     $data = [
+            //         'day'=>$day,
+            //         'count'=>0,
+            //     ];
+            //         array_push($artistsRegistered,$data);
+            //    }
         }
 
         // foreach ($days as $day) {
