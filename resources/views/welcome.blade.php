@@ -15,7 +15,7 @@
                                                                         -moz-background-size: cover;
                                                                         -o-background-size: cover;
                                                                         background-size: cover;">
-                    <div class="col-lg-4 mx-auto">
+                    <div class="col-sm-6 col-lg-4 mx-auto">
                         @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
                             <div class="text-center">
                                 <a href="{{ route('register') }}" style="background-color: rgb(51, 196, 196);"
@@ -32,8 +32,8 @@
                                 </a>
                             </div>
                         @endif
-                        <div class="card-body px-5 py-5">
-                        </div>
+                        {{-- <div class="card-body px-5 py-5">
+                        </div> --}}
                     </div>
                 </div>
                 <!-- content-wrapper ends -->
