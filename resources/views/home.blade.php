@@ -84,21 +84,22 @@
       </div>
     </div> --}}
         <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
-            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
                 <div class="card pt-4">
                     <div class="card-body mb-5">
                         <div class="row">
-                            <div class="col-md-6 offset-3">
-                                <h3>Artist Registered This Week</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mx-auto">
+                                <div class="card-title text-dark">
+                                    <h3>Artists & Sport Stars Registered This Week Per Day</h3>
+                                </div>
                                 <div class="card-body">
                                     <canvas id="myChart-bar" style="height:230px"></canvas>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mx-auto">
+                                <div class="card-title text-dark">
+                                    <h3>Registered Artists & Sport Stars Per Region</h3>
+                                </div>
                                 <div class="card-body" style="position: relative; height:50%; width:50%">
                                     <canvas id="myChart-pie" height="300"></canvas>
                                 </div>
@@ -108,7 +109,7 @@
                     </div>
                 </div>
             @endif
-            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
                 <div class="card pt-4">
                     <div class="card-body mb-5">
                         <h4 class="card-title text-dark">Artist Vote Tally</h4>
@@ -140,11 +141,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($artists as $artist)
+                                    {{-- @forelse ($artists as $artist)
                                         <tr>
-                                            <td>{{ $artist->name }}</td>
+                                            <td>{{ $artist->name }}</td> --}}
                                             {{-- <td class="text-center">{{ $artist->email }}</td> --}}
-                                            <td class="text-center">{{ $artist->phone }}</td>
+                                            {{-- <td class="text-center">{{ $artist->phone }}</td>
                                             <td
                                                 class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
                                                 {{ $artist->is_approved == 1 ? 'Approved' : 'Not Approved' }}
@@ -237,7 +238,7 @@
                                         <tr>
                                             <td class="text-center" colspan="6">No Registered Artists</td>
                                         </tr>
-                                    @endforelse
+                                    @endforelse --}}
                                 </tbody>
                             </table>
                         </div>
@@ -251,7 +252,7 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     {{-- Section Racing Bar vote tally --}}
-    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
         <script>
             const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
             const setBg = () => {
@@ -358,7 +359,7 @@
             getData();
         </script>
     @endif
-    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
@@ -401,19 +402,19 @@
                 };
 
                 // Pie Chart
-
-                let response_pie = await fetch(url_bar);
+                const url_pie = `{{ route('api.artists.artistsperRegion') }}`;
+                let response_pie = await fetch(url_pie);
                 const res_pie = await response_pie.json();
 
                 const labels_pie = [];
                 const backgroundColor_pie = [];
                 const data_pie1 = [];
                 let opacity_pie = 1.0;
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < res_pie.data.length; i++) {
                     let color_pie = 'rgb(245, 162, 10,'
                     color_pie = color_pie + ((opacity_pie -= 0.1).toString()) + ')'
                     console.log(color_pie)
-                    labels_pie.push(res_pie.data[i].day);
+                    labels_pie.push(res_pie.data[i].region);
                     data_pie1.push(res_pie.data[i].count);
                     backgroundColor_pie.push(color_pie);
                 }
@@ -432,7 +433,7 @@
 
                 const config_pie = {
                     type: 'pie',
-                    data: data_bar,
+                    data: data_pie,
                     options: {
                         responsive: true,
                         maintainAspectRatio: true,
@@ -454,7 +455,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{-- <script>
+    <script>
       $(document).ready(function (){
         $('#ArtistTable').DataTable({
           "processing":true,
@@ -462,15 +463,37 @@
           "ajax": "{{route('api.artists.index')}}",
           "columns":[
             { "data": "name"},
-            { "data": "email"},
+            // { "data": "email"},
             { "data": "phone"},
             { "data": "is_approved"},
             { "data": "created_at"},
-          ]
+            { "data": "action",orderable:false,searchable:false},
+          ],
+          dom: 'Bfrtip',
+                buttons: [
+                    'copy',
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Judges_list',
+                        exportOptions: {
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, ':visible']
+                            }
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: 'Judges_list',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4]
+                        }
+                    },
+                    'colvis'
+                ],
         });
       });
-    </script> --}}
-    <script>
+    </script>
+    {{-- <script>
         $(document).ready(function() {
             $('#ArtistTable').DataTable({
                 dom: 'Bfrtip',
@@ -496,5 +519,5 @@
                 ]
             });
         });
-    </script>
+    </script> --}}
 @endsection

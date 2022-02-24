@@ -14,6 +14,7 @@ use App\Models\Vote;
 use DB;
 use Auth;
 use App\Models\Disapprove;
+use App\Utility\SendSMS;
 use Illuminate\Validation\Rules\Password;
 
 
@@ -140,12 +141,12 @@ class HomeController extends Controller
         $user = User::findOrFail($id);
 
         $is_approved = 1;
-
-        if ($user->phase_id != 4) {
+        if ($user->phase_id <= 4) {
             $level = $user->phase_id;
             $level += 1;
+        }else{
+            return back()->with('message','Participant is in the Final Stage');
         }
-
 
         $user->update([
             'is_approved' => $is_approved,
@@ -155,6 +156,14 @@ class HomeController extends Controller
             'approved_by' => Auth::id(),
             'artist_id' => $user->id,
         ]);
+
+
+
+        $level_name = DB::table('phases')->where('id',$user->phase_id)->value('title');
+        $mobile = $user->phone;
+        $message = "Congratulations $user->name! You Have been Approved for the $level_name stage. Stay Tuned!";
+
+        $this->sendMessage($mobile,$message);
 
 
         return back()->with('message', 'Artist Approved Successfully');
@@ -171,7 +180,7 @@ class HomeController extends Controller
             $is_approved = 1;
         }
 
-        if ($user->phase_id > 1  ) {
+        if ($user->phase_id > 1 ) {
             $level = $user->phase_id;
             $level -= 1;
         }else{
@@ -181,13 +190,20 @@ class HomeController extends Controller
             'is_approved' => $is_approved,
             'phase_id' => $level,
         ]);
-
+        $request->validate([
+            'reason_id' => 'required',
+        ]);
         Disapprove::create([
             'reason_id' => $request->reason_id,
             'reason' => $request->reason,
             'artist_id' => $id,
             'action_by' => Auth::id(),
         ]);
+        $level_name = DB::table('phases')->where('id',$user->phase_id)->value('title');
+        $mobile = $user->phone;
+        $message = "Hello, $user->name. We are sorry to announce that you have been disqualified for the competition. Thank You $user->name for participatinng in this activity. We wish you all the best in our next and future contests. Stay Tuned!";
+
+        $this->sendMessage($mobile,$message);
 
         return back()->with('message', 'Operation Successful');
     }
@@ -218,5 +234,44 @@ class HomeController extends Controller
         //dd($logs);
 
         return view('approvals_rejects_log',compact('logs'));
+    }
+
+    public function sendMessage($mobile, $message){
+        try{
+            $headers = [
+                    'Cookie: ci_session=ttdhpf95lap45hqt3h255af90npbb3ql'
+                ];
+
+            $encodMessage = rawurlencode($message);
+
+                $url = 'https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to='.$mobile.'&from=IMS&sms='.$encodMessage.'&response=json&unicode=0&bulkbalanceuser=voucher';
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_ENCODING, "");
+                curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true,);
+                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+                $response = curl_exec($ch);
+                $res = json_decode($response);
+                date_default_timezone_set('Africa/Nairobi');
+                $date = date('m/d/Y h:i:s a', time());
+                // if($res)
+                // {
+                //     print_r( "This is test number:".$mobile.", ".$date." \r\n");
+                // }
+                curl_close($ch);
+
+            }catch (\Exception $e) {
+
+            return redirect()->back()->with('errors','Something Went Wrong. Please Check the Supplied Phone Number or Your Network Connectivity Status.');
+        }
     }
 }

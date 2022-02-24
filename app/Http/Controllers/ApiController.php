@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ApiResource;
 use App\Models\User;
 use DB;
+use DataTables;
 
 class ApiController extends Controller
 {
@@ -65,9 +66,21 @@ class ApiController extends Controller
     }
 
     public function getArtists(){
-        $artists = User::where('role_id',2);
+        $artists = DB::table('users')->where('role_id','!=',1)->get();
 
-        return datatables($artists)->make(true);
+
+        $table =  DataTables::of($artists)
+            ->addColumn('action', function ($row) {
+                return '<a href="' . route('profile', $row->id) .'" class="btn btn-xs btn-primary got=to" id="' . $row->id. '">View</a>';
+            });
+
+            $table->editColumn('is_approved', function ($row) {
+                return $row->is_approved == 1 ? 'Approved' : 'Not Approved';
+            });
+
+            return $table->make(true);
+        // return new ApiResource($artists);
+        // return datatables($artists)->make(true);
     }
 
     public function getVoteCountPerArtist(){
@@ -114,7 +127,7 @@ class ApiController extends Controller
         foreach($days as $day)
         {
             foreach ($artistsweekly as $aw) {
-                if($aw->dayname === $day){
+                if($aw->dayname == $day){
                     $data = [
                         'day'=>$aw->dayname,
                         'count'=>$aw->count,
@@ -122,9 +135,6 @@ class ApiController extends Controller
                     array_push($artistsRegistered,$data);
                 }
             }
-        }
-
-        foreach ($days as $day) {
             if((array_search($day, array_column($artistsRegistered, 'day')))!= $day){
                 $data = [
                     'day'=>$day,
@@ -133,29 +143,69 @@ class ApiController extends Controller
                     array_push($artistsRegistered,$data);
                }
         }
+
+        // foreach ($days as $day) {
+        //     if((array_search($day, array_column($artistsRegistered, 'day')))!= $day){
+        //         $data = [
+        //             'day'=>$day,
+        //             'count'=>0,
+        //         ];
+        //             array_push($artistsRegistered,$data);
+        //        }
+        // }
         usort($artistsRegistered, function($a, $b) {
             return  $b['count']- $a['count'];
           });
 
        return new ApiResource($artistsRegistered);
     }
-    public function getregisteredArtistPerWeek(){
-        $weeklyregs = User::all()->groupBy(function($date) {
-            return \Carbon\Carbon::parse($date->created_at)->format('W');
-        });
-        $weeklyregs = $weeklyregs->reverse();
+    // public function getregisteredArtistPerWeek(){
+    //     $weeklyregs = User::all()->groupBy(function($date) {
+    //         return \Carbon\Carbon::parse($date->created_at)->format('W');
+    //     });
+    //     $weeklyregs = $weeklyregs->reverse();
 
-        $weeeklydata = [];
-        foreach($weeklyregs as $week){
+    //     $weeeklydata = [];
+    //     foreach($weeklyregs as $week){
+    //         $data = [
+    //             'week'=>$week,
+    //             'count'=>0,
+    //         ];
+    //         array_push($weeeklydata,$data);
+    //     }
+
+    //     dd($weeklyregs);
+
+    //     return new ApiResource($weeklyregs);
+    // }
+
+    // Artist registered per region
+
+    public function artistsperRegion(){
+
+        $artistRegions = User::where('role_id', '!=', 1)->select('region_id',DB::raw("COUNT(*) as count_row"))->groupBy('region_id')->get();
+        $artistRegionData = [];
+        foreach($artistRegions as $ar)
+        {
             $data = [
-                'week'=>$week,
-                'count'=>0,
+                'region' => DB::table('regions')->where('id',$ar->region_id)->value('name'),
+                'count' => $ar->count_row,
             ];
-            array_push($weeeklydata,$data);
+
+            array_push($artistRegionData,$data);
         }
 
-        dd($weeklyregs);
+        $regions = DB::table('regions')->select('name')->get();
+        foreach ($regions as $region) {
+            if((array_search($region->name, array_column($artistRegionData, 'region')))!= $region->name){
+                $data = [
+                    'region'=>$region->name,
+                    'count'=>0,
+                ];
+                    array_push($artistRegionData,$data);
+               }
+        }
 
-        return new ApiResource($weeklyregs);
+        return new ApiResource($artistRegionData);
     }
 }
