@@ -40,9 +40,9 @@ Route::post('approve/{id}','HomeController@approve')->name('approve')->middlewar
 Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove')->middleware('otp');
 Route::delete('delete/{id}','HomeController@delete_artist')->name('delete')->middleware('otp');
 
-Route::get('vote', 'IndexController@index')->name('vote')->middleware('otp');
-Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist')->middleware('otp');
-Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote')->middleware('otp');
+Route::get('vote', 'IndexController@index')->name('vote');
+Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist');
+Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
 
 
 Route::get('levels','PhasesController@index')->name('levels')->middleware('otp');

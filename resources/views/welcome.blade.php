@@ -129,7 +129,7 @@
 
             if(age<18){
                 setCookie(17,"dfjgheirufIUhfbiesd374834xhj:fjd",1);
-                alert('This website is not for Minors. Parental consent is mandatory!');
+                alert('This website is not for Minors. You have to be 18 years and above to use this website!');
             }else{
                 eraseCookie(17);
             }
@@ -153,7 +153,7 @@
         }
         function checkCookie(){
             if(document.cookie){
-                alert('This website is not for Minors. Parental consent is mandatory!');
+                alert('This website is not for Minors. You have to be 18 years and above to use this website!');
             }
         }
 
