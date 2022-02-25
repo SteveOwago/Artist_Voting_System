@@ -28,8 +28,9 @@
                                     <td class="text-center">{{ $judge->phone }}</td>
                                     <td class="text-center">{{ $judge->created_at }}</td>
                                     <td class="text-center"><a href="{{ route('profile', [$judge->id]) }}"
-                                            class="btn btn-sm btn-dark"> View </a> &nbsp; <a href=""
-                                            class="btn btn-sm btn-danger"> Delete </a></td>
+                                            class="btn btn-sm btn-dark"> View </a> &nbsp;
+                                            {{-- <a href=""
+                                            class="btn btn-sm btn-danger"> Delete </a></td> --}}
                                 </tr>
                             @empty
                                 <tr>

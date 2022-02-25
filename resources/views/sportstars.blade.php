@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                         @endif
-                                        &nbsp; @if (Auth::user()->role_id == 1)
+                                        {{-- &nbsp; @if (Auth::user()->role_id == 1)
                                             <a class="btn btn-sm btn-danger"
                                                 href="{{ route('delete', [$sportstar->id]) }}" onclick="event.preventDefault();
                                                                       document.getElementById('delete').submit();">
@@ -113,7 +113,7 @@
                                                 @csrf
                                                 @method('delete')
                                             </form>
-                                        @endif
+                                        @endif --}}
                                 </tr>
                             @empty
                                 <tr>
