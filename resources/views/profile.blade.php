@@ -44,7 +44,7 @@
                                                     </li>
                                                 @endif
                                             </ul>
-                                            @if (Auth::id() == $user->id)
+                                            @if (Auth::id() == $user->id || Auth::user()->role_id == 1)
                                                 <div class="text-center">
                                                     <a href="{{ route('edit_profile', [$user->id]) }}"
                                                         class="btn btn-lg btn-primary mt-3">Edit</a>
