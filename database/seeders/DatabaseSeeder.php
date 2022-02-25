@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             RolesTableSeeder::class,
             VotesTableSeeder::class,
+            ActivitiesTableSeeder::class,
         ]);
     }
 }
