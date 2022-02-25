@@ -84,7 +84,7 @@ class ApiController extends Controller
     }
 
     public function getVoteCountPerArtist(){
-        // Votes for the racing chart in Dashboard
+        // Votes for the racing chart in Dashboard Artists
         $votesCountperArtist = DB::table('votes')->select('artist_id',DB::raw("COUNT(*) as count_row"))
                                 ->orderBy("count_row","desc")
                                 ->groupBy("artist_id")
@@ -103,6 +103,28 @@ class ApiController extends Controller
             array_push($voteartists,$artist);
         }
         return new ApiResource($voteartists);
+    }
+
+    public function getVoteCountPerSportStar(){
+        // Votes for the racing chart in Dashboard For SportStars
+        $votesCountperSportStar = DB::table('votes')->select('artist_id',DB::raw("COUNT(*) as count_row"))
+                                ->orderBy("count_row","desc")
+                                ->groupBy("artist_id")
+                                ->join('users','votes.artist_id','users.id')
+                                ->where('users.is_approved',1)
+                                ->where('users.role_id',3)->take(10)
+                                ->get();
+
+        $voteSportStars = [];
+        foreach($votesCountperSportStar as $vpc){
+            $SportStar = [
+                'name'=> DB::table('users')->where('is_approved',1)->where('id',$vpc->artist_id)->value('name'),
+                'artist_id'=> $vpc->artist_id,
+                'count' => $vpc->count_row,
+            ];
+            array_push($voteSportStars,$SportStar);
+        }
+        return new ApiResource($voteSportStars);
     }
 
     public function getregisteredArtistPerDay(){
