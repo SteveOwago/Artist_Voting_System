@@ -86,7 +86,7 @@
         </div>
       </div>
     </div> --}}
-        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
             <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
                 <div class="card pt-4">
                     <div class="card-body mb-5">
@@ -113,7 +113,7 @@
                 </div>
             </div>
         @endif
-        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
             <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
                 <div class="card pt-4">
                     <div class="card-body mb-5">
@@ -266,7 +266,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     {{-- Section Racing Bar vote tally --}}
-    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
         <script>
             const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
             // const setBg = () => {
@@ -400,7 +400,7 @@
                 const backgroundColor_sport = [];
                 let opacity_sport = 1.0;
                 for (let i = 0; i < res_sport.data.length; i++) {
-                    let color_sport = 'rgb(255, 0, 0,'
+                    let color_sport = 'rgb(0, 255, 76,'
                     color_sport = color_sport + ((opacity_sport -= 0.05).toString()) + ')'
                     labels_sport.push(res_sport.data[i].name);
                     count_sport.push(res_sport.data[i].count);
@@ -500,7 +500,7 @@
             fetchData();
         </script>
     @endif
-    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
