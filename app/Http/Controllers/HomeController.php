@@ -113,15 +113,28 @@ class HomeController extends Controller
     public function update_profile(Request $request, $id)
     {
 
-
+        $user = User::findOrFail($id);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            //'email' => 'required|string|email|max:255',
             'phone' => 'required|integer|min:12',
         ]);
 
-        $user = User::findOrFail($id);
 
+        if($request->hasFile('profile')){
+            $validated = $request->validate([
+                'profile' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $profile = public_path('profile_pictures/').$user->profile;
+            if($profile && $user->profile !== "default.png"){
+                File::delete($profile);
+            }
+
+            $profile = time().'.'.$request->file('profile')->getClientOriginalName();
+            $request->file('profile')->move(public_path('profile_pictures'), $profile);
+
+            $user->update(['profile'=>$profile,]);
+        }
 
 
 
