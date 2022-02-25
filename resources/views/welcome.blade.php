@@ -43,21 +43,35 @@
 
 <body>
     <div class="container-scroller" onload="checkCookie();">
+
         <div class="container-fluid page-body-wrapper full-page-wrapper responsive_style">
             <div class="row w-100 m-0">
                 <div class="content-wrapper d-flex align-items-center responsive_style">
                     <div class="col-sm-6 col-lg-4 mx-auto">
-                        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+                        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+                            <div class="row text-center" style="margin-bottom: 30%;">
+                                <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
+                                    NEXTERS VOTING PLATFORM</h1>
+                                <h4 style="font-size:30px;font-weight:500;">To Register and Participate click the button
+                                    below</h4>
+                            </div>
                             <div class="text-center">
-                                <a href="{{ route('register') }}" style="background-color: rgb(51, 196, 196);"
+                                <a href="{{ route('register') }}"
+                                    style="background-color: rgb(51, 196, 196);border-radius:20px;"
                                     class="btn btn-lg btn-success">
                                     <h4>Register</h4>
                                 </a>
                             </div>
                         @endif
-                        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+                        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+                            <div class="row text-center" style="margin-bottom: 30%;">
+                                <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
+                                    NEXTERS VOTING PLATFORM</h1>
+                                <h4 style="font-size:30px;font-weight:500;">To Vote forYour FavouriteArtist of Sport Star Click Below</h4>
+                            </div>
                             <div class="text-center">
-                                <a href="{{ route('vote') }}" style="background-color: rgb(51, 196, 196);"
+                                <a href="{{ route('vote') }}"
+                                    style="background-color: rgb(51, 196, 196);border-radius:20px;"
                                     class="btn btn-lg btn-success">
                                     <h4>Vote Now</h4>
                                 </a>
@@ -127,10 +141,10 @@
             }
 
 
-            if(age<18){
-                setCookie(17,"dfjgheirufIUhfbiesd374834xhj:fjd",1);
+            if (age < 18) {
+                setCookie(17, "dfjgheirufIUhfbiesd374834xhj:fjd", 1);
                 alert('This website is not for Minors. You have to be 18 years and above to use this website!');
-            }else{
+            } else {
                 eraseCookie(17);
             }
 
@@ -151,12 +165,12 @@
             var keyValue = getCookie(key);
             setCookie(key, keyValue, '-1');
         }
-        function checkCookie(){
-            if(document.cookie){
+
+        function checkCookie() {
+            if (document.cookie) {
                 alert('This website is not for Minors. You have to be 18 years and above to use this website!');
             }
         }
-
     </script>
 </body>
 
