@@ -63,6 +63,14 @@
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('activities')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-settings"></i>
+          </span>
+          <span class="menu-title">Activities</span>
+        </a>
+      </li>
       {{-- <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-icon">

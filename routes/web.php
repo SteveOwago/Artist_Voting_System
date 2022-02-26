@@ -39,6 +39,10 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::get('judges/create', 'HomeController@create_judge')->name('create_judge');
     Route::post('judges/create', 'HomeController@add_judge')->name('add_judge');
 
+    Route::get('setting/activity', 'SettingsController@index')->name('activities');
+    Route::get('setting/activity/edit/{id}', 'SettingsController@activityEdit')->name('activities.edit');
+    Route::put('setting/activity/update/{id}', 'SettingsController@activityUpdate')->name('activities.update');
+
     Route::get('profile/{id}', 'HomeController@profile')->name('profile');
     Route::get('edit_profile/{id}', 'HomeController@edit_profile')->name('edit_profile');
     Route::put('edit_profile/{id}', 'HomeController@update_profile')->name('update_profile');
