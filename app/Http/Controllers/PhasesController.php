@@ -29,4 +29,25 @@ class PhasesController extends Controller
 
         return view('levels.sportstars',compact('sportstars','reasons','level'));
     }
+
+    public function activatePhase($id){
+        $phase = Phase::findOrFail($id);
+
+        $phase->update([
+            'status' => 1,
+        ]);
+
+        return back()->with('message','Activity Activated Succesfully');
+    }
+
+    public function deactivatePhase($id){
+        $phase = Phase::findOrFail($id);
+
+        $phase->update([
+            'status' => 0,
+        ]);
+
+        return back()->with('message','Activity Dectivated Succesfully');
+    }
+
 }

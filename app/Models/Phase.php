@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Phase extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'created_at'];
+    protected $fillable = ['title','status', 'created_at'];
 }

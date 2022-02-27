@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Phase;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -10,7 +11,9 @@ class SettingsController extends Controller
     public function index(){
         $activities = Activity::all();
 
-        return view('activities.index', compact('activities'));
+        $phases = Phase::all();
+
+        return view('activities.index', compact('activities', 'phases'));
     }
 
     public function activityEdit($id){

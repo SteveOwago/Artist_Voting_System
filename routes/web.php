@@ -42,6 +42,8 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::get('setting/activity', 'SettingsController@index')->name('activities');
     Route::get('setting/activity/edit/{id}', 'SettingsController@activityEdit')->name('activities.edit');
     Route::put('setting/activity/update/{id}', 'SettingsController@activityUpdate')->name('activities.update');
+    Route::post('phase/activate/{id}', 'PhasesController@activatePhase')->name('phase.activate');
+    Route::post('phase/deactivate/{id}', 'PhasesController@deactivatePhase')->name('phase.deactivate');
 
     Route::get('profile/{id}', 'HomeController@profile')->name('profile');
     Route::get('edit_profile/{id}', 'HomeController@edit_profile')->name('edit_profile');
