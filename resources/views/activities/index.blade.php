@@ -14,7 +14,7 @@
                 <div class="row col-sm-12 col-md-10 mx-auto">
                     @forelse ($activities as $activity)
                         <div class="col-sm-12 col-md-6">
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-header text-dark text-center">{{ strtoupper($activity->title) }}</div>
                                 <div class="card-body">
                                     <ul style="list-style: none;">
