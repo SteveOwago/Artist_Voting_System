@@ -30010,7 +30010,7 @@ div.tagsinput span.tag a {
 /* Sidebar */
 .sidebar {
     min-height: calc(100vh - 70px);
-    background: #2C2A23;
+    background: #df9019;
     font-weight: normal;
     padding: 0;
     width: 244px;
@@ -30038,7 +30038,7 @@ div.tagsinput span.tag a {
 }
 
 .sidebar .sidebar-brand-wrapper .sidebar-brand {
-    color: #38425e;
+    color: #000;
     font-size: 1.5rem;
     line-height: 48px;
     margin-right: 0;
@@ -30049,7 +30049,7 @@ div.tagsinput span.tag a {
 .sidebar .sidebar-brand-wrapper .sidebar-brand:active,
 .sidebar .sidebar-brand-wrapper .sidebar-brand:focus,
 .sidebar .sidebar-brand-wrapper .sidebar-brand:hover {
-    color: #252b3e;
+    color: #000;
 }
 
 .sidebar .sidebar-brand-wrapper .sidebar-brand img {
@@ -30125,7 +30125,7 @@ div.tagsinput span.tag a {
     font-size: 1rem;
     line-height: 1;
     margin-left: auto;
-    color: #bba8bff5;
+    color: #000;
 }
 
 .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
@@ -30186,11 +30186,11 @@ div.tagsinput span.tag a {
 }
 
 .sidebar .nav .nav-item.active>.nav-link .menu-title {
-    color: #ffffff;
+    color: #fff;
 }
 
 .sidebar .nav .nav-item.active>.nav-link i {
-    color: #ffffff;
+    color: #fff;
 }
 
 .sidebar .nav .nav-item.nav-profile .nav-link {

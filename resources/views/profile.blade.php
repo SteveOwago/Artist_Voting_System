@@ -29,7 +29,7 @@
                                                 {{-- <li class="list-group-item"><b>Email:</b> {{ $user->email }}</li> --}}
                                                 <li class="list-group-item"><b>Phone:</b> {{ $user->phone }}</li>
                                                 <li class="list-group-item"><b>Registered:</b>
-                                                    {{ $user->created_at->diffForHumans() }} </li>
+                                                    {{ $user->created_at }} </li>
 
                                                 <li class="list-group-item"><b>Region:</b> {{ \DB::table('regions')->where('id',$user->region_id)->value('name') }}</li>
                                                 <li class="list-group-item"><b>Type:</b>

@@ -63,14 +63,6 @@
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="{{route('activities')}}">
-          <span class="menu-icon">
-            <i class="mdi mdi-settings"></i>
-          </span>
-          <span class="menu-title">Activities</span>
-        </a>
-      </li>
       {{-- <li class="nav-item menu-items">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-icon">
@@ -87,7 +79,15 @@
           </ul>
         </div>
       </li> --}}
-      @if(Auth::user()->role_id ==  1)
+      @if(Auth::user()->role_id ==  1 || Auth::user()->role_id ==  4)
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('activities')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-settings"></i>
+          </span>
+          <span class="menu-title">Activities</span>
+        </a>
+      </li>
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('artists')}}">
           <span class="menu-icon">
