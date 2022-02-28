@@ -21,6 +21,8 @@ Auth::routes();
 Route::get('vote', 'IndexController@index')->name('vote');
 Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist');
 Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
+Route::get('voteArtists', 'IndexController@votingArtists')->name('voting.artists');
+Route::get('voteSportstars', 'IndexController@votingSportstars')->name('voting.sportstars');
 
 
 

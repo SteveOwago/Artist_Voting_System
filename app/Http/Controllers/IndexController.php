@@ -56,4 +56,14 @@ class IndexController extends Controller
 
         return back()->with('message', 'Thank You! Vote Submited Sucessfully');
     }
+
+    public function votingArtists(){
+        $artists =  User::where('role_id',2)->where('is_approved',1)->where('phase_id',4)->take(10)->get();
+
+        return view('voting.artists', compact('artists'));
+    }
+    public function votingSportstars(){
+        $sportstars = User::where('role_id',3)->where('is_approved',1)->where('phase_id',4)->take(10)->get();
+        return view('voting.sportstars', compact('sportstars'));
+    }
 }

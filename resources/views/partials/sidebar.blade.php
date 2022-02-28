@@ -1,7 +1,8 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-      <a class="sidebar-brand brand-logo" href="{{ route('home')}}"><h4>{{ env('APP_SHORT_NAME')}}</h4></a>
-      <a class="sidebar-brand brand-logo-mini" href="{{ route('home')}}">{{ env('APP_SHORT_NAME')}}</h4></a>
+        <a class="navbar-brand brand-logo-mini" href="{{route('home')}}">
+            <img src="{{asset('backend/assets/images/logo.png')}}" alt="tusker logo image" height="50px" width="100px" style="border-radius:30%">
+        </a>
     </div>
     <ul class="nav">
       <li class="nav-item profile">
@@ -141,6 +142,9 @@
         <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                                     <span class="menu-icon">
+                                                        <i class="mdi mdi-logout"></i>
+                                                      </span>
                                         {{ __('Logout') }}
                                     </a>
 

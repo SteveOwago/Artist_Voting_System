@@ -1,6 +1,8 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row">
           <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="{{route('home')}}"><h3>{{ env('APP_NAME')}}</h3></a>
+            <a class="navbar-brand brand-logo-mini" href="{{route('home')}}">
+                <img src="{{asset('backend/assets/images/logo.png')}}" alt="tusker logo image">
+            </a>
           </div>
           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -14,7 +16,7 @@
               </li>
             </ul> --}}
             <ul class="navbar-nav navbar-nav-right">
-              @if(Auth::user()->role_id ==  1)
+              @if(Auth::user()->role_id ==  1 || Auth::user()->role_id == 4)
                 <li class="nav-item dropdown d-none d-lg-block">
                   <a class="nav-link btn btn-warning create-new-button" href="{{route('create_judge')}}">+ Add New Judge</a>
                 </li>

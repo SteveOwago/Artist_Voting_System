@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Approve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -14,6 +15,7 @@ use App\Models\Vote;
 use DB;
 use Auth;
 use App\Models\Disapprove;
+use App\Models\Region;
 use App\Utility\SendSMS;
 use Illuminate\Validation\Rules\Password;
 
@@ -39,14 +41,17 @@ class HomeController extends Controller
     {
 
         //Data for homepage dashboard statistics
+        $activities = Activity::all();
         $authuser = User::where('id', \Auth::id())->get();
-        $artists = User::where('role_id', '!=',1)->get();
+        $artists = User::where('role_id',2)->get();
+        $sportstars = User::where('role_id',3)->get();
+        $regions = Region::all();
         $finalistsArtists = User::where('role_id', '!=', 1)->where('is_approved', 1)->where('phase_id', 4)->get();
         $votes = Vote::all();
         $reasons = Reason::all();
 
 
-        return view('home', compact('artists', 'authuser', 'finalistsArtists', 'votes', 'reasons'));
+        return view('home', compact('artists','sportstars', 'authuser', 'finalistsArtists', 'votes', 'reasons','activities','regions'));
     }
     public function artists()
     {
@@ -174,7 +179,7 @@ class HomeController extends Controller
 
         $level_name = DB::table('phases')->where('id',$user->phase_id)->value('title');
         $mobile = $user->phone;
-        $message = "Congratulations $user->name! You Have been Approved for the $level_name stage. Stay Tuned!";
+        $message = "Congratulations $user->name! You Have qualified for Round (X) stage for Tusker Nexters Competition. Stay tuned for details on the next stage. Terms and conditions Apply. Helpline 0721985566.";
 
         $this->sendMessage($mobile,$message);
 
@@ -212,11 +217,11 @@ class HomeController extends Controller
             'artist_id' => $id,
             'action_by' => Auth::id(),
         ]);
-        $level_name = DB::table('phases')->where('id',$user->phase_id)->value('title');
-        $mobile = $user->phone;
-        $message = "Hello, $user->name. We are sorry to announce that you have been disqualified for the competition. Thank You $user->name for participatinng in this activity. We wish you all the best in our next and future contests. Stay Tuned!";
+        // $level_name = DB::table('phases')->where('id',$user->phase_id)->value('title');
+        // $mobile = $user->phone;
+        // $message = "Hello, $user->name. We are sorry to announce that you have been disqualified for the competition. Thank You $user->name for participatinng in this activity. We wish you all the best in our next and future contests. Stay Tuned!";
 
-        $this->sendMessage($mobile,$message);
+        // $this->sendMessage($mobile,$message);
 
         return back()->with('message', 'Operation Successful');
     }
@@ -257,7 +262,7 @@ class HomeController extends Controller
 
             $encodMessage = rawurlencode($message);
 
-                $url = 'https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to='.$mobile.'&from=IMS&sms='.$encodMessage.'&response=json&unicode=0&bulkbalanceuser=voucher';
+                $url = 'https://3.229.54.57/expresssms/Api/send_bulk_api?action=send-sms&api_key=Snh2SGFQT0dIZmFtcRGU9ZXBlcEQ=&to='.$mobile.'&from=EABL&sms='.$encodMessage.'&response=json&unicode=0&bulkbalanceuser=voucher';
 
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

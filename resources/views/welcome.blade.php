@@ -48,7 +48,7 @@
             <div class="row w-100 m-0">
                 <div class="content-wrapper d-flex align-items-center responsive_style">
                     <div class="col-sm-6 col-lg-4 mx-auto">
-                        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+                        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
                             <div class="row text-center" style="margin-bottom: 30%;">
                                 <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
                                     NEXTERS VOTING PLATFORM</h1>
@@ -63,7 +63,7 @@
                                 </a>
                             </div>
                         @endif
-                        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+                        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
                             <div class="row text-center" style="margin-bottom: 30%;">
                                 <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
                                     NEXTERS VOTING PLATFORM</h1>

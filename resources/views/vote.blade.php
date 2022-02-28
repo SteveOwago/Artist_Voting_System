@@ -21,7 +21,7 @@
         /* Media Screen Desktop/Laptop */
         @media only screen and (min-device-width: 1200px) and (max-device-width: 3000px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/web-1920.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/laptop.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -32,7 +32,7 @@
         /* Media Screen Tablet */
         @media only screen and (min-device-width: 500px) and (max-device-width: 1199px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/ipad-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/tablet.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -43,7 +43,7 @@
         /* Media Screen Phone */
         @media only screen and (min-device-width: 200px) and (max-device-width: 499px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/mobile-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/phone.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -68,47 +68,11 @@
                             <div class="col-lg-4"></div>
                             <div class="col-sm-12 col-lg-6 card" style="background: transparent; border:none;">
                                 <div class="row">
-                                    <div class="col-sm-6 col-lg-4 mt-3 mb-3" style="background: transparent;">
-                                        <h4 class="">Artists</h4>
-                                        <ul style="list-style: none;">
-                                            @forelse ($artists as $artist)
-                                                <li>
-                                                    <div class="row">
-                                                        <div class="col-sm-3 mb-1 mt-1"> <a
-                                                                href="{{ route('voteArtist', [$artist->id]) }}"
-                                                                class="btn btn-sm btn-primary">Vote</a></div>
-                                                        <div class="col-sm-3 mb-1 mt-1"> <button
-                                                                class="btn btn-sm btn-info">&nbsp;{{ strtoupper($artist->name) }}&nbsp;</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            @empty
-                                                <li> <span>No Approved Artists yet</span></li>
-                                            @endforelse
-                                        </ul>
+                                    <div class="col-sm-12 col-lg-4 mt-3 mb-3 text-center" style="background: transparent;">
+                                        <h4 class="">Select Category Below</h4>
+                                        <a href="{{route('voting.artists')}}" class="btn btn-primary">Artists</a>
+                                        <a href="{{route('voting.sportstars')}}" class="btn btn-primary">SportStars</a>
                                     </div>
-                                    <div class="col-lg-4"></div>
-                                    <div class="col-sm-6 col-lg-4" style="background: transparent;">
-                                        <h4 class="mb-1">SportStars</h4>
-                                        <ul style="list-style: none;">
-                                            @forelse ($sportstars as $sportstar)
-                                                <li>
-                                                    <div class="row">
-                                                        <div class="col-sm-3 mb-1 mt-1"> <a
-                                                                href="{{ route('voteArtist', [$sportstar->id]) }}"
-                                                                class="btn btn-sm btn-primary">Vote</a></div>
-                                                        <div class="col-sm-3 mb-1 mt-1"> <button
-                                                                class="btn btn-sm btn-info">&nbsp;{{ strtoupper($sportstar->name) }}&nbsp;</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            @empty
-                                                <li> <button class="btn btn-info">&nbsp; No Approved SportStars yet
-                                                        &nbsp;</button></li>
-                                            @endforelse
-                                        </ul>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

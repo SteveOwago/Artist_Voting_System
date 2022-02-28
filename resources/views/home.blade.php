@@ -10,67 +10,113 @@
 @endsection
 @section('content')
     {{-- Dashboard Statistics Section --}}
-    @if (Auth::user()->role_id == 1)
+    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
         <div class="row">
-            <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <div class="d-flex align-items-center align-self-start">
-                                    <h3 class="mb-0">{{ count($artists) }} Artists</h3>
-                                    {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
+            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+                <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="d-flex align-items-center align-self-start">
+                                        <h3 class="mb-0">{{ count($artists) }} Artists</h3>
+                                        {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="icon icon-box-warning">
+                                        <span class="mdi mdi-music icon-item"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="icon icon-box-warning">
-                                    <span class="mdi mdi-music icon-item"></span>
-                                </div>
-                            </div>
+                            <h6 class="text-muted font-weight-normal">Registered Artists</h6>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Registered Artists</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <div class="d-flex align-items-center align-self-start">
-                                    <h3 class="mb-0">{{ count($finalistsArtists) }} Artists and SportStars</h3>
-                                    {{-- <p class="text-muted ml-2 mb-0 font-weight-medium">-2.4%</p> --}}
+                <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="d-flex align-items-center align-self-start">
+                                        <h3 class="mb-0">{{ count($regions) }} Sportstars</h3>
+                                        {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="icon icon-box-warning">
+                                        <span class="mdi mdi-music icon-item"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="icon icon-box-warning">
-                                    <span class="mdi mdi-library-music icon-item"></span>
-                                </div>
-                            </div>
+                            <h6 class="text-muted font-weight-normal">Registered Sportstars</h6>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Finalists</h6>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-9">
-                                <div class="d-flex align-items-center align-self-start">
-                                    <h3 class="mb-0">{{ count($votes) }}</h3>
+                <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="d-flex align-items-center align-self-start">
+                                        <h3 class="mb-0">{{ count($regions) }} Regions</h3>
+                                        {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="icon icon-box-warning">
+                                        <span class="mdi mdi-music icon-item"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="icon icon-box-warning ">
-                                    <span class="mdi mdi-briefcase-check icon-item"></span>
-                                </div>
-                            </div>
+                            <h6 class="text-muted font-weight-normal">Regions</h6>
                         </div>
-                        <h6 class="text-muted font-weight-normal">Total Votes</h6>
                     </div>
                 </div>
-            </div>
+            @endif
+            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+                <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="d-flex align-items-center align-self-start">
+                                        <h3 class="mb-0">{{ count($votes) }}</h3>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="icon icon-box-warning ">
+                                        <span class="mdi mdi-briefcase-check icon-item"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="text-muted font-weight-normal">Total Votes</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="d-flex align-items-center align-self-start">
+                                        <h3 class="mb-0">{{ count($finalistsArtists) }} Artists and SportStars
+                                        </h3>
+                                        {{-- <p class="text-muted ml-2 mb-0 font-weight-medium">-2.4%</p> --}}
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="icon icon-box-warning">
+                                        <span class="mdi mdi-library-music icon-item"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="text-muted font-weight-normal">Finalists</h6>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
         </div>
     @endif
     {{-- End Dashboard Statistics Section --}}
@@ -86,11 +132,11 @@
         </div>
       </div>
     </div> --}}
-        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
             <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
                 <div class="card pt-4">
                     <div class="card-body mb-5">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-md-6 mx-auto">
                                 <div class="card-title text-dark">
                                     <h3>Artists & Sport Stars Registered This Week Per Day</h3>
@@ -113,7 +159,7 @@
                 </div>
             </div>
         @endif
-        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
             <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
                 <div class="card pt-4">
                     <div class="card-body mb-5">
@@ -266,7 +312,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     {{-- Section Racing Bar vote tally --}}
-    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
         <script>
             const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
             // const setBg = () => {
@@ -424,7 +470,7 @@
                 const config_sport = {
                     plugins: [ChartDataLabels],
                     type: 'bar',
-                    data:data_sport,
+                    data: data_sport,
                     options: {
                         indexAxis: 'y',
                         scales: {
@@ -500,7 +546,7 @@
             fetchData();
         </script>
     @endif
-    @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 04)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {

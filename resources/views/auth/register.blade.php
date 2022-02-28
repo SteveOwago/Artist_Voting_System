@@ -30,7 +30,7 @@
 /* Media Screen Tablet */
         @media only screen and (min-device-width: 500px) and (max-device-width: 1199px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/ipad-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/tablet.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -40,7 +40,7 @@
 /* Media Screen Phone */
         @media only screen and (min-device-width: 200px) and (max-device-width: 499px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/mobile-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/phone.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -59,6 +59,26 @@
                     <div class="col-sm-12 col-lg-4 mx-auto" syle="position: relative;">
                         {{-- <div class="card text-center justify-content-center"
                         ></div> --}}
+                        @if (session('message'))
+                            <div class="row mb-2">
+                                <div class="col-lg-12">
+                                    <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                                </div>
+                            </div>
+                        @endif
+                        @if ($errors->count() > 0)
+                            <div class="alert alert-danger">
+                                <ul class="list-unstyled">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="row text-center">
+                            <h3 class="text-dark mb-5">WELCOME TO THE TUSKER
+                                NEXTERS VOTING PLATFORM</h3>
+                        </div>
                         <div class="card" style="background-color: #fafa98;">
                             <div class="card-header text-center">
                                 <h4>Register</h4>
