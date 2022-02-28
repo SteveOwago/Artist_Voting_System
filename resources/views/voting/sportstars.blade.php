@@ -69,33 +69,37 @@
                             <div class="col-sm-12 col-lg-4 mx-auto mt-3 mb-3" style="background: transparent;">
                                 <h2 class="text-center">Sportstars</h2>
                                 <ul style="list-style: none;">
-                                    @forelse ($sportstars as $sportstar)
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <img src="{{ asset('profile_pictures/') . '/' . $sportstar->profile }}"
-                                                        alt="" height="100px" width="100px" style="border-radius: 30%;">
+                                    <div class="col-sm-12mb-2 mt-2" style="background:rgba(253, 174, 3, 0.5)">
+                                        @forelse ($sportstars as $sportstar)
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <img src="{{ asset('profile_pictures/') . '/' . $sportstar->profile }}"
+                                                            alt="" height="50px" width="50px"
+                                                            style="border-radius: 30%;">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <h4 style="color:#fff;">{{ strtoupper($sportstar->name) }}
+                                                        </h4>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <a href="{{ route('votesportstar', [$sportstar->id]) }}"
+                                                            class="btn btn-success">Vote</a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <h4 style="color:#fff;">{{ strtoupper($sportstar->name) }}</h4>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="{{ route('votesportstar', [$sportstar->id]) }}"
-                                                        class="btn btn-success">Vote</a>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-sm-3 mb-1 mt-1"> <a
+                                                {{-- <div class="col-sm-3 mb-1 mt-1"> <a
                                                                 href="{{ route('votesportstar', [$sportstar->id]) }}"
                                                                 class="btn btn-sm btn-primary">Vote</a></div>
                                                         <div class="col-sm-3 mb-1 mt-1"> <button
                                                                 class="btn btn-sm btn-info">&nbsp;{{ strtoupper($sportstar->name) }}&nbsp;</button>
                                                         </div> --}}
 
-                                        </li>
-                                        <hr>
-                                    @empty
-                                        <li style="color:#fff;"> <span>No Approved sportstars yet</span></li>
-                                    @endforelse
+                                            </li>
+                                            <hr>
+                                        @empty
+                                            <li style="color:#fff;"> <span>No Approved sportstars yet</span></li>
+                                        @endforelse
+                                    </div>
                                 </ul>
                             </div>
 

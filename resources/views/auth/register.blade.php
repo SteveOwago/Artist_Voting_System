@@ -20,7 +20,7 @@
 /* Media Screen Desktop/Laptop */
         @media only screen and (min-device-width: 1200px) and (max-device-width: 3000px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/web-1920.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/laptop.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -56,7 +56,7 @@
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="row w-100">
                 <div class="content-wrapper d-flex align-items-center responsive_style">
-                    <div class="col-sm-12 col-lg-4 mx-auto" syle="position: relative;">
+                    <div class="col-sm-12 col-lg-4 mx-auto">
                         {{-- <div class="card text-center justify-content-center"
                         ></div> --}}
                         @if (session('message'))
@@ -95,7 +95,7 @@
 
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>{{ $error }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
@@ -125,7 +125,7 @@
 
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>{{ $error }}</strong>
                                                 </span>
                                             @enderror
                                         </div>

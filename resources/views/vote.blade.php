@@ -64,6 +64,12 @@
                         {{-- <div class="text-center">
                     <a href="{{route('vote')}}" style="background-color: rgb(51, 196, 196);" class="btn btn-lg btn-success"><h4>Vote Now</h4></a>
                 </div> --}}
+                <div class="col-sm-6 mx-auto" style="margin-bottom: 10;">
+                    <div class="row text-center">
+                        <h3 class="text-dark mb-5">WELCOME TO THE TUSKER
+                            NEXTERS VOTING PLATFORM</h3>
+                    </div>
+                </div>
                         <div class="row">
                             <div class="col-lg-4"></div>
                             <div class="col-sm-12 col-lg-6 card" style="background: transparent; border:none;">

@@ -145,7 +145,7 @@
                                                      <span class="menu-icon">
                                                         <i class="mdi mdi-logout"></i>
                                                       </span>
-                                        {{ __('Logout') }}
+                                                      <span class="menu-title"> {{ __('Logout') }}</span>
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

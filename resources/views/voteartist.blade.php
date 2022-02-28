@@ -36,9 +36,12 @@
                 background-size: cover;">
 
                     <div class="col-sm-12 col-lg-4 mx-auto">
+                        <div class="text-center mb-5">
+                            <h3 class="text-dark mb-5">Vote for {{strtoupper($user->name)}}</h3>
+                        </div>
                         <div class="card" style="background-color: #fafa98;">
                             <div class="card-header text-center">
-                                <h4>Complete The form to Submit Your Vote</h4>
+                                <h4>Complete The form</h4>
                             </div>
                             <div class="card-body text-center justify-content-center px-5 py-5">
                                 @if (session('message'))
@@ -115,7 +118,7 @@
                                 @enderror
                             </div> --}}
                                     <div class="form-group">
-                                        <input type="submit" value="Submit" class="btn btn-lg btn-success form-control">
+                                        <input type="submit" value="Vote Now" class="btn btn-lg btn-success">
                                     </div>
                                 </form>
                             </div>

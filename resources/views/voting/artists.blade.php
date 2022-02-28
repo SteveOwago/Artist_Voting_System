@@ -65,36 +65,39 @@
                     <a href="{{route('vote')}}" style="background-color: rgb(51, 196, 196);" class="btn btn-lg btn-success"><h4>Vote Now</h4></a>
                 </div> --}}
                         <div class="row">
-                            <div class="col-sm-12 col-lg-4 mx-auto mt-3 mb-3" style="background: transparent;">
+                            <div class="col-sm-12 col-lg-4 mx-auto mt-3 mb-3">
                                 <h2 class="text-center">Artists</h2>
                                 <ul style="list-style: none;">
-                                    @forelse ($artists as $artist)
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-sm-3">
-                                                    <img src="{{ asset('profile_pictures/') . '/' . $artist->profile }}"
-                                                        alt="" height="100px" width="100px" style="border-radius: 30%;">
+                                    <div class="col-sm-12 mb-2 mt-2" style="background:rgba(243, 167, 3, 0.5)">
+                                        @forelse ($artists as $artist)
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <img src="{{ asset('profile_pictures/') . '/' . $artist->profile }}"
+                                                            alt="" height="50px" width="50px"
+                                                            style="border-radius: 30%;">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <h4 style="color:#fff;">{{ strtoupper($artist->name) }}</h4>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <a href="{{ route('voteArtist', [$artist->id]) }}"
+                                                            class="btn btn-success">Vote</a>
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <h4 style="color:#fff;">{{ strtoupper($artist->name) }}</h4>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a href="{{ route('voteArtist', [$artist->id]) }}"
-                                                        class="btn btn-success">Vote</a>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-sm-3 mb-1 mt-1"> <a
+                                                {{-- <div class="col-sm-3 mb-1 mt-1"> <a
                                                                 href="{{ route('voteArtist', [$artist->id]) }}"
                                                                 class="btn btn-sm btn-primary">Vote</a></div>
                                                         <div class="col-sm-3 mb-1 mt-1"> <button
                                                                 class="btn btn-sm btn-info">&nbsp;{{ strtoupper($artist->name) }}&nbsp;</button>
                                                         </div> --}}
 
-                                        </li>
-                                        <hr>
-                                    @empty
-                                        <li style="color:#fff;"> <span>No Approved Artists yet</span></li>
-                                    @endforelse
+                                            </li>
+                                            <hr>
+                                        @empty
+                                            <li style="color:#fff;"> <span>No Approved Artists yet</span></li>
+                                        @endforelse
+                                    </div>
                                 </ul>
                             </div>
                         </div>

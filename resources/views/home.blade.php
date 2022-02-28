@@ -191,11 +191,11 @@
                             <table class="table table-striped table-hover" id="ArtistTable">
                                 <thead>
                                     <tr>
+                                        <th>Date Registered</th>
                                         <th> Name </th>
                                         {{-- <th>Email</th> --}}
                                         <th>Phone</th>
                                         <th> Status </th>
-                                        <th>Date Registered</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -670,6 +670,9 @@
                 "serverSide": true,
                 "ajax": "{{ route('api.artists.index') }}",
                 "columns": [{
+                        "data": "created_at"
+                    },
+                    {
                         "data": "name"
                     },
                     // { "data": "email"},
@@ -678,9 +681,6 @@
                     },
                     {
                         "data": "is_approved"
-                    },
-                    {
-                        "data": "created_at"
                     },
                     {
                         "data": "action",
