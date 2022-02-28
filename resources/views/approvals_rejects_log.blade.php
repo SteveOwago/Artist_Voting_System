@@ -18,7 +18,7 @@
                             <tr>
                                 <th> Artist/SportStar Name </th>
                                 <th> Status </th>
-                                <th>Action By</th>
+                                <th>Judge Name</th>
                                 <th class="text-center">Date</th>
                             </tr>
                         </thead>

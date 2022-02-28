@@ -15,18 +15,19 @@
                     <table class="table table-striped table-hover display nowrap" id="sportstarTable">
                         <thead>
                             <tr>
+                                <th>Date Registered</th>
                                 <th> Name </th>
                                 {{-- <th>Email</th> --}}
                                 <th>Phone</th>
                                 <th> Status </th>
                                 <th>Level</th>
-                                <th>Date Registered</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($sportstars as $sportstar)
                                 <tr>
+                                    <td class="text-center">{{ $sportstar->created_at }}</td>
                                     <td>{{ $sportstar->name }}</td>
                                     {{-- <td class="text-center">{{ $sportstar->email }}</td> --}}
                                     <td class="text-center">{{ $sportstar->phone }}</td>
@@ -35,7 +36,6 @@
                                     </td>
                                     <td>{{ strtoupper(\DB::table('phases')->where('id', $sportstar->phase_id)->value('title')) }}
                                     </td>
-                                    <td class="text-center">{{ $sportstar->created_at }}</td>
                                     <td class="text-center"><a href="{{ route('profile', [$sportstar->id]) }}"
                                             class="btn btn-sm btn-dark"> View </a> &nbsp;
                                         @if (Auth::user()->role_id == 1 && $sportstar->phase_id != 4)
