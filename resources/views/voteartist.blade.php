@@ -41,7 +41,7 @@
                         </div>
                         <div class="card" style="background-color: #fafa98;">
                             <div class="card-header text-center">
-                                <h4>Complete The form</h4>
+                                <h4>Complete The Form</h4>
                             </div>
                             <div class="card-body text-center justify-content-center px-5 py-5">
                                 @if (session('message'))

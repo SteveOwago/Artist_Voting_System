@@ -71,7 +71,7 @@
                                     <div class="col-sm-12 mb-2 mt-2" style="background:rgba(243, 167, 3, 0.5)">
                                         @forelse ($artists as $artist)
                                             <li>
-                                                <div class="row">
+                                                <div class="row mt-2">
                                                     <div class="col-sm-3">
                                                         <img src="{{ asset('profile_pictures/') . '/' . $artist->profile }}"
                                                             alt="" height="50px" width="50px"
@@ -82,7 +82,7 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <a href="{{ route('voteArtist', [$artist->id]) }}"
-                                                            class="btn btn-success">Vote</a>
+                                                            class="btn btn-success mt-2">Vote</a>
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-sm-3 mb-1 mt-1"> <a

@@ -70,9 +70,10 @@
                                 <h2 class="text-center">Sportstars</h2>
                                 <ul style="list-style: none;">
                                     <div class="col-sm-12mb-2 mt-2" style="background:rgba(253, 174, 3, 0.5)">
+                                        <br>
                                         @forelse ($sportstars as $sportstar)
                                             <li>
-                                                <div class="row">
+                                                <div class="row mt-2 mx-auto">
                                                     <div class="col-sm-3">
                                                         <img src="{{ asset('profile_pictures/') . '/' . $sportstar->profile }}"
                                                             alt="" height="50px" width="50px"
@@ -83,8 +84,8 @@
                                                         </h4>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <a href="{{ route('votesportstar', [$sportstar->id]) }}"
-                                                            class="btn btn-success">Vote</a>
+                                                        <a href="{{ route('voteArtist', [$sportstar->id]) }}"
+                                                            class="btn btn-success mt-2">Vote</a>
                                                     </div>
                                                 </div>
                                                 {{-- <div class="col-sm-3 mb-1 mt-1"> <a
