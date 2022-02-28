@@ -59,6 +59,11 @@
                     <div class="col-sm-12 col-lg-4 mx-auto">
                         {{-- <div class="card text-center justify-content-center"
                         ></div> --}}
+
+                        <div class="row text-center">
+                            <h3 class="mb-5" style=" font-size:50px;font-weight:bold;color:#000;">WELCOME TO THE TUSKER
+                                NEXTERS PLATFORM</h3>
+                        </div>
                         @if (session('message'))
                             <div class="row mb-2">
                                 <div class="col-lg-12">
@@ -75,10 +80,6 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class="row text-center">
-                            <h3 class="text-dark mb-5">WELCOME TO THE TUSKER
-                                NEXTERS VOTING PLATFORM</h3>
-                        </div>
                         <div class="card" style="background-color: #fafa98;">
                             <div class="card-header text-center">
                                 <h4>Register</h4>

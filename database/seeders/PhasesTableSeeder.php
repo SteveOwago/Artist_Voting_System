@@ -18,18 +18,22 @@ class PhasesTableSeeder extends Seeder
             [
                 'id'                 => 1,
                 'title'         => 'Round One',
+                'status'    =>1,
             ],
             [
                 'id'                 => 2,
                 'title'         => 'Round Two',
+                'status'    =>0,
             ],
             [
                 'id'                 => 3,
                 'title'         => 'Semi Final',
+                'status'    =>0,
             ],
             [
                 'id'                 => 4,
                 'title'         => 'Finalist',
+                'status'    =>0,
             ],
         ];
         Phase::insert($phases);

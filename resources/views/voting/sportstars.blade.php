@@ -57,6 +57,13 @@
 <body>
     <div class="container-scroller responsive_style">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="row">
+                <div class="containter">
+                    <div class="col-sm-6 mx-auto text-center">
+                        <img src="{{asset('backend/assets/images/logo.png')}}" alt="Logo">
+                    </div>
+                </div>
+            </div>
             <div class="row w-100">
                 <div class="content-wrapper d-flex align-items-center responsive_style">
 
@@ -66,40 +73,43 @@
                 </div> --}}
                         <div class="row">
 
-                            <div class="col-sm-12 col-lg-4 mx-auto mt-3 mb-3" style="background: transparent;">
+                            <div class="col-sm-12 col-lg-6 mx-auto mt-3 mb-3">
                                 <h2 class="text-center">Sportstars</h2>
                                 <ul style="list-style: none;">
-                                    <div class="col-sm-12mb-2 mt-2" style="background:rgba(253, 174, 3, 0.5)">
+                                    <div class="col-sm-12 mb-2 mt-2" style="background:rgba(243, 167, 3, 0.5)">
                                         <br>
-                                        @forelse ($sportstars as $sportstar)
-                                            <li>
-                                                <div class="row mt-2 mx-auto">
-                                                    <div class="col-sm-3">
-                                                        <img src="{{ asset('profile_pictures/') . '/' . $sportstar->profile }}"
-                                                            alt="" height="50px" width="50px"
-                                                            style="border-radius: 30%;">
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <h4 style="color:#fff;">{{ strtoupper($sportstar->name) }}
-                                                        </h4>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <a href="{{ route('voteArtist', [$sportstar->id]) }}"
-                                                            class="btn btn-success mt-2">Vote</a>
-                                                    </div>
-                                                </div>
-                                                {{-- <div class="col-sm-3 mb-1 mt-1"> <a
-                                                                href="{{ route('votesportstar', [$sportstar->id]) }}"
-                                                                class="btn btn-sm btn-primary">Vote</a></div>
-                                                        <div class="col-sm-3 mb-1 mt-1"> <button
-                                                                class="btn btn-sm btn-info">&nbsp;{{ strtoupper($sportstar->name) }}&nbsp;</button>
-                                                        </div> --}}
+                                        <div class="row mt-2">
+                                            @forelse ($sportstars as $sportstar)
+                                                <div class="col-lg-6 mx-auto">
+                                                    <li>
+                                                        <div class="row mt-2">
+                                                            <div class="col-sm-3">
+                                                                <img src="{{ asset('profile_pictures/') . '/' . $sportstar->profile }}"
+                                                                    alt="" height="50px" width="50px"
+                                                                    style="border-radius: 30%;">
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <h4 style="color:#fff;">{{ strtoupper($sportstar->name) }}
+                                                                </h4>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <a href="{{ route('voteArtist', [$sportstar->id]) }}"
+                                                                    class="btn btn-success mt-2">Vote</a>
+                                                            </div>
+                                                        </div>
+                                                        {{-- <div class="col-sm-3 mb-1 mt-1"> <a
+                                                            href="{{ route('votesportstar', [$sportstar->id]) }}"
+                                                            class="btn btn-sm btn-primary">Vote</a></div>
+                                                    <div class="col-sm-3 mb-1 mt-1"> <button
+                                                            class="btn btn-sm btn-info">&nbsp;{{ strtoupper($sportstar->name) }}&nbsp;</button>
+                                                    </div> --}}
 
-                                            </li>
-                                            <hr>
-                                        @empty
-                                            <li style="color:#fff;"> <span>No Approved sportstars yet</span></li>
-                                        @endforelse
+                                                    </li>
+                                                </div>
+                                            @empty
+                                                <li style="color:#fff;"> <span>No Approved sportstars yet</span></li>
+                                            @endforelse
+                                        </div>
                                     </div>
                                 </ul>
                             </div>

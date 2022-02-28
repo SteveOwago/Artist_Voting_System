@@ -79,8 +79,8 @@
                         @endif
                         <div class="col-sm-12 col-md-10 offset-1">
                             <div class="row text-center">
-                                <h3 class="text-dark mb-5">WELCOME TO THE TUSKER
-                                    NEXTERS VOTING PLATFORM</h3>
+                                <h3 class="mb-5" style=" font-size:50px;font-weight:bold;color:#000;">WELCOME TO THE TUSKER
+                                    NEXTERS PLATFORM</h3>
                             </div>
                             <div class="card" style="background-color: #fafa98;">
                                 <div class="card-header text-center">

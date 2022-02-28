@@ -19,7 +19,7 @@
                             <div class="row">
                                 <div class="col-9">
                                     <div class="d-flex align-items-center align-self-start">
-                                        <h3 class="mb-0">{{ count($artists) }} Artists</h3>
+                                        <h3 class="mb-0"><a href="{{route('artists')}}" style="text-decoration: none;  color:black;">{{ count($artists) }} Artists</a></h3>
                                         {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-9">
                                     <div class="d-flex align-items-center align-self-start">
-                                        <h3 class="mb-0">{{ count($regions) }} Sportstars</h3>
+                                        <h3 class="mb-0"><a href="{{route('sportstars')}}" style="text-decoration: none; color:black;">{{ count($regions) }} Sportstars</a></h3>
                                         {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> --}}
                                     </div>
                                 </div>

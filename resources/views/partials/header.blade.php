@@ -16,7 +16,7 @@
               </li>
             </ul> --}}
             <ul class="navbar-nav navbar-nav-right">
-              @if(Auth::user()->role_id ==  1 || Auth::user()->role_id == 4)
+              @if(Auth::user()->role_id == 4)
                 <li class="nav-item dropdown d-none d-lg-block">
                   <a class="nav-link btn btn-warning create-new-button" href="{{route('create_judge')}}">+ Add New Judge</a>
                 </li>

@@ -80,15 +80,7 @@
           </ul>
         </div>
       </li> --}}
-      @if(Auth::user()->role_id ==  1 || Auth::user()->role_id ==  4)
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="{{route('activities')}}">
-          <span class="menu-icon">
-            <i class="mdi mdi-settings"></i>
-          </span>
-          <span class="menu-title">Activities</span>
-        </a>
-      </li>
+      @if (Auth::user()->role_id ==  1 || Auth::user()->role_id ==  4)
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('artists')}}">
           <span class="menu-icon">
@@ -119,6 +111,16 @@
             <i class="mdi mdi-playlist-check"></i>
           </span>
           <span class="menu-title">Approval Levels</span>
+        </a>
+      </li>
+      @endif
+      @if(Auth::user()->role_id ==  4)
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('activities')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-settings"></i>
+          </span>
+          <span class="menu-title">Activities</span>
         </a>
       </li>
       <li class="nav-item menu-items">

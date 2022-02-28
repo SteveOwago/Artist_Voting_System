@@ -179,7 +179,7 @@ class HomeController extends Controller
 
         $level_name = DB::table('phases')->where('id',$user->phase_id)->value('title');
         $mobile = $user->phone;
-        $message = "Congratulations $user->name! You Have qualified for Round (X) stage for Tusker Nexters Competition. Stay tuned for details on the next stage. Terms and conditions Apply. Helpline 0721985566.";
+        $message = "Congratulations $user->name! You Have qualified for $level_name stage for Tusker Nexters Competition. Stay tuned for details on the next stage. Terms and conditions Apply. Helpline 0721985566.";
 
         $this->sendMessage($mobile,$message);
 
