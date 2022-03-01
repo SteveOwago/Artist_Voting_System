@@ -132,6 +132,16 @@
         </a>
       </li>
       @endif
+      @if (Auth::user()->role_id == 5)
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="{{route('attendance.checklist')}}">
+            <span class="menu-icon">
+                <i class="mdi mdi-checkbox-marked"></i>
+            </span>
+            <span class="menu-title">Attendance Checklist</span>
+            </a>
+        </li>
+      @endif
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('profile',Auth::id())}}">
           <span class="menu-icon">

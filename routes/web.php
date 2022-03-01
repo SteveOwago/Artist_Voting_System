@@ -24,7 +24,10 @@ Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist');
 Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
 Route::get('voteArtists', 'IndexController@votingArtists')->name('voting.artists');
 Route::get('voteSportstars', 'IndexController@votingSportstars')->name('voting.sportstars');
-
+Route::get('attendance/checklist', 'IndexController@checklist')->name('attendance.checklist');
+Route::get('attendance/checklist/{id}', 'IndexController@show')->name('attendance.show');
+Route::get('attendance/checkin/{id}/{activityid}', 'IndexController@checkin')->name('attendance.checkin');
+Route::post('send/registration/sms', 'IndexController@sendRegSMS')->name('send.registration.sms');
 
 
 Route::get('otp', [App\Http\Controllers\OTPController::class, 'index'])->name('otp.index');
@@ -44,6 +47,7 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
 
     Route::get('setting/activity', 'SettingsController@index')->name('activities');
     Route::get('setting/activity/edit/{id}', 'SettingsController@activityEdit')->name('activities.edit');
+    Route::get('setting/activity/show/{id}', 'SettingsController@show')->name('activities.show');
     Route::get('setting/activity/create', 'SettingsController@create')->name('activities.create');
     Route::post('setting/activity/create', 'SettingsController@store')->name('activities.store');
     Route::put('setting/activity/update/{id}', 'SettingsController@activityUpdate')->name('activities.update');

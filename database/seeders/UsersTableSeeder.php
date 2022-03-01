@@ -348,6 +348,19 @@ class UsersTableSeeder extends Seeder
                 'created_at'        => \Carbon\Carbon::now(),
                 'id_number' => mt_rand(10000000,99999999),
             ],
+            [
+                'id'                 => 27,
+                'name'         => 'Attendance Check',
+                'email'              => 'attendance@ims.co.ke',
+                'phone'              => '254708444398',
+                'is_approved'        => 1,
+                'role_id'              => 5,
+                'password'           => bcrypt('password'),
+                'remember_token'     => null,
+                'email_verified_at'        => \Carbon\Carbon::now(),
+                'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
+            ],
         ];
 
         User::insert($users);
