@@ -546,7 +546,7 @@
             fetchData();
         </script>
     @endif
-    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 04)
+    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {

@@ -9,15 +9,14 @@
     <div class="col-sm-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title text-dark">Edit Activity: {{strtoupper($activity->title)}}</h4>
+                <h4 class="card-title text-dark">Add Activity</h4>
                 <div class="row col-sm-12 col-md-10 mx-auto">
                     <div class="card-body">
-                        <form action="{{route('activities.update',[$activity->id])}}" method="post">
-                            @method('put')
+                        <form action="{{route('activities.store')}}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="">Activity Title</label>
-                                <input class="form-control" type="text" name="title" id="" value="{{$activity->title}}" required>
+                                <input class="form-control" type="text" name="title" id="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Activity Region</label>
@@ -50,15 +49,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Venue</label>
-                                <input class="form-control" type="text" name="venue" id="" value="{{$activity->venue}}" required>
+                                <input class="form-control" type="text" name="venue" id="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Start Date</label>
-                                <input class="form-control" type="datetime-local" name="start_date" id="" value="{{$activity->start_date}}" required>
+                                <input class="form-control" type="datetime-local" name="start_date" id="" required>
                             </div>
                             <div class="form-group">
                                 <label for="">End Date</label>
-                                <input class="form-control" type="datetime-local" name="end_date" value="{{$activity->end_date}}" id="" required>
+                                <input class="form-control" type="datetime-local" name="end_date" id="" required>
                             </div>
 
                             <div class="form-group">
