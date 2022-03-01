@@ -24,11 +24,13 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
+        'id_number',
         'is_approved',
         'role_id',
         'profile',
         'phase_id',
         'region_id',
+        'activity_id',
         'password',
     ];
 

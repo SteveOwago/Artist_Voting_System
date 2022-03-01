@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 2,
@@ -33,6 +34,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 3,
@@ -45,6 +47,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 4,
@@ -57,6 +60,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 5,
@@ -69,6 +73,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 6,
@@ -81,6 +86,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 7,
@@ -93,6 +99,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 8,
@@ -105,6 +112,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 9,
@@ -117,6 +125,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 10,
@@ -129,6 +138,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 11,
@@ -141,6 +151,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 12,
@@ -153,6 +164,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 13,
@@ -165,6 +177,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 14,
@@ -177,6 +190,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 15,
@@ -189,6 +203,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 16,
@@ -201,6 +216,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 17,
@@ -213,6 +229,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 18,
@@ -225,6 +242,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 19,
@@ -237,6 +255,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 20,
@@ -249,6 +268,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 21,
@@ -261,6 +281,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 22,
@@ -273,6 +294,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 23,
@@ -285,6 +307,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 24,
@@ -297,6 +320,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 25,
@@ -309,6 +333,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
             [
                 'id'                 => 26,
@@ -321,6 +346,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token'     => null,
                 'email_verified_at'        => \Carbon\Carbon::now(),
                 'created_at'        => \Carbon\Carbon::now(),
+                'id_number' => mt_rand(10000000,99999999),
             ],
         ];
 

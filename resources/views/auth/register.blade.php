@@ -17,7 +17,8 @@
         input::placeholder {
             color: rgb(252, 244, 244);
         }
-/* Media Screen Desktop/Laptop */
+
+        /* Media Screen Desktop/Laptop */
         @media only screen and (min-device-width: 1200px) and (max-device-width: 3000px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
                 background: url("{{ asset('frontend/images/laptop.png') }}") no-repeat center fixed;
@@ -27,7 +28,8 @@
                 background-size: cover;
             }
         }
-/* Media Screen Tablet */
+
+        /* Media Screen Tablet */
         @media only screen and (min-device-width: 500px) and (max-device-width: 1199px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
                 background: url("{{ asset('frontend/images/tablet.png') }}") no-repeat center fixed;
@@ -37,7 +39,8 @@
                 background-size: cover;
             }
         }
-/* Media Screen Phone */
+
+        /* Media Screen Phone */
         @media only screen and (min-device-width: 200px) and (max-device-width: 499px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
                 background: url("{{ asset('frontend/images/phone.png') }}") no-repeat center fixed;
@@ -61,7 +64,8 @@
                         ></div> --}}
 
                         <div class="row text-center">
-                            <h3 class="mb-5" style=" font-size:50px;font-weight:bold;color:#000;">WELCOME TO THE TUSKER
+                            <h3 class="mb-5" style=" font-size:50px;font-weight:bold;color:#000;">WELCOME TO
+                                THE TUSKER
                                 NEXTERS PLATFORM</h3>
                         </div>
                         @if (session('message'))
@@ -85,7 +89,7 @@
                                 <h4>Register</h4>
                             </div>
                             <div class="card-body text-center justify-content-center px-5 py-5">
-                                <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('register_user') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="col-sm-12">
@@ -94,28 +98,28 @@
                                                 value="{{ old('name') }}" required autocomplete="name"
                                                 placeholder="FirstName LastName" autofocus>
 
-                                            @error('name')
+                                            {{-- @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $error }}</strong>
                                                 </span>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
                                     </div>
 
-                                    {{-- <div class="row mb-3">
+                                    <div class="row mb-3">
                                         <div class="col-sm-12">
-                                            <input id="email" type="email"
-                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="{{ old('email') }}" required placeholder="somebody@example.com"
-                                                autocomplete="email">
+                                            <input id="id_number" type="id_number"
+                                                class="form-control @error('id_number') is-invalid @enderror"
+                                                name="id_number" required
+                                                placeholder="ID NUMBER" autocomplete="id_number">
 
-                                            @error('email')
+                                            {{-- @error('id_number')
                                                 <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                                    <strong>{{ $error }}</strong>
                                                 </span>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
-                                    </div> --}}
+                                    </div>
 
                                     <div class="row mb-3">
                                         <div class="col-sm-12">
@@ -124,11 +128,11 @@
                                                 value="{{ old('phone') }}" required placeholder="2547XXXXXXXX"
                                                 autocomplete="phone">
 
-                                            @error('phone')
+                                            {{-- @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $error }}</strong>
                                                 </span>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -138,6 +142,17 @@
                                                 @foreach ($regions as $region)
                                                     <option value="{{ $region->id }}">
                                                         {{ strtoupper($region->name) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-12">
+                                            <select name="activity_id" class="form-control" required>
+                                                <option selected disabled>---Select Activity/Audition---</option>
+                                                @foreach ($activities as $activity)
+                                                    <option value="{{ $activity->id }}">
+                                                        {{ strtoupper($activity->title) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

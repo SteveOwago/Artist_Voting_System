@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::post('register_user', 'Auth\RegisterController@registerUser')->name('register_user');
 Route::get('vote', 'IndexController@index')->name('vote');
 Route::get('vote/{id}', 'IndexController@vote')->name('voteArtist');
 Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');

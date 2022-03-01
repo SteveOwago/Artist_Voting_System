@@ -41,10 +41,10 @@ class HomeController extends Controller
     {
 
         //Data for homepage dashboard statistics
-        $activities = Activity::all()->sortByDesc('id');
+        $activities = Activity::all();
         $authuser = User::where('id', \Auth::id())->get();
-        $artists = User::where('role_id',2)->sortByDesc('id')->get();
-        $sportstars = User::where('role_id',3)->sortByDesc('id')->get();
+        $artists = User::where('role_id',2)->get();
+        $sportstars = User::where('role_id',3)->get();
         $regions = Region::all();
         $finalistsArtists = User::where('role_id', '!=', 1)->where('is_approved', 1)->where('phase_id', 4)->get();
         $votes = Vote::all();
@@ -55,7 +55,7 @@ class HomeController extends Controller
     }
     public function artists()
     {
-        $artists = User::where('role_id', 2)->sortByDesc('id')->get();
+        $artists = User::where('role_id', 2)->get();
         $reasons = Reason::all();
         return view('artists', compact('artists', 'reasons'));
     }

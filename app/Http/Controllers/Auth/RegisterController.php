@@ -53,9 +53,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'min:12','integer','unique:users'],
+            'phone' => ['required', 'min:12','integer'],
+            'id_number' => ['required', 'min:8','integer'],
             'region_id' => ['required', 'integer'],
             'role_id' => ['required', 'integer'],
+            'activity_id' => ['required','integer'],
             'consent' => ['required','accepted'],
         ],
         [
@@ -72,11 +74,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'phone' => $data['phone'],
-            'region_id' => $data['region_id'],
-            'role_id' => $data['role_id'],
+        $user = User::updateOrCreate([
+            ['id_number' => $data['id_number']],
+            ['name' => $data['name']],
+            ['phone' => $data['phone']],
+            ['region_id' => $data['region_id']],
+            ['activity_id' => $data['activity_id']],
+            ['role_id' => $data['role_id']],
         ]);
 
         $region = \DB::table('regions')->where('id',$user->region_id)->value('name');
@@ -86,6 +90,54 @@ class RegisterController extends Controller
         $this->sendMessage($mobile,$message);
 
         return $user;
+
+    }
+
+
+    public function registerUser(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'numeric|digits:12',
+            'id_number' => 'numeric|digits:8',
+            'region_id' => 'required|integer',
+            'role_id' => 'required|integer',
+            'activity_id' => 'required|integer',
+            'consent' => 'required|accepted',
+        ]);
+        // $validator = Validator::make($request->all(), [
+        //         'name' => 'required|string|max:255',
+        //         'phone' => 'min:12',
+        //         'id_number' => 'numeric|min:8',
+        //         'region_id' => 'required|integer',
+        //         'role_id' => 'required|integer',
+        //         'activity_id' => 'required|integer',
+        //         'consent' => 'required|accepted',
+        //     ]);
+
+        // if ($validator->fails()) {
+        //      \Session::flash('errors', $validator->messages()->first());
+        //      return redirect()->back()->withInput();
+        // }
+        $user = User::updateOrCreate(
+            ['id_number' => $request->id_number],
+            ['name' => $request->name],
+            ['phone' => $request->phone],
+            ['region_id' => $request->region_id],
+            ['activity_id' => $request->activity_id],
+            ['role_id' => $request->role_id],
+        );
+
+        $activity = \DB::table('activities')->where('id',$user->activity_id)->value('title');
+        $activityStartDate = \DB::table('activities')->where('id',$user->activity_id)->value('start_date');
+        $venue = \DB::table('activities')->where('id',$user->activity_id)->value('venue');
+
+        $region = \DB::table('regions')->where('id',$user->region_id)->value('name');
+        $mobile = $user->phone;
+        $message = "Thank you $user->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for $activity auditions scheduled on $activityStartDate, at $venue . See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
+
+        $this->sendMessage($mobile,$message);
+
+        return back()->with('message','Thank You for registering to our Platform');
 
     }
     public function sendMessage($mobile, $message){
@@ -126,4 +178,5 @@ class RegisterController extends Controller
             return redirect()->back()->with('errors','Something Went Wrong. Please Check the Supplied Phone Number or Your Network Connectivity Status.');
         }
     }
+
 }
