@@ -69,7 +69,7 @@ class User extends Authenticatable
         );
 
         $receiverNumber = auth()->user()->phone;
-        $message = "2FA login code is ". $code;
+        $message = "OTP login code is ". $code;
 
         try{
 

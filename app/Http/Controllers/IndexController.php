@@ -107,7 +107,7 @@ class IndexController extends Controller
         ]);
         $regUrl = URL::to('/register');
         $mobile = $request->phone;
-        $message = "Thank you for showing up for this event. Please use the link provided to register accordingly for this event:  $regUrl";
+        $message = "Thank you for comming to this event. Please use the link provided to register accordingly for this event:  $regUrl";
 
         $this->sendMessage($mobile, $message);
 

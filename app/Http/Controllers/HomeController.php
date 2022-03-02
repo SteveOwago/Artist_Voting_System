@@ -83,7 +83,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'integer', 'min:12', 'unique:users'],
+            'phone' => ['required', 'integer', 'digits:12', 'unique:users'],
             'password' => ['required', 'string', Password::min(8)->mixedCase()->symbols()->uncompromised(), 'confirmed'],
         ]);
 
@@ -122,7 +122,7 @@ class HomeController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             //'email' => 'required|string|email|max:255',
-            'phone' => 'required|integer|min:12',
+            'phone' => 'required|numeric|digits:12',
         ]);
 
 
