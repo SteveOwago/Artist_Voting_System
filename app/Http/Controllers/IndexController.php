@@ -84,7 +84,7 @@ class IndexController extends Controller
     public function show($id)
     {
 
-        $participants = User::where('activity_id', $id)->get();
+        $participants = User::where('activity_id', $id)->where('role_id','!=',1)->where('role_id','!=',4)->where('role_id','!=',5)->get();
         $activityName = \DB::table('activities')->where('id', $id)->value('title');
         $activityID =   \DB::table('activities')->where('id', $id)->value('id');
 

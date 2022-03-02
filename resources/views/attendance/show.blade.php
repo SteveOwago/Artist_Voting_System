@@ -62,6 +62,7 @@
                                 <th> Name </th>
                                 {{-- <th>Email</th> --}}
                                 <th>Phone</th>
+                                <th>ID Number</th>
                                 <th> Status </th>
                                 <th>Level</th>
                                 <th class="text-center">Actions</th>
@@ -74,6 +75,7 @@
                                     <td>{{ $participant->name }}</td>
                                     {{-- <td class="text-center">{{ $participant->email }}</td> --}}
                                     <td class="text-center">{{ $participant->phone }}</td>
+                                    <td class="text-center">{{ $participant->id_number }}</td>
                                     <td class="text-center">
                                         {{ $participant->is_approved == '1' ? 'Approved' : 'Not Approved' }}
                                     </td>
