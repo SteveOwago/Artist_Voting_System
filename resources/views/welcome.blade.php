@@ -171,6 +171,9 @@
                 alert('This website is not for Minors. You have to be 18 years and above to use this website!');
             }
         }
+        do {
+            checkCookie();
+        } while (document.cookie);
     </script>
 </body>
 

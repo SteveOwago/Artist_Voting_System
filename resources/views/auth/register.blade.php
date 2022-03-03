@@ -214,9 +214,9 @@
                                             <button type="submit" class="btn btn-warning">
                                                 {{ __('Register') }}
                                             </button>
-                                            &nbsp; <a class="btn btn-link" href="{{ route('login') }}">
+                                            {{-- &nbsp; <a class="btn btn-link" href="{{ route('login') }}">
                                                 {{ __('Login?') }}
-                                            </a>
+                                            </a> --}}
                                         </div>
                                     </div>
                                 </form>
