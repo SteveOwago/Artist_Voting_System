@@ -49,19 +49,19 @@
                 <div class="content-wrapper d-flex align-items-center responsive_style">
                     <div class="col-sm-6 col-lg-4 mx-auto">
                         {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
-                            <div class="row text-center" style="margin-bottom: 30%;">
-                                <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
-                                    NEXTERS PLATFORM</h1>
-                                <h4 style="font-size:30px;font-weight:500;">To Register and Participate click the button
-                                    below</h4>
-                            </div>
-                            <div class="text-center">
-                                <a href="{{ route('register') }}"
-                                    style="background-color: rgb(51, 196, 196);border-radius:20px;"
-                                    class="btn btn-lg btn-success">
-                                    <h4>Register</h4>
-                                </a>
-                            </div>
+                        <div class="row text-center" style="margin-bottom: 30%;">
+                            <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
+                                NEXTERS PLATFORM</h1>
+                            <h4 style="font-size:30px;font-weight:500;">To Register and Participate click the button
+                                below</h4>
+                        </div>
+                        <div class="text-center">
+                            <a href="{{ route('register') }}"
+                                style="background-color: rgb(51, 196, 196);border-radius:20px;"
+                                class="btn btn-lg btn-success">
+                                <h4>Register</h4>
+                            </a>
+                        </div>
                         {{-- @endif --}}
                         {{-- @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
                             <div class="row text-center" style="margin-bottom: 30%;">
@@ -89,14 +89,14 @@
     </div>
 
     <div class="modal fade" id="ageConsent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+        aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog  modal-dialog-centered" role="document">
             <div class="modal-content" style="background-color: #fafa98;">
                 <div class="modal-header text-center" style="border:none;">
                     <h3 class="modal-title text-dark" id="exampleModalLabel">Can You Show Us Some ID?</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> --}}
                 </div>
                 <form action="#">
                     <div class="modal-body text-dark" style="border:none;">
@@ -113,7 +113,6 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="border:none;">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" onclick="consent();" data-dismiss="modal"
                             class="btn btn-primary">Submit</button>
                     </div>
@@ -143,11 +142,14 @@
 
             if (age < 18) {
                 setCookie(17, "dfjgheirufIUhfbiesd374834xhj:fjd", 1);
-                alert('This website is not for Minors. You have to be 18 years and above to use this website!');
+                const cookie1 = getCookie(17);
+                console.log(cookie1);
+                do {
+                    alert('This website is not for Minors. You have to be 18 years and above to use this website!');
+                } while (cookie1 == "dfjgheirufIUhfbiesd374834xhj:fjd");
             } else {
                 eraseCookie(17);
             }
-
         }
 
         function setCookie(key, value, expiry) {
@@ -166,16 +168,12 @@
             setCookie(key, keyValue, '-1');
         }
 
+
         function checkCookie() {
-            if (document.cookie) {
+            if (cookie1 != null) {
                 alert('This website is not for Minors. You have to be 18 years and above to use this website!');
             }
         }
-        const cookie1 = getCookie(17);
-        console.log(cookie1);
-        do {
-            checkCookie();
-        } while (document.cookie == cookie1 );
     </script>
 </body>
 

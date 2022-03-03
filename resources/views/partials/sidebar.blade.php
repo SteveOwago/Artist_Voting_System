@@ -94,7 +94,7 @@
           <span class="menu-icon">
             <i class="mdi mdi-controller-classic"></i>
           </span>
-          <span class="menu-title">Sport Stars</span>
+          <span class="menu-title">SportStars</span>
         </a>
       </li>
       <li class="nav-item menu-items">

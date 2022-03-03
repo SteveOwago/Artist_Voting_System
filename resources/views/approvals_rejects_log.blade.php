@@ -28,7 +28,7 @@
                                     <td>{{ strtoupper(\DB::table('users')->where('id', $log->artist_id)->value('name')) }}
                                     </td>
                                     <td>
-                                        {{ isset($log->action_by) ? 'Approved' : 'Disapproved' }}
+                                        {{ isset($log->approved_by) ? 'Approved' : 'Disapproved' }}
                                     </td>
                                     <td>{{ strtoupper(\DB::table('users')->where('id', isset($log->action_by) ? $log->action_by : $log->approved_by)->value('name')) }}
                                     </td>
