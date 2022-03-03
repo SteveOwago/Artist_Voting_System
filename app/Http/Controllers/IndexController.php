@@ -105,7 +105,8 @@ class IndexController extends Controller
         $request->validate([
             'phone' => 'required|numeric|digits:12'
         ]);
-        $regUrl = URL::to('/register');
+        //$regUrl = URL::to('/register');
+        $regUrl = 'http://nexters.beer/register';
         $mobile = $request->phone;
         $message = "Thank you for comming to this event. Please use the link provided to register accordingly for this event:  $regUrl";
 

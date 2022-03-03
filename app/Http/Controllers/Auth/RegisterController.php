@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
+use DB;
 
 class RegisterController extends Controller
 {
@@ -97,13 +98,15 @@ class RegisterController extends Controller
     public function registerUser(Request $request){
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'numeric|digits:12',
-            'id_number' => 'numeric|digits:8',
+            'phone' => 'required|integer|digits:12',
+            'id_number' => 'required|numeric|digits:8',
             'region_id' => 'required|integer',
             'role_id' => 'required|integer',
             'activity_id' => 'required|integer',
             'consent' => 'required|accepted',
         ]);
+
+
         // $validator = Validator::make($request->all(), [
         //         'name' => 'required|string|max:255',
         //         'phone' => 'min:12',
@@ -118,22 +121,24 @@ class RegisterController extends Controller
         //      \Session::flash('errors', $validator->messages()->first());
         //      return redirect()->back()->withInput();
         // }
-        $user = User::updateOrCreate(
+        $user = DB::table('users')->updateOrInsert(
             ['id_number' => $request->id_number],
-            ['name' => $request->name],
-            ['phone' => $request->phone],
-            ['region_id' => $request->region_id],
-            ['activity_id' => $request->activity_id],
-            ['role_id' => $request->role_id],
+            ['name' => $request->name,
+            'phone' => $request->phone,
+            'region_id' => $request->region_id,
+            'activity_id' => $request->activity_id,
+            'role_id' => $request->role_id,
+            'created_at' => \Carbon\Carbon::now()]
         );
 
-        $activity = \DB::table('activities')->where('id',$user->activity_id)->value('title');
-        $activityStartDate = \DB::table('activities')->where('id',$user->activity_id)->value('start_date');
-        $venue = \DB::table('activities')->where('id',$user->activity_id)->value('venue');
+        $activity = \DB::table('activities')->where('id',$request->activity_id)->value('title');
+        $activityStartDate = \DB::table('activities')->where('id',$request->activity_id)->value('start_date');
+        $venue = \DB::table('activities')->where('id',$request->activity_id)->value('venue');
 
-        $region = \DB::table('regions')->where('id',$user->region_id)->value('name');
-        $mobile = $user->phone;
-        $message = "Thank you $user->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for $activity auditions scheduled on $activityStartDate, at $venue . See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
+        $region = \DB::table('regions')->where('id',$request->region_id)->value('name');
+        $mobile = $request->phone;
+        //dd($request->phone);
+        $message = "Thank you $request->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for $activity auditions scheduled on $activityStartDate, at $venue . See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
 
         $this->sendMessage($mobile,$message);
 
