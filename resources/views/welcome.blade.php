@@ -8,7 +8,7 @@
         /* Media Screen Desktop/Laptop */
         @media only screen and (min-device-width: 1200px) and (max-device-width: 3000px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/web-1920.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/laptop.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -19,7 +19,7 @@
         /* Media Screen Tablet */
         @media only screen and (min-device-width: 500px) and (max-device-width: 1199px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/ipad-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/tablet.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -30,7 +30,7 @@
         /* Media Screen Phone */
         @media only screen and (min-device-width: 200px) and (max-device-width: 499px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/mobile-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/phone.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -48,7 +48,7 @@
             <div class="row w-100 m-0">
                 <div class="content-wrapper d-flex align-items-center responsive_style">
                     <div class="col-sm-6 col-lg-4 mx-auto">
-                        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+                        {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
                             <div class="row text-center" style="margin-bottom: 30%;">
                                 <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
                                     NEXTERS PLATFORM</h1>
@@ -62,8 +62,8 @@
                                     <h4>Register</h4>
                                 </a>
                             </div>
-                        @endif
-                        @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+                        {{-- @endif --}}
+                        {{-- @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
                             <div class="row text-center" style="margin-bottom: 30%;">
                                 <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
                                     NEXTERS VOTING PLATFORM</h1>
@@ -76,7 +76,7 @@
                                     <h4>Vote Now</h4>
                                 </a>
                             </div>
-                        @endif
+                        @endif --}}
                         {{-- <div class="card-body px-5 py-5">
                         </div> --}}
                     </div>
@@ -171,9 +171,11 @@
                 alert('This website is not for Minors. You have to be 18 years and above to use this website!');
             }
         }
+        const cookie1 = getCookie(17);
+        console.log(cookie1);
         do {
             checkCookie();
-        } while (document.cookie);
+        } while (document.cookie == cookie1 );
     </script>
 </body>
 

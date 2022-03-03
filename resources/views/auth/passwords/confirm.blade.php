@@ -65,22 +65,44 @@
         input::placeholder {
             color: rgb(252, 244, 244);
         }
+        /* Media Screen Desktop/Laptop */
+        @media only screen and (min-device-width: 1200px) and (max-device-width: 3000px) and (-webkit-min-device-pixel-ratio: 1) {
+            .responsive_style {
+                background: url("{{ asset('frontend/images/laptop.png') }}") no-repeat center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        }
+/* Media Screen Tablet */
+        @media only screen and (min-device-width: 500px) and (max-device-width: 1199px) and (-webkit-min-device-pixel-ratio: 1) {
+            .responsive_style {
+                background: url("{{ asset('frontend/images/tablet.png') }}") no-repeat center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        }
+/* Media Screen Phone */
+        @media only screen and (min-device-width: 200px) and (max-device-width: 499px) and (-webkit-min-device-pixel-ratio: 1) {
+            .responsive_style {
+                background: url("{{ asset('frontend/images/phone.png') }}") no-repeat center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-scroller" style="background: url({{ asset('frontend/images/landing_page.png') }}) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;">
+    <div class="container-scroller responsive_style">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="row w-100">
-                <div class="content-wrapper d-flex align-items-center" style="background: url({{ asset('frontend/images/landing_page.png') }}) no-repeat center center fixed;
-                -webkit-background-size: cover;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                background-size: cover;">
+                <div class="content-wrapper d-flex align-items-center responsive_style">
 
                     <div class="col-sm-12 col-lg-6 mx-auto">
                         @if(session('message'))

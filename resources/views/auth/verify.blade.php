@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +49,7 @@
         /* Media Screen Desktop/Laptop */
         @media only screen and (min-device-width: 1200px) and (max-device-width: 3000px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/web-1920.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/laptop.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -59,7 +59,7 @@
 /* Media Screen Tablet */
         @media only screen and (min-device-width: 500px) and (max-device-width: 1199px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/ipad-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/tablet.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
@@ -69,7 +69,7 @@
 /* Media Screen Phone */
         @media only screen and (min-device-width: 200px) and (max-device-width: 499px) and (-webkit-min-device-pixel-ratio: 1) {
             .responsive_style {
-                background: url("{{ asset('frontend/images/mobile-view.png') }}") no-repeat center fixed;
+                background: url("{{ asset('frontend/images/phone.png') }}") no-repeat center fixed;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
                 -o-background-size: cover;
