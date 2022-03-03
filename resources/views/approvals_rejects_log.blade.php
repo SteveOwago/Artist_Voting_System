@@ -16,7 +16,7 @@
                     <table class="table table-striped table-hover display nowrap" id="ArtistTable">
                         <thead>
                             <tr>
-                                <th> Artist/SportStar Name </th>
+                                <th> Artist/E-Gamer Name </th>
                                 <th> Status </th>
                                 <th>Judge Name</th>
                                 <th class="text-center">Date</th>

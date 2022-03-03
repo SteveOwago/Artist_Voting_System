@@ -8,7 +8,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title text-dark">All receptionists</h4>
+                <h4 class="card-title text-dark">All Receptionists</h4>
                 <div class="col-lg-10 offset-1 table-responsive">
                     <table class="table table-striped table-hover" id="receptionistsTable">
                         <thead>

@@ -25,7 +25,7 @@ class RolesTableSeeder extends Seeder
             ],
             [
                 'id'                 => 3,
-                'title'         => 'Sportstar',
+                'title'         => 'E-Gamer',
             ],
 
         ];

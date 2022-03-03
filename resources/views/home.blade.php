@@ -12,7 +12,7 @@
     {{-- Dashboard Statistics Section --}}
     @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
         <div class="row">
-            @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+            {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
                 <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -73,8 +73,8 @@
                         </div>
                     </div>
                 </div>
-            @endif
-            @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+            {{-- @endif --}}
+            {{-- @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
                 <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
@@ -103,7 +103,7 @@
                                         <h3 class="mb-0">{{ count($finalistsArtists) }} Artists and SportStars
                                         </h3>
                                         {{-- <p class="text-muted ml-2 mb-0 font-weight-medium">-2.4%</p> --}}
-                                    </div>
+                                    {{-- </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="icon icon-box-warning">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
 
         </div>
     @endif
@@ -132,7 +132,7 @@
         </div>
       </div>
     </div> --}}
-        @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+        {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
             <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
                 <div class="card pt-4">
                     <div class="card-body mb-5">
@@ -158,7 +158,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        {{-- @endif --}}
         {{-- @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
             <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
                 <div class="card pt-4">
@@ -546,7 +546,7 @@
             fetchData();
         </script>
     @endif --}}
-    @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03)
+    {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
         <script>
             const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
             const setBg = () => {
@@ -650,7 +650,7 @@
             }
             fetchData();
         </script>
-    @endif
+    {{-- @endif --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
