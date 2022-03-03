@@ -61,7 +61,7 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::get('edit_profile/{id}', 'HomeController@edit_profile')->name('edit_profile');
     Route::put('edit_profile/{id}', 'HomeController@update_profile')->name('update_profile');
 
-    Route::post('approve/{id}','HomeController@approve')->name('approve');
+    Route::get('approve/{id}','HomeController@approve')->name('approve');
     Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove');
     Route::delete('delete/{id}','HomeController@delete_artist')->name('delete');
 

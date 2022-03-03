@@ -39,16 +39,14 @@
                                     <td class="text-center"><a href="{{ route('profile', [$sportstar->id]) }}"
                                             class="btn btn-sm btn-dark"> View </a> &nbsp;
                                         @if (Auth::user()->role_id == 1 && $sportstar->phase_id != 4)
-                                            <a class="btn btn-sm btn-warning" href="{{ route('approve', [$sportstar->id]) }}"
-                                                onclick="event.preventDefault();
-                                                                                document.getElementById('approve').submit();">
+                                            <a class="btn btn-sm btn-warning" href="{{ route('approve', [$sportstar->id]) }}">
                                                 Approve
                                             </a>
 
-                                            <form id="approve" action="{{ route('approve', [$sportstar->id]) }}"
+                                            {{-- <form id="approve" action="{{ route('approve', [$sportstar->id]) }}"
                                                 method="POST" class="d-none">
                                                 @csrf
-                                            </form>
+                                            </form> --}}
                                         @endif
                                         @if (Auth::user()->role_id == 1)
                                             <a class="btn btn-sm btn-danger" data-toggle="modal"
