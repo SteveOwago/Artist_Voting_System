@@ -106,6 +106,14 @@
         </a>
       </li>
       <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('receptionists')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-account-network"></i>
+          </span>
+          <span class="menu-title">Receptionists</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('levels')}}">
           <span class="menu-icon">
             <i class="mdi mdi-playlist-check"></i>

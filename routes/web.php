@@ -42,8 +42,11 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::get('artists', 'HomeController@artists')->name('artists');
     Route::get('sportstars', 'HomeController@sportstars')->name('sportstars');
     Route::get('judges', 'HomeController@judges')->name('judges');
+    Route::get('receptionists', 'HomeController@receptionists')->name('receptionists');
     Route::get('judges/create', 'HomeController@create_judge')->name('create_judge');
     Route::post('judges/create', 'HomeController@add_judge')->name('add_judge');
+    Route::get('receptionists/create', 'HomeController@create_receptionist')->name('create_receptionist');
+    Route::post('receptionists/create', 'HomeController@add_receptionist')->name('add_receptionist');
 
     Route::get('setting/activity', 'SettingsController@index')->name('activities');
     Route::get('setting/activity/edit/{id}', 'SettingsController@activityEdit')->name('activities.edit');

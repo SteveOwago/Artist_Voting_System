@@ -97,7 +97,38 @@ class HomeController extends Controller
 
         return back()->with('message', 'Judge Added Sucessfully');
     }
+    public function receptionists()
+    {
+        $receptionists = User::where('role_id', 5)->get();
+        return view('receptionists', compact('receptionists'));
+    }
 
+    public function create_receptionist()
+    {
+
+        return view('create_receptionist');
+    }
+
+    public function add_receptionist(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'integer', 'digits:12', 'unique:users'],
+            'password' => ['required', 'string', Password::min(8)->mixedCase()->symbols()->uncompromised(), 'confirmed'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role_id' => 5,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return back()->with('message', 'Receptionist Added Sucessfully');
+    }
     public function profile($id)
     {
 

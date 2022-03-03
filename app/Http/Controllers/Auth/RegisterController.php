@@ -73,26 +73,26 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        $user = User::updateOrCreate([
-            ['id_number' => $data['id_number']],
-            ['name' => $data['name']],
-            ['phone' => $data['phone']],
-            ['region_id' => $data['region_id']],
-            ['activity_id' => $data['activity_id']],
-            ['role_id' => $data['role_id']],
-        ]);
+    // protected function create(array $data)
+    // {
+    //     $user = User::updateOrCreate([
+    //         ['id_number' => $data['id_number']],
+    //         ['name' => $data['name']],
+    //         ['phone' => $data['phone']],
+    //         ['region_id' => $data['region_id']],
+    //         ['activity_id' => $data['activity_id']],
+    //         ['role_id' => $data['role_id']],
+    //     ]);
 
-        $region = \DB::table('regions')->where('id',$user->region_id)->value('name');
-        $mobile = $user->phone;
-        $message = "Thank you $user->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for auditions on 30th March 2022 at Nyayo Stadium, 10am. See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
+    //     $region = \DB::table('regions')->where('id',$user->region_id)->value('name');
+    //     $mobile = $user->phone;
+    //     $message = "Thank you $user->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for auditions on 30th March 2022 at Nyayo Stadium, 10am. See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
 
-        $this->sendMessage($mobile,$message);
+    //     $this->sendMessage($mobile,$message);
 
-        return $user;
+    //     return $user;
 
-    }
+    // }
 
 
     public function registerUser(Request $request){
@@ -138,7 +138,7 @@ class RegisterController extends Controller
         $region = \DB::table('regions')->where('id',$request->region_id)->value('name');
         $mobile = $request->phone;
         //dd($request->phone);
-        $message = "Thank you $request->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for $activity auditions scheduled on $activityStartDate, at $venue . See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
+        $message = "Thank you $request->name for registering in the Tusker Nexters Platform! You have registered in $region. Please avail yourself for $activity scheduled on $activityStartDate, at $venue . See you then and All the best in the competition! Terms and conditions Apply. Helpline 0721985566";
 
         $this->sendMessage($mobile,$message);
 

@@ -33,12 +33,11 @@
 
                                                 <li class="list-group-item"><b>Region:</b> {{ \DB::table('regions')->where('id',$user->region_id)->value('name') }}</li>
                                                 <li class="list-group-item"><b>Type:</b>
-                                                    {{ $user->role_id == 1 ? 'Judge' : ($user->role_id == 2 ? 'Artist' : 'Sports Star') }}
+                                                    {{ $user->role_id == 1 ? 'Judge' : ($user->role_id == 2 ? 'Artist' : ($user->role_id == 3 ? 'SportStar' : ($user->role_id == 4 ? 'Admin' : 'Receptionist'))) }}
                                                 </li>
-                                                @if ($user->role_id != 1)
+                                                @if ($user->role_id != 1 && $user->role_id != 4 && $user->role_id != 5)
                                                     <li class="list-group-item"><b>Approval Level:</b> {{ \DB::table('phases')->where('id',$user->phase_id)->value('title') }}</li>
-                                                @endif
-                                                @if ($user->role_id != 1)
+
                                                     <li class="list-group-item"><b>Status:</b> <a
                                                             class="btn btn-sm {{ $user->is_approved == '1' ? 'text-success' : 'text-danger' }}">{{ $user->is_approved == '1' ? 'Approved' : 'Not Approved' }}</a>
                                                     </li>

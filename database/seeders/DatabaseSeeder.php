@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PhasesTableSeeder::class,
             RegionsTableSeeder::class,
-            RegionsTableSeeder::class,
+            ReasonsTableSeeder::class,
             UsersTableSeeder::class,
             RolesTableSeeder::class,
             ActivitiesTableSeeder::class,

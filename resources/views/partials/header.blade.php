@@ -20,6 +20,9 @@
                 <li class="nav-item dropdown d-none d-lg-block">
                   <a class="nav-link btn btn-warning create-new-button" href="{{route('create_judge')}}">+ Add New Judge</a>
                 </li>
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a class="nav-link btn btn-success create-new-button" href="{{route('create_receptionist')}}">+ Add New Receptionist</a>
+                  </li>
               @endif
               <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link" href="#">
