@@ -17,7 +17,7 @@ class ReasonsTableSeeder extends Seeder
         $reasons = [
             [
                 'id'                 => 1,
-                'reason'         => 'Poor Audio',
+                'reason'         => 'Poor Vocals',
             ],
             [
                 'id'                 => 2,
@@ -25,7 +25,7 @@ class ReasonsTableSeeder extends Seeder
             ],
             [
                 'id'                 => 3,
-                'reason'         => 'Poor Flow of rhythm',
+                'reason'         => 'Poor Flow of Rhythm',
             ],
             [
                 'id'                 => 4,

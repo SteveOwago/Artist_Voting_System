@@ -18,7 +18,7 @@ class ActivitiesTableSeeder extends Seeder
             [
                 'id'                 => 1,
                 'title'         => 'Mount Kenya Auditions',
-                'start_date'       => '2022-02-01 00:00:00',
+                'start_date'       => '2022-02-01 08:00:00',
                 'end_date'       => '2022-03-31 23:59:00',
                 'status' =>1,
                 'region_id' =>11,
@@ -28,7 +28,7 @@ class ActivitiesTableSeeder extends Seeder
             [
                 'id'                 => 2,
                 'title'         => 'Lake Region Auditions',
-                'start_date'       => '2022-02-01 00:00:00',
+                'start_date'       => '2022-02-01 08:00:00',
                 'end_date'       => '2022-03-31 23:59:00',
                 'status' =>1,
                 'region_id' =>7,
