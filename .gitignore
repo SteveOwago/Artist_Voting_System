@@ -2,9 +2,8 @@
 /public/hot
 /public/profile_pictures
 /public/storage
-/storage/*.key
-/vendor
-/vendor/laravel/ui/auth-backend
+/vendor/*
+!/vendor/laravel/ui/*
 .env
 .env.backup
 .phpunit.result.cache
