@@ -133,6 +133,10 @@ class RegisterController extends Controller
 
         $activity = \DB::table('activities')->where('id',$request->activity_id)->value('title');
         $activityStartDate = \DB::table('activities')->where('id',$request->activity_id)->value('start_date');
+
+        $activityStartDate = \Carbon\Carbon::parse($activityStartDate)->format('l jS \\of F Y h:i:s A');
+
+        // dd($activityStartDate);
         $venue = \DB::table('activities')->where('id',$request->activity_id)->value('venue');
 
         $region = \DB::table('regions')->where('id',$request->region_id)->value('name');
