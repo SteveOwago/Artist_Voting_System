@@ -61,27 +61,29 @@
                 <div class="content-wrapper d-flex align-items-center responsive_style">
 
                     <div class="col-sm-12 col-lg-4 mx-auto">
-                        @if (session('message'))
-                            <div class="row mb-2">
-                                <div class="col-lg-12">
-                                    <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-                                </div>
-                            </div>
-                        @endif
-                        @if ($errors->count() > 0)
-                            <div class="alert alert-danger">
-                                <ul class="list-unstyled">
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+
                         <div class="col-sm-12 col-md-10 offset-1">
                             <div class="row text-center">
-                                <h3 class="mb-5" style=" font-size:50px;font-weight:bold;color:#000;">WELCOME TO THE TUSKER
+                                <h3 class="mb-5" style=" font-size:50px;font-weight:bold;color:#000;">WELCOME
+                                    TO THE TUSKER
                                     NEXTERS PLATFORM</h3>
                             </div>
+                            @if (session('message'))
+                                <div class="row mb-2">
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                                    </div>
+                                </div>
+                            @endif
+                            @if ($errors->count() > 0)
+                                <div class="alert alert-danger">
+                                    <ul class="list-unstyled">
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="card" style="background-color: #fafa98;">
                                 <div class="card-header text-center">
                                     <h4>Login</h4>
@@ -97,10 +99,9 @@
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     name="email" value="{{ old('email') }}" required
                                                     autocomplete="email" autofocus placeholder="somebody@example.com">
-
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
+                                                        <strong>{{ $error }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
