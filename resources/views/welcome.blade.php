@@ -52,14 +52,14 @@
                         <div class="row text-center" style="margin-bottom: 30%;">
                             <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
                                 NEXTERS PLATFORM</h1>
-                            <h4 style="font-size:30px;font-weight:500;">To Register and Participate click the button
+                            <h4 style="font-size:30px;font-weight:500;">To Login Click the button
                                 below</h4>
                         </div>
                         <div class="text-center">
-                            <a href="{{ route('register') }}"
+                            <a href="{{ route('login') }}"
                                 style="background-color: rgb(51, 196, 196);border-radius:20px;"
                                 class="btn btn-lg btn-success">
-                                <h4>Register</h4>
+                                <h4>Login</h4>
                             </a>
                         </div>
                         {{-- @endif --}}
