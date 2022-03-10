@@ -17,6 +17,7 @@ class CreateCheckinsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('activity_id');
+            $table->string('code');
             $table->timestamps();
         });
     }

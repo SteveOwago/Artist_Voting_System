@@ -81,6 +81,14 @@
         </div>
       </li> --}}
       @if (Auth::user()->role_id ==  1 || Auth::user()->role_id ==  4)
+      {{-- <li class="nav-item menu-items">
+        <a class="nav-link" href="{{route('registered.ussd')}}">
+          <span class="menu-icon">
+            <i class="mdi mdi-nature-people"></i>
+          </span>
+          <span class="menu-title">Registered Users</span>
+        </a>
+      </li> --}}
       <li class="nav-item menu-items">
         <a class="nav-link" href="{{route('artists')}}">
           <span class="menu-icon">

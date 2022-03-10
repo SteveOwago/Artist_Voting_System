@@ -323,4 +323,20 @@ class HomeController extends Controller
             return redirect()->back()->with('errors','Something Went Wrong. Please Check the Supplied Phone Number or Your Network Connectivity Status.');
         }
     }
+
+    public function registeredUSSD(){
+
+        $users = DB::table('registration')->select('*')->get();
+
+        return view('registration.index', compact('users'));
+    }
+
+    public function checkin(Request $request){
+        DB::table('checkins')->updateOrInsert(
+            ['user_id'     =>   $request->user_id],
+            ['activity_id'   =>   $request->activity_id, 'code' => $request->code,],
+        );
+
+        return back()->with('message', 'User Checked In Successfully.');
+    }
 }

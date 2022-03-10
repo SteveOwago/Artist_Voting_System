@@ -84,19 +84,31 @@ class IndexController extends Controller
     public function show($id)
     {
 
-        $participants = User::where('activity_id', $id)->where('role_id','!=',1)->where('role_id','!=',4)->where('role_id','!=',5)->get();
+        // $participants = User::where('activity_id', $id)->where('role_id','!=',1)->where('role_id','!=',4)->where('role_id','!=',5)->get();
+        $participants = \DB::table('registration')->select('tableid', 'name', 'msisdn','participant_type','region', 'registration_no', 'datecreated')->get();
+        $_SERVER['HTTP_USER_AGENT'];
+
+        // Using get_browser() with return_array set to TRUE
+        $mybrowser = get_browser(null, true);
+        // dd($_SERVER['HTTP_USER_AGENT']);
+
         $activityName = \DB::table('activities')->where('id', $id)->value('title');
         $activityID =   \DB::table('activities')->where('id', $id)->value('id');
 
         return view('attendance.show', compact('participants'), ['activityName' => $activityName, 'activityID' => $activityID]);
     }
-    public function checkin($user_id, $activity_id)
-    {
+    public function checkin(Request $request){
         DB::table('checkins')->updateOrInsert(
-            ['user_id'     =>   $user_id],
-            ['activity_id'   =>   $activity_id],
+            ['user_id'     =>   $request->user_id],
+            ['activity_id'   =>   $request->activity_id, 'code' => $request->code,],
         );
-
+        DB::table('users')->insert([
+            'name' => $request->name,
+            'phone'=> $request->phone,
+            'role_id' => $request->role_id,
+            'activity_id' => $request->activity_id,
+            'created_at' => \Carbon\Carbon::now(),
+        ]);
         return back()->with('message', 'User Checked In Successfully.');
     }
 
@@ -112,7 +124,7 @@ class IndexController extends Controller
 
         $this->sendMessage($mobile, $message);
 
-        return back()->with('message','Operation Done!');
+        return back()->with('message', 'Operation Done!');
     }
     public function sendMessage($mobile, $message)
     {

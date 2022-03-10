@@ -26,7 +26,7 @@ Route::get('voteArtists', 'IndexController@votingArtists')->name('voting.artists
 Route::get('voteSportstars', 'IndexController@votingSportstars')->name('voting.sportstars');
 Route::get('attendance/checklist', 'IndexController@checklist')->name('attendance.checklist');
 Route::get('attendance/checklist/{id}', 'IndexController@show')->name('attendance.show');
-Route::get('attendance/checkin/{id}/{activityid}', 'IndexController@checkin')->name('attendance.checkin');
+Route::post('attendance/checkin', 'IndexController@checkin')->name('attendance.checkin');
 Route::post('send/registration/sms', 'IndexController@sendRegSMS')->name('send.registration.sms');
 
 
@@ -38,6 +38,7 @@ Route::get('otp/reset', [App\Http\Controllers\OTPController::class, 'resend'])->
 
 Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('registered/users', 'HomeController@registeredUSSD')->name('registered.ussd');
     Route::get('approval-disaproval-logs', 'HomeController@approvalDissaprovalLogs')->name('approval.disaproval.logs');
     Route::get('artists', 'HomeController@artists')->name('artists');
     Route::get('sportstars', 'HomeController@sportstars')->name('sportstars');
@@ -55,7 +56,7 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::post('setting/activity/create', 'SettingsController@store')->name('activities.store');
     Route::put('setting/activity/update/{id}', 'SettingsController@activityUpdate')->name('activities.update');
     Route::get('delete/activity/{id}','SettingsController@delete_activity')->name('activities.delete');
-
+    Route::post('checkin/user/{id}', 'HomeController@checkin')->name('checkin');
 
     Route::post('phase/activate/{id}', 'PhasesController@activatePhase')->name('phase.activate');
     Route::post('phase/deactivate/{id}', 'PhasesController@deactivatePhase')->name('phase.deactivate');

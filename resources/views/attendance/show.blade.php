@@ -12,11 +12,11 @@
             <div class="card-body">
                 <h4 class="card-title text-dark">All Registered Participants for {{ $activityName }}</h4>
                 <div class="col-lg-10 offset-1 table-responsive">
-                    <button type="button" class="mb-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    {{-- <button type="button" class="mb-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
                         Send Registration SMS
-                    </button>
+                    </button> --}}
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -42,7 +42,7 @@
                                                             <strong>{{ $error }}</strong>
                                                         </span>
                                                     @enderror --}}
-                                                </div>
+                    {{-- </div>
                                             </div>
                                         </div>
 
@@ -54,7 +54,7 @@
                             </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <table class="table table-striped table-hover display nowrap mt-5" id="participantTable">
                         <thead>
                             <tr>
@@ -62,28 +62,91 @@
                                 <th> Name </th>
                                 {{-- <th>Email</th> --}}
                                 <th>Phone</th>
-                                <th>ID Number</th>
-                                <th> Status </th>
-                                <th>Level</th>
+                                <th>Region</th>
+                                <th> Registration Number</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($participants as $participant)
                                 <tr>
-                                    <td class="text-center">{{ $participant->created_at }}</td>
+                                    <td class="text-center">{{ $participant->datecreated }}</td>
                                     <td>{{ $participant->name }}</td>
                                     {{-- <td class="text-center">{{ $participant->email }}</td> --}}
-                                    <td class="text-center">{{ $participant->phone }}</td>
-                                    <td class="text-center">{{ $participant->id_number }}</td>
+                                    <td class="text-center">{{ '*********' . substr($participant->msisdn, -3) }}</td>
+                                    <td class="text-center">{{ $participant->region }}</td>
                                     <td class="text-center">
-                                        {{ $participant->is_approved == '1' ? 'Approved' : 'Not Approved' }}
+                                        {{ $participant->registration_no }}
                                     </td>
-                                    <td>{{ strtoupper(\DB::table('phases')->where('id', $participant->phase_id)->value('title')) }}
+                                    <td class="text-center">
+                                        {{-- <a
+                                            href="/attendance/checkin/{{ $participant->tableid }}/{{ $activityID }}"
+                                            class="btn btn-primary">Check-In</a> --}}
+                                            @if ($participant->tableid == \DB::table('checkins')->select('user_id')->where('activity_id',$activityID)->take(1)->value('user_id') )
+                                            <button type="button" class="mb-2 btn btn-warning">
+                                                User Checked In
+                                            </button>
+                                            @endif
+                                            @if ($participant->tableid != \DB::table('checkins')->select('user_id')->where('activity_id',$activityID)->take(1)->value('user_id') )
+                                            <button type="button" class="mb-2 btn btn-primary" data-toggle="modal"
+                                                data-target="#exampleModalCenter{{$participant->tableid}}">
+                                                Sign In
+                                            </button>
+                                            <div class="modal fade" id="exampleModalCenter{{$participant->tableid}}"
+                                                tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="border: none;">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Enter Participant
+                                                                Audition Code for : {{ '*********' . substr($participant->msisdn, -3) }}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{ route('attendance.checkin') }}" method="post">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="form-group">
+                                                                        <div class="text-center">
+                                                                            <label for="code">Audition Code:</label>
+                                                                            <input id="code" type="text"
+                                                                                class="form-control @error('code') is-invalid @enderror"
+                                                                                name="code" value="{{ old('code') }}" required
+                                                                                placeholder="AO001" autocomplete="phone"
+                                                                                style="border-radius:10px;">
+                                                                                <input type="hidden" name="user_id" value="{{$participant->tableid}}">
+                                                                                <input type="hidden" name="activity_id" value="{{$activityID}}">
+                                                                                <input type="hidden" name="name" value="{{$participant->name}}">
+                                                                                <input type="hidden" name="phone" value="{{$participant->msisdn}}">
+                                                                                <input type="hidden" name="role_id" value="{{$participant->participant_type == 2 ? 3 : 2 }}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="text-center">
+                                                                            <label for="activity">Audition Region</label>
+                                                                            <select name="region" id=""  style="border:1px;border-radius:10px;">
+                                                                                <option selected value="{{$activityID}}">{{$activityName}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-warning">Submit</button>
+                                                            </div>
+                                                            @endif
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <td class="text-center"><a
-                                            href="/attendance/checkin/{{ $participant->id }}/{{ $activityID }}"
-                                            class="btn btn-primary">Check-In</a></td>
+
                                 </tr>
                             @empty
                                 <tr>
