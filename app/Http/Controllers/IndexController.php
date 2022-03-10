@@ -86,10 +86,10 @@ class IndexController extends Controller
 
         // $participants = User::where('activity_id', $id)->where('role_id','!=',1)->where('role_id','!=',4)->where('role_id','!=',5)->get();
         $participants = \DB::table('registration')->select('tableid', 'name', 'msisdn','participant_type','region', 'registration_no', 'datecreated')->get();
-        $_SERVER['HTTP_USER_AGENT'];
+        // $_SERVER['HTTP_USER_AGENT'];
 
         // Using get_browser() with return_array set to TRUE
-        $mybrowser = get_browser(null, true);
+        // $mybrowser = get_browser(null, true);
         // dd($_SERVER['HTTP_USER_AGENT']);
 
         $activityName = \DB::table('activities')->where('id', $id)->value('title');
