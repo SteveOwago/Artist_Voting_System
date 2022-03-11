@@ -52,8 +52,8 @@
                         <div class="row text-center" style="margin-bottom: 30%;">
                             <h1 class="text-dark mb-5" style="font-size:50px;font-weight:800;">WELCOME TO THE TUSKER
                                 NEXTERS PLATFORM</h1>
-                            <h4 style="font-size:30px;font-weight:500;">To Login Click the button
-                                below</h4>
+                            <h4 style="font-size:30px;font-weight:500;">To Login Click the Button
+                                Below</h4>
                         </div>
                         <div class="text-center">
                             <a href="{{ route('login') }}"

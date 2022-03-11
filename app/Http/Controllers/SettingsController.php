@@ -66,6 +66,8 @@ class SettingsController extends Controller
 
        $activity->update([
            'title' => $request->title,
+           'venue' => $request->venue,
+           'region_id'=>$request->region_id,
            'start_date' => $request->start_date,
            'end_date' => $request->end_date,
        ]);
