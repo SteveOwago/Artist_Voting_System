@@ -89,14 +89,14 @@ class ApiController extends Controller
                                 ->orderBy("count_row","desc")
                                 ->groupBy("artist_id")
                                 ->join('users','votes.artist_id','users.id')
-                                ->where('users.is_approved',1)
-                                ->where('users.role_id',2)->take(10)
-                                ->get();
+//                                ->where('users.is_approved',1)
+                                ->where('users.role_id',2)
+                                ->cursor();
 
         $voteartists = [];
         foreach($votesCountperArtist as $vpc){
             $artist = [
-                'name'=> DB::table('users')->where('is_approved',1)->where('id',$vpc->artist_id)->value('name'),
+                'name'=> DB::table('users')->where('id',$vpc->artist_id)->value('name'),
                 'artist_id'=> $vpc->artist_id,
                 'count' => $vpc->count_row,
             ];

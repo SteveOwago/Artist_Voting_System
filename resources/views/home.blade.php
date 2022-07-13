@@ -133,34 +133,34 @@
       </div>
     </div> --}}
         {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
-            <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
-                <div class="card pt-4">
-                    <div class="card-body mb-5">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 mx-auto">
-                                <div class="card-title text-dark">
-                                    <h3>Artists & Sport Stars Registered This Week Per Day</h3>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="myChart-bar" style="height:230px"></canvas>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mx-auto">
-                                <div class="card-title text-dark">
-                                    <h3>Registered Artists & Sport Stars Per Region</h3>
-                                </div>
-                                <div class="card-body" style="position: relative; height:50%; width:50%">
-                                    <canvas id="myChart-pie" height="300"></canvas>
-                                </div>
+{{--            <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">--}}
+{{--                <div class="card pt-4">--}}
+{{--                    <div class="card-body mb-5">--}}
+{{--                        <div class="row align-items-center">--}}
+{{--                            <div class="col-md-6 mx-auto">--}}
+{{--                                <div class="card-title text-dark">--}}
+{{--                                    <h3>Artists & Sport Stars Registered This Week Per Day</h3>--}}
+{{--                                </div>--}}
+{{--                                <div class="card-body">--}}
+{{--                                    <canvas id="myChart-bar" style="height:230px"></canvas>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-6 mx-auto">--}}
+{{--                                <div class="card-title text-dark">--}}
+{{--                                    <h3>Registered Artists & Sport Stars Per Region</h3>--}}
+{{--                                </div>--}}
+{{--                                <div class="card-body" style="position: relative; height:50%; width:50%">--}}
+{{--                                    <canvas id="myChart-pie" height="300"></canvas>--}}
+{{--                                </div>--}}
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         {{-- @endif --}}
-        {{-- @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
-            <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
+         @if (\Carbon\Carbon::now()->month == 7 || \Carbon\Carbon::now()->month == 8)
+            <div class="col-lg-12 grid-margin stretch-card" style="height:800px;">
                 <div class="card pt-4">
                     <div class="card-body mb-5">
                         <h4 class="card-title text-dark">Artist Vote Tally</h4>
@@ -168,15 +168,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">
-                <div class="card pt-4">
-                    <div class="card-body mb-5">
-                        <h4 class="card-title text-dark">SportStars Vote Tally</h4>
-                        <canvas id="myChart-Sport" style="height:230px"></canvas>
-                    </div>
-                </div>
-            </div>
-        @endif --}}
+{{--            <div class="col-lg-12 grid-margin stretch-card" style="height:500px;">--}}
+{{--                <div class="card pt-4">--}}
+{{--                    <div class="card-body mb-5">--}}
+{{--                        <h4 class="card-title text-dark">SportStars Vote Tally</h4>--}}
+{{--                        <canvas id="myChart-Sport" style="height:230px"></canvas>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+        @endif
     </div>
     {{-- End Chart Votes Tally Summary Area Chart --}}
 
@@ -312,14 +312,20 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     {{-- Section Racing Bar vote tally --}}
-    {{-- @if (\Carbon\Carbon::now()->month == 04 || \Carbon\Carbon::now()->month == 05)
+    @if (\Carbon\Carbon::now()->month == 7 || \Carbon\Carbon::now()->month == 8)
+        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+
         <script>
-            const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
+
+
             // const setBg = () => {
             //     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
             //     return randomColor
             // }
+            let myChart = null;
             async function getData() {
+
+                const url = `{{ route('api.votes.getVoteCountPerArtist') }}`;
                 let response = await fetch(url);
                 const res = await response.json();
                 //console.log(data.data[0].name);
@@ -373,9 +379,12 @@
                         maintainAspectRatio: false,
                     }
                 };
-
+                // Check if chart is in use
+                if (myChart != null){
+                    myChart.destroy();
+                }
                 // render init block
-                const myChart = new Chart(
+                myChart = new Chart(
                     document.getElementById('myChart'),
                     config
                 );
@@ -427,229 +436,243 @@
 
             getData();
 
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
 
+            var pusher = new Pusher('a6701833f67d9e7d9404', {
+                cluster: 'ap2'
+            });
 
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function(data) {
+                const infoChart = JSON.stringify(data);
+
+                if(getData()){
+                    console.log('Chart Data function hit by endpoint');
+                }
+               // alert(infoChart);
+            });
             // Fetch Data SportStars
 
-            const url_sport = `{{ route('api.votes.getVoteCountPerSportStar') }}`;
+            {{--const url_sport = `{{ route('api.votes.getVoteCountPerSportStar') }}`;--}}
             // const setBg = () => {
             //     const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
             //     return randomColor
             // }
-            async function fetchData() {
-                let response_sport = await fetch(url_sport);
-                const res_sport = await response_sport.json();
-                //console.log(data.data[0].name);
-
-                const labels_sport = [];
-                const count_sport = [];
-                const backgroundColor_sport = [];
-                let opacity_sport = 1.0;
-                for (let i = 0; i < res_sport.data.length; i++) {
-                    let color_sport = 'rgb(0, 255, 76,'
-                    color_sport = color_sport + ((opacity_sport -= 0.05).toString()) + ')'
-                    labels_sport.push(res_sport.data[i].name);
-                    count_sport.push(res_sport.data[i].count);
-                    backgroundColor_sport.push(color_sport);
-
-                }
-                // console.log(count);
-
-                const data_sport = {
-                    labels: labels_sport,
-                    datasets: [{
-                        label: 'Votes',
-                        data: count_sport,
-                        backgroundColor: backgroundColor_sport,
-                        borderColor: backgroundColor_sport,
-                        borderWidth: 1
-                    }]
-                };
-
-                // config
-                const config_sport = {
-                    plugins: [ChartDataLabels],
-                    type: 'bar',
-                    data: data_sport,
-                    options: {
-                        indexAxis: 'y',
-                        scales: {
-                            x: {
-                                beginAtZero: true
-                            }
-                        },
-                        datalabels: {
-                            anchor: 'end',
-                            align: 'top',
-                            formatter: Math.round,
-                            font: {
-                                weight: 'bold'
-                            }
-                        },
-                        responsive: true,
-                        maintainAspectRatio: false,
-                    }
-                };
-
-                // render init block
-                const myChartSport = new Chart(
-                    document.getElementById('myChart-Sport'),
-                    config_sport
-                );
-
-
-
-                setInterval(function updateSport() {
-                    let merged_sport = myChartSport.config_sport.data.labels_sport.map((label, i) => {
-                        return {
-                            'labels': myChartSport.config_sport.data.labels_sport[i],
-                            'dataPoints': myChartSport.config_sport.data.datasets[0].data_sport[i],
-                            'backgroundColor': myChartSport.config_sport.data.datasets[0]
-                                .backgroundColor_sport[i],
-                            'borderColor': myChartSport.config_sport.data.datasets[0].borderColor_sport[i]
-                        }
-                    })
-                    // console.log(merged)
-                    const lab_sport = [];
-                    const dp_sport = [];
-                    const bgc_sport = [];
-                    const bc_sport = [];
-
-                    const dataSort_sport = merged_sport.sort((b, a) => {
-                        return a.dataPoints - b.dataPoints
-                    });
-
-                    for (i = 0; i < dataSort_sport.length; i++) {
-                        lab_sport.push(dataSort_sport[i].labels_sport);
-                        dp_sport.push(dataSort_sport[i].dataPoints);
-                        bgc_sport.push(dataSort_sport[i].backgroundColor_sport);
-                        bc_sport.push(dataSort_sport[i].borderColor_sport);
-                    }
-
-                    // console.log(lab);
-                    myChart.config_sport.data_sport.labels_sport = lab_sport;
-                    myChart.config_sport.data_sport.datasets[0].data_sport = dp_sport;
-                    myChart.config_sport.data_sport.datasets[0].backgroundColor_sport = bgc_sport;
-                    myChart.config_sport.data_sport.datasets[0].borderColor_sport = bc_sport;
-
-                    // function addData(chart, label, data) {
-                    //     chart.data.labels.push(label);
-                    //     chart.data.datasets.forEach((dataset) => {
-                    //         dataset.data.push(data);
-                    //     });
-                    //     chart.update();
-                    // }
-                    myChartSport.updateSport();
-                }, 1000);
-            }
-
-            fetchData();
+            // async function fetchData() {
+            //     let response_sport = await fetch(url_sport);
+            //     const res_sport = await response_sport.json();
+            //     //console.log(data.data[0].name);
+            //
+            //     const labels_sport = [];
+            //     const count_sport = [];
+            //     const backgroundColor_sport = [];
+            //     let opacity_sport = 1.0;
+            //     for (let i = 0; i < res_sport.data.length; i++) {
+            //         let color_sport = 'rgb(0, 255, 76,'
+            //         color_sport = color_sport + ((opacity_sport -= 0.05).toString()) + ')'
+            //         labels_sport.push(res_sport.data[i].name);
+            //         count_sport.push(res_sport.data[i].count);
+            //         backgroundColor_sport.push(color_sport);
+            //
+            //     }
+            //     // console.log(count);
+            //
+            //     const data_sport = {
+            //         labels: labels_sport,
+            //         datasets: [{
+            //             label: 'Votes',
+            //             data: count_sport,
+            //             backgroundColor: backgroundColor_sport,
+            //             borderColor: backgroundColor_sport,
+            //             borderWidth: 1
+            //         }]
+            //     };
+            //
+            //     // config
+            //     const config_sport = {
+            //         plugins: [ChartDataLabels],
+            //         type: 'bar',
+            //         data: data_sport,
+            //         options: {
+            //             indexAxis: 'y',
+            //             scales: {
+            //                 x: {
+            //                     beginAtZero: true
+            //                 }
+            //             },
+            //             datalabels: {
+            //                 anchor: 'end',
+            //                 align: 'top',
+            //                 formatter: Math.round,
+            //                 font: {
+            //                     weight: 'bold'
+            //                 }
+            //             },
+            //             responsive: true,
+            //             maintainAspectRatio: false,
+            //         }
+            //     };
+            //
+            //     // render init block
+            //     const myChartSport = new Chart(
+            //         document.getElementById('myChart-Sport'),
+            //         config_sport
+            //     );
+            //
+            //
+            //
+            //     setInterval(function updateSport() {
+            //         let merged_sport = myChartSport.config_sport.data.labels_sport.map((label, i) => {
+            //             return {
+            //                 'labels': myChartSport.config_sport.data.labels_sport[i],
+            //                 'dataPoints': myChartSport.config_sport.data.datasets[0].data_sport[i],
+            //                 'backgroundColor': myChartSport.config_sport.data.datasets[0]
+            //                     .backgroundColor_sport[i],
+            //                 'borderColor': myChartSport.config_sport.data.datasets[0].borderColor_sport[i]
+            //             }
+            //         })
+            //         // console.log(merged)
+            //         const lab_sport = [];
+            //         const dp_sport = [];
+            //         const bgc_sport = [];
+            //         const bc_sport = [];
+            //
+            //         const dataSort_sport = merged_sport.sort((b, a) => {
+            //             return a.dataPoints - b.dataPoints
+            //         });
+            //
+            //         for (i = 0; i < dataSort_sport.length; i++) {
+            //             lab_sport.push(dataSort_sport[i].labels_sport);
+            //             dp_sport.push(dataSort_sport[i].dataPoints);
+            //             bgc_sport.push(dataSort_sport[i].backgroundColor_sport);
+            //             bc_sport.push(dataSort_sport[i].borderColor_sport);
+            //         }
+            //
+            //         // console.log(lab);
+            //         myChart.config_sport.data_sport.labels_sport = lab_sport;
+            //         myChart.config_sport.data_sport.datasets[0].data_sport = dp_sport;
+            //         myChart.config_sport.data_sport.datasets[0].backgroundColor_sport = bgc_sport;
+            //         myChart.config_sport.data_sport.datasets[0].borderColor_sport = bc_sport;
+            //
+            //         // function addData(chart, label, data) {
+            //         //     chart.data.labels.push(label);
+            //         //     chart.data.datasets.forEach((dataset) => {
+            //         //         dataset.data.push(data);
+            //         //     });
+            //         //     chart.update();
+            //         // }
+            //         myChartSport.updateSport();
+            //     }, 1000);
+            // }
+            //
+            // fetchData();
         </script>
-    @endif --}}
+    @endif }
     {{-- @if (\Carbon\Carbon::now()->month == 02 || \Carbon\Carbon::now()->month == 03) --}}
-        <script>
-            const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;
-            const setBg = () => {
-                const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-                return randomColor
-            }
-            async function fetchData() {
-                let response_bar = await fetch(url_bar);
-                const res_bar = await response_bar.json();
+{{--        <script>--}}
+{{--            const url_bar = `{{ route('api.artists.getregisteredArtistPerDay') }}`;--}}
+{{--            const setBg = () => {--}}
+{{--                const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);--}}
+{{--                return randomColor--}}
+{{--            }--}}
+{{--            async function fetchData() {--}}
+{{--                let response_bar = await fetch(url_bar);--}}
+{{--                const res_bar = await response_bar.json();--}}
 
-                const labels_bar = [];
-                const backgroundColor_bar = [];
-                const data_bar1 = [];
-                let opacity = 1.0;
-                for (let i = 0; i < res_bar.data.length; i++) {
-                    let color = 'rgb(245, 162, 10,'
-                    color = color + ((opacity -= 0.1).toString()) + ')'
-                    //console.log(color)
-                    labels_bar.push(res_bar.data[i].day);
-                    data_bar1.push(res_bar.data[i].count);
-                    backgroundColor_bar.push(color);
-                }
-
-
-
-                const data_bar = {
-                    labels: labels_bar,
-                    datasets: [{
-                        label: 'Registered Artists This Week',
-                        backgroundColor: backgroundColor_bar,
-                        // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],
-                        data: data_bar1,
-                    }]
-                };
-
-                const config_bar = {
-                    plugins: [ChartDataLabels],
-                    type: 'bar',
-                    data: data_bar,
-                    options: {
-                        plugins: {
-                            datalabels: {
-                                anchor: 'end',
-                                align: 'top',
-                                formatter: Math.round,
-                                font: {
-                                    weight: 'bold'
-                                }
-                            }
-                        }
-                    }
-                };
-
-                // Pie Chart
-                const url_pie = `{{ route('api.artists.artistsperRegion') }}`;
-                let response_pie = await fetch(url_pie);
-                const res_pie = await response_pie.json();
-
-                const labels_pie = [];
-                const backgroundColor_pie = [];
-                const data_pie1 = [];
-                let opacity_pie = 1.0;
-                for (let i = 0; i < res_pie.data.length; i++) {
-                    let color_pie = 'rgb(245, 162, 10,'
-                    color_pie = color_pie + ((opacity_pie -= 0.1).toString()) + ')'
-                    console.log(color_pie)
-                    labels_pie.push(res_pie.data[i].region);
-                    data_pie1.push(res_pie.data[i].count);
-                    backgroundColor_pie.push(color_pie);
-                }
+{{--                const labels_bar = [];--}}
+{{--                const backgroundColor_bar = [];--}}
+{{--                const data_bar1 = [];--}}
+{{--                let opacity = 1.0;--}}
+{{--                for (let i = 0; i < res_bar.data.length; i++) {--}}
+{{--                    let color = 'rgb(245, 162, 10,'--}}
+{{--                    color = color + ((opacity -= 0.1).toString()) + ')'--}}
+{{--                    //console.log(color)--}}
+{{--                    labels_bar.push(res_bar.data[i].day);--}}
+{{--                    data_bar1.push(res_bar.data[i].count);--}}
+{{--                    backgroundColor_bar.push(color);--}}
+{{--                }--}}
 
 
 
-                const data_pie = {
-                    labels: labels_pie,
-                    datasets: [{
-                        label: 'Registered Artists This Week',
-                        backgroundColor: backgroundColor_pie,
-                        // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],
-                        data: data_pie1,
-                    }]
-                };
+{{--                const data_bar = {--}}
+{{--                    labels: labels_bar,--}}
+{{--                    datasets: [{--}}
+{{--                        label: 'Registered Artists This Week',--}}
+{{--                        backgroundColor: backgroundColor_bar,--}}
+{{--                        // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],--}}
+{{--                        data: data_bar1,--}}
+{{--                    }]--}}
+{{--                };--}}
 
-                const config_pie = {
-                    type: 'pie',
-                    data: data_pie,
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: true,
-                    }
-                };
+{{--                const config_bar = {--}}
+{{--                    plugins: [ChartDataLabels],--}}
+{{--                    type: 'bar',--}}
+{{--                    data: data_bar,--}}
+{{--                    options: {--}}
+{{--                        plugins: {--}}
+{{--                            datalabels: {--}}
+{{--                                anchor: 'end',--}}
+{{--                                align: 'top',--}}
+{{--                                formatter: Math.round,--}}
+{{--                                font: {--}}
+{{--                                    weight: 'bold'--}}
+{{--                                }--}}
+{{--                            }--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                };--}}
 
-                const myChart_bar = new Chart(
-                    document.getElementById('myChart-bar'),
-                    config_bar
-                );
-                const myChart_pie = new Chart(
-                    document.getElementById('myChart-pie'),
-                    config_pie
-                );
-            }
-            fetchData();
-        </script>
+{{--                // Pie Chart--}}
+{{--                const url_pie = `{{ route('api.artists.artistsperRegion') }}`;--}}
+{{--                let response_pie = await fetch(url_pie);--}}
+{{--                const res_pie = await response_pie.json();--}}
+
+{{--                const labels_pie = [];--}}
+{{--                const backgroundColor_pie = [];--}}
+{{--                const data_pie1 = [];--}}
+{{--                let opacity_pie = 1.0;--}}
+{{--                for (let i = 0; i < res_pie.data.length; i++) {--}}
+{{--                    let color_pie = 'rgb(245, 162, 10,'--}}
+{{--                    color_pie = color_pie + ((opacity_pie -= 0.1).toString()) + ')'--}}
+{{--                    console.log(color_pie)--}}
+{{--                    labels_pie.push(res_pie.data[i].region);--}}
+{{--                    data_pie1.push(res_pie.data[i].count);--}}
+{{--                    backgroundColor_pie.push(color_pie);--}}
+{{--                }--}}
+
+
+
+{{--                const data_pie = {--}}
+{{--                    labels: labels_pie,--}}
+{{--                    datasets: [{--}}
+{{--                        label: 'Registered Artists This Week',--}}
+{{--                        backgroundColor: backgroundColor_pie,--}}
+{{--                        // borderColor: ['rgb(106, 255, 51)', 'rgb(255,66,51)', 'rgb(255, 189, 51 )'],--}}
+{{--                        data: data_pie1,--}}
+{{--                    }]--}}
+{{--                };--}}
+
+{{--                const config_pie = {--}}
+{{--                    type: 'pie',--}}
+{{--                    data: data_pie,--}}
+{{--                    options: {--}}
+{{--                        responsive: true,--}}
+{{--                        maintainAspectRatio: true,--}}
+{{--                    }--}}
+{{--                };--}}
+
+{{--                const myChart_bar = new Chart(--}}
+{{--                    document.getElementById('myChart-bar'),--}}
+{{--                    config_bar--}}
+{{--                );--}}
+{{--                const myChart_pie = new Chart(--}}
+{{--                    document.getElementById('myChart-pie'),--}}
+{{--                    config_pie--}}
+{{--                );--}}
+{{--            }--}}
+{{--            fetchData();--}}
+{{--        </script>--}}
     {{-- @endif --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
         integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
