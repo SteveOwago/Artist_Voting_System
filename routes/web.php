@@ -41,6 +41,9 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::get('registered/users', 'HomeController@registeredUSSD')->name('registered.ussd');
     Route::get('approval-disaproval-logs', 'HomeController@approvalDissaprovalLogs')->name('approval.disaproval.logs');
     Route::get('artists', 'HomeController@artists')->name('artists');
+    Route::get('artists-finalists', 'HomeController@artistsFinalists')->name('artists.finalists');
+
+
     Route::get('sportstars', 'HomeController@sportstars')->name('sportstars');
     Route::get('judges', 'HomeController@judges')->name('judges');
     Route::get('receptionists', 'HomeController@receptionists')->name('receptionists');
@@ -66,6 +69,7 @@ Route::group([ 'middleware' => ['auth:web','otp'] ], function () {
     Route::put('edit_profile/{id}', 'HomeController@update_profile')->name('update_profile');
 
     Route::get('approve/{id}','HomeController@approve')->name('approve');
+    Route::get('approve-finalist/{id}','HomeController@approveFinalist')->name('approve.finalists');
     Route::post('disapprove/{id}','HomeController@disapprove')->name('disapprove');
     Route::delete('delete/{id}','HomeController@delete_artist')->name('delete');
 

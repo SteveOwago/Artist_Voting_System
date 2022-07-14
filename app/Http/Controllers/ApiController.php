@@ -85,18 +85,17 @@ class ApiController extends Controller
 
     public function getVoteCountPerArtist(){
         // Votes for the racing chart in Dashboard Artists
-        $votesCountperArtist = DB::table('votes')->select('artist_id',DB::raw("COUNT(*) as count_row"))
+        $votesCountperArtist = DB::table('votes_artists')->select('artist_id',DB::raw("COUNT(*) as count_row"))
                                 ->orderBy("count_row","desc")
                                 ->groupBy("artist_id")
-                                ->join('users','votes.artist_id','users.id')
-                                ->where('users.is_approved',1)
-                                ->where('users.role_id',2)->take(10)
-                                ->get();
+                                ->join('artists','votes_artists.artist_id','artists.id')
+                                ->where('artists.status',1)
+                                ->cursor();
 
         $voteartists = [];
         foreach($votesCountperArtist as $vpc){
             $artist = [
-                'name'=> DB::table('users')->where('is_approved',1)->where('id',$vpc->artist_id)->value('name'),
+                'name'=> DB::table('artists')->where('id',$vpc->artist_id)->value('name'),
                 'artist_id'=> $vpc->artist_id,
                 'count' => $vpc->count_row,
             ];

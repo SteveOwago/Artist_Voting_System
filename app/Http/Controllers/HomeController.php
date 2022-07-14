@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Approve;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +59,11 @@ class HomeController extends Controller
         $artists = User::where('role_id', 2)->get();
         $reasons = Reason::all();
         return view('artists', compact('artists', 'reasons'));
+    }
+
+    public function artistsFinalists(){
+        $artists = Artist::all();
+        return view('artists_finalists', compact('artists'));
     }
     public function sportstars()
     {
@@ -256,6 +262,21 @@ class HomeController extends Controller
 
         return back()->with('message', 'Operation Successful');
     }
+
+    // Approve Artist/Gamer
+    public function approveFinalist($id)
+    {
+
+        $user = Artist::findOrFail($id);
+
+        $user->update([
+            'status' => $user->status == 0? 1:0,
+        ]);
+
+        return back()->with('message', 'Artist Approved Successfully');
+    }
+
+    // DisApprove Artist/Gamer
     public function delete_artist($id)
     {
 

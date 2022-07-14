@@ -61,7 +61,7 @@ class LoginController extends Controller
            );
            $receiverNumber = Auth::user()->phone;
            $message = "OTP login code is ". $code;
-            $this->sendSMS($receiverNumber,$message);
+            //$this->sendSMS($receiverNumber,$message);
             return redirect()->route('otp.index');
         }
 
