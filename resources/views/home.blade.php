@@ -181,123 +181,43 @@
     {{-- End Chart Votes Tally Summary Area Chart --}}
 
     {{-- Registered Artists --}}
-    @if (Auth::user()->role_id == 1)
+
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-dark">All Registered Artists & Sport Stars</h4>
+                        <h4 class="card-title text-dark">All Voting Stations</h4>
                         <div class="col-lg-10 offset-1 table-responsive">
                             <table class="table table-striped table-hover" id="ArtistTable">
                                 <thead>
                                     <tr>
-                                        <th>Date Registered</th>
-                                        <th> Name </th>
-                                        {{-- <th>Email</th> --}}
-                                        <th>Phone</th>
-                                        <th> Status </th>
-                                        <th>Actions</th>
+                                        <th class="text-center"> Name </th>
+                                        <th class="text-center"> Outlet Code</th>
+                                        <th class="text-center"> Status </th>
+                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @forelse ($artists as $artist)
+                                 @forelse ($outlets as $outlet)
                                         <tr>
-                                            <td>{{ $artist->name }}</td> --}}
-                                    {{-- <td class="text-center">{{ $artist->email }}</td> --}}
-                                    {{-- <td class="text-center">{{ $artist->phone }}</td>
+                                            <td class="text-center">{{ $outlet->outlet_name }}</td>
+                                            <td class="text-center">{{ $outlet->outlet_code }}</td>
                                             <td
-                                                class="text-center {{ $artist->is_approved == 1 ? 'text-warning' : 'text-danger' }}">
-                                                {{ $artist->is_approved == 1 ? 'Approved' : 'Not Approved' }}
+                                                class="text-center {{ $outlet->status == 1 ? 'text-success' : 'text-danger' }}">
+                                                {{ $outlet->status == 1 ? 'Active' : 'Inactive' }}
                                             </td>
-                                            <td class="text-center">{{ $artist->created_at }}</td>
-                                            <td class="text-center"><a href="{{ route('profile', [$artist->id]) }}"
-                                                    class="btn btn-sm btn-dark"> View </a> &nbsp;
-                                                @if ($artist->is_approved == 1 && Auth::user()->role_id == 1)
-                                                    <a class="btn btn-sm btn-danger" data-toggle="modal"
-                                                        data-target="#exampleModal{{ $artist->id }}" href="#">
-                                                        Disapprove
-                                                    </a>
-                                                    <div class="modal fade" id="exampleModal{{ $artist->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">REJECT
-                                                                        ARTIST :
-                                                                        {{ strtoupper($artist->name) }}</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form action="{{ route('disapprove', [$artist->id]) }}"
-                                                                    method="post">
-                                                                    @csrf
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group">
-                                                                            <label for="reason">Select Reason</label>
-                                                                            <select name="reason_id" class="form-control"
-                                                                                style="border:solid 1px;">
-                                                                                <option selected disabled>Select Reason
-                                                                                </option>
-                                                                                @foreach ($reasons as $reason)
-                                                                                    <option value="{{ $reason->id }}">
-                                                                                        {{ strtoupper($reason->reason) }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="reason">Reason Description</label>
-                                                                            <textarea class="form-control" name="reason"
-                                                                                id="" cols="30" rows="10"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-warning">Save
-                                                                            changes</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if ($artist->is_approved == 0 && Auth::user()->role_id == 1)
-                                                    <a class="btn btn-sm btn-warning"
-                                                        href="{{ route('approve', [$artist->id]) }}"
-                                                        onclick="event.preventDefault();
-                                                                                                    document.getElementById('approve').submit();">
-                                                        Approve
-                                                    </a>
 
-                                                    <form id="approve" action="{{ route('approve', [$artist->id]) }}"
-                                                        method="POST" class="d-none">
-                                                        @csrf
-                                                    </form>
-                                                @endif
-                                                &nbsp; @if (Auth::user()->role_id == 1)
-                                                    <a class="btn btn-sm btn-danger"
-                                                        href="{{ route('delete', [$artist->id]) }}" onclick="event.preventDefault();
-                                                                              document.getElementById('delete').submit();">
-                                                        Delete
-                                                    </a>
-
-                                                    <form id="delete" action="{{ route('delete', [$artist->id]) }}"
-                                                        method="POST" class="d-none">
-                                                        @csrf
-                                                        @method('delete')
-                                                    </form>
-                                                @endif
+                                            <td class="text-center"><a href="{{ route('activate.voting', [$outlet->id]) }}"
+                                                    class="btn btn-sm  {{ $outlet->status == 1 ? 'btn-danger' :
+                                                'btn-success' }}"> {{ $outlet->status == 1 ? 'Deactivate' :
+                                                'Activate' }}</a>
                                             </td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td class="text-center" colspan="6">No Registered Artists</td>
+                                            <td class="text-center" colspan="3">No Registered Artists</td>
                                         </tr>
-                                    @endforelse --}}
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -305,7 +225,7 @@
                 </div>
             </div>
         </div>
-    @endif
+
     {{-- End of registered Users --}}
 @endsection
 @section('scripts')
@@ -686,56 +606,56 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $('#ArtistTable').DataTable({--}}
+{{--                "processing": true,--}}
+{{--                "serverSide": true,--}}
+{{--                "ajax": "{{ route('api.artists.index') }}",--}}
+{{--                "columns": [{--}}
+{{--                        "data": "created_at"--}}
+{{--                    },--}}
+{{--                    {--}}
+{{--                        "data": "name"--}}
+{{--                    },--}}
+{{--                    // { "data": "email"},--}}
+{{--                    {--}}
+{{--                        "data": "phone"--}}
+{{--                    },--}}
+{{--                    {--}}
+{{--                        "data": "is_approved"--}}
+{{--                    },--}}
+{{--                    {--}}
+{{--                        "data": "action",--}}
+{{--                        orderable: false,--}}
+{{--                        searchable: false--}}
+{{--                    },--}}
+{{--                ],--}}
+{{--                dom: 'lBfrtip',--}}
+{{--                buttons: [--}}
+{{--                    'copy',--}}
+{{--                    {--}}
+{{--                        extend: 'excelHtml5',--}}
+{{--                        title: 'Artist_and_Sport_Stars_list',--}}
+{{--                        exportOptions: {--}}
+{{--                            exportOptions: {--}}
+{{--                                columns: [0, 1, 2, 3, 4, ':visible']--}}
+{{--                            }--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    {--}}
+{{--                        extend: 'pdfHtml5',--}}
+{{--                        title: 'Artist_and_Sport_Stars_list',--}}
+{{--                        exportOptions: {--}}
+{{--                            columns: [0, 1, 2, 3, 4]--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    'colvis'--}}
+{{--                ],--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
     <script>
-        $(document).ready(function() {
-            $('#ArtistTable').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": "{{ route('api.artists.index') }}",
-                "columns": [{
-                        "data": "created_at"
-                    },
-                    {
-                        "data": "name"
-                    },
-                    // { "data": "email"},
-                    {
-                        "data": "phone"
-                    },
-                    {
-                        "data": "is_approved"
-                    },
-                    {
-                        "data": "action",
-                        orderable: false,
-                        searchable: false
-                    },
-                ],
-                dom: 'lBfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excelHtml5',
-                        title: 'Artist_and_Sport_Stars_list',
-                        exportOptions: {
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, ':visible']
-                            }
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        title: 'Artist_and_Sport_Stars_list',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4]
-                        }
-                    },
-                    'colvis'
-                ],
-            });
-        });
-    </script>
-    {{-- <script>
         $(document).ready(function() {
             $('#ArtistTable').DataTable({
                 dom: 'Bfrtip',
@@ -743,7 +663,7 @@
                     'copy',
                     {
                         extend: 'excelHtml5',
-                        title: 'Judges_list',
+                        title: 'Outlets',
                         exportOptions: {
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, ':visible']
@@ -752,7 +672,7 @@
                     },
                     {
                         extend: 'pdfHtml5',
-                        title: 'Judges_list',
+                        title: 'Outlets',
                         exportOptions: {
                             columns: [0, 1, 2, 3, 4]
                         }
@@ -761,5 +681,5 @@
                 ]
             });
         });
-    </script> --}}
+    </script>
 @endsection

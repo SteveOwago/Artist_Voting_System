@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -158,5 +159,18 @@ class IndexController extends Controller
 
             return redirect()->back()->with('errors', 'Something Went Wrong. Please Check the Supplied Phone Number or Your Network Connectivity Status.');
         }
+    }
+
+
+    // Activate voting
+    public function activateVoting($id){
+        $outlet = Outlet::findOrFail($id);
+
+        $outlet->status == 1? $outlet->update([
+            'status' => 0,
+        ]):$outlet->update([
+            'status' => 1,
+        ]);
+        return back()->with('message','Operation Successfull.');
     }
 }

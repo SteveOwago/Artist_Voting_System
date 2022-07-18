@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\Approve;
 use App\Models\Artist;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -50,9 +51,9 @@ class HomeController extends Controller
         $finalistsArtists = User::where('role_id', '!=', 1)->where('is_approved', 1)->where('phase_id', 4)->get();
         $votes = Vote::all();
         $reasons = Reason::all();
+        $outlets = Outlet::all();
 
-
-        return view('home', compact('artists','sportstars', 'authuser', 'finalistsArtists', 'votes', 'reasons','activities','regions'));
+        return view('home', compact('artists','sportstars','outlets','authuser', 'finalistsArtists', 'votes', 'reasons','activities','regions'));
     }
     public function artists()
     {
