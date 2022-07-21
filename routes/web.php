@@ -25,6 +25,7 @@ Route::post('submit_vote', 'IndexController@voteArtist')->name('submit_vote');
 Route::get('voteArtists', 'IndexController@votingArtists')->name('voting.artists');
 Route::get('addWhitelist', 'IndexController@addwhiteList')->name('add.whitelist');
 Route::post('addWhitelist', 'IndexController@addWhitelistSubmit')->name('add.whitelist.submit');
+Route::get('delete/whitelist/{id}', 'IndexController@deleteWhitelist')->name('delete.whitelist');
 Route::get('outlets/{id}', 'IndexController@activateVoting')->name('activate.voting');
 
 Route::get('voteSportstars', 'IndexController@votingSportstars')->name('voting.sportstars');

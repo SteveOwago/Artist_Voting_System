@@ -65,6 +65,9 @@
 
 
                                     <td class="text-center">
+                                        <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('delete.whitelist', $whitelist->id) }}">
+                                            Delete
+                                        </a>
                                     </td>
                                 </tr>
                             @empty

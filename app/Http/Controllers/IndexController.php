@@ -197,4 +197,13 @@ class IndexController extends Controller
             return back()->with('error', 'Phone Number not Added to Whitelist');
         }
     }
+    public function deleteWhitelist($id){
+        $data = DB::table('whitelist')->where('id',$id)->get();
+        if($data->count()> 0){
+            DB::delete('delete from whitelist where id = ?',[$id]);
+            return back()->with('message', 'Phone Number Removed Successfully');
+        }else{
+            return back()->with('error', 'Phone Number Not Found');
+        }
+    }
 }
