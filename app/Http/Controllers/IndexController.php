@@ -173,4 +173,28 @@ class IndexController extends Controller
         ]);
         return back()->with('message','Operation Successfull.');
     }
+    //Add Whitelist Page
+    public function addWhitelist(){
+        $whitelists = DB::table('whitelist')->select('*')->orderBy('id','DESC')->get();
+        return view('add_whitelist', compact('whitelists'));
+    }
+
+    public function addWhitelistSubmit(Request $request){
+        $request->validate([
+            'phone' => 'required|digits:12|numeric',
+        ]);
+        $phoneexists = DB::table('whitelist')->where('phone',$request->phone)->get();
+
+        if($phoneexists->count()>0){
+            return back()->with('error','Phone Number exists in Whitelist');
+        }
+        $data = DB::table('whitelist')->insert([
+            'phone' => $request->phone,
+        ]);
+        if ($data){
+            return back()->with('message', 'Phone Number Added Successfully to whitelist');
+        }else{
+            return back()->with('error', 'Phone Number not Added to Whitelist');
+        }
+    }
 }

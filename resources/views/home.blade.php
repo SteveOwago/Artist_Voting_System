@@ -209,7 +209,7 @@
 
                                             <td class="text-center"><a href="{{ route('activate.voting', [$outlet->id]) }}"
                                                     class="btn btn-sm  {{ $outlet->status == 1 ? 'btn-danger' :
-                                                'btn-success' }}"> {{ $outlet->status == 1 ? 'Deactivate' :
+                                                'btn-success' }}" > {{ $outlet->status == 1 ? 'Deactivate' :
                                                 'Activate' }}</a>
                                             </td>
                                         </tr>

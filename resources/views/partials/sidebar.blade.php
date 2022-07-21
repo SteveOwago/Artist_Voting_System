@@ -32,11 +32,11 @@
       @if (Auth::user()->role_id ==  1 || Auth::user()->role_id ==  4)
 
       <li class="nav-item menu-items">
-        <a class="nav-link" href="{{route('artists')}}">
+        <a class="nav-link" href="{{route('add.whitelist')}}">
           <span class="menu-icon">
             <i class="mdi mdi-nature-people"></i>
           </span>
-          <span class="menu-title">Artists</span>
+          <span class="menu-title">Add Whitelist</span>
         </a>
       </li>
             <li class="nav-item menu-items">
